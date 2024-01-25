@@ -1,19 +1,18 @@
-import {SpyObject} from "@ngneat/spectator";
-import {AppComponent} from "./app.component";
-import {createComponentFactory, Spectator} from "@ngneat/spectator/jest";
+import { AppComponent } from './app.component';
+import { createComponentFactory, Spectator } from '@ngneat/spectator/jest';
 
-describe("App component",()=>{
-  let spectator:Spectator<AppComponent>;
+describe('App component', () => {
+  let spectator: Spectator<AppComponent>;
 
   const createComponent = createComponentFactory({
-    component:AppComponent
-  })
+    component: AppComponent,
+  });
 
-  beforeEach(()=>{
+  beforeEach(() => {
     spectator = createComponent();
-  })
+  });
 
-  it("Should create component (smoke)",()=>{
+  it('Should create component (smoke)', () => {
     expect(spectator.component).toBeDefined();
-  })
-})
+  });
+});
