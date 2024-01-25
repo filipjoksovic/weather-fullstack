@@ -1,0 +1,31 @@
+<div class="sidebar" [ngClass]="{ sidebar__closed: !isOpen }">
+  <div class="sidebar__title">
+    @if (isOpen) {
+      <h1>Weather</h1>
+    }
+    <p-button
+      [icon]="isOpen ? 'pi pi-times' : 'pi pi-chevron-right'"
+      [rounded]="true"
+      severity="help"
+      (onClick)="toggleSidebar()"></p-button>
+  </div>
+  <div class="sidebar__body">
+    <app-sidebar-link label="Link" link="" icon="pi pi-user"></app-sidebar-link>
+    <app-sidebar-link label="Link" link="" icon="pi pi-user"></app-sidebar-link>
+    <app-sidebar-link label="Link" link="" icon="pi pi-user"></app-sidebar-link>
+    <app-sidebar-link label="Link" link="" icon="pi pi-user"></app-sidebar-link>
+    <app-sidebar-link label="Link" link="" icon="pi pi-user"></app-sidebar-link>
+  </div>
+  <div class="sidebar__footer">
+    <div class="sidebar__footer sidebar__footer__account-section">
+      <p-avatar
+        label="P"
+        styleClass="mr-2"
+        size="xlarge"
+        shape="circle"></p-avatar>
+      @if (isOpen) {
+        <app-sidebar-link label="Link" link=""></app-sidebar-link>
+      }
+    </div>
+  </div>
+</div>
