@@ -1,4 +1,4 @@
 package com.weather.backend.auth.models;
 
-public record AuthenticationResponse(String token, String username) {
+public record AuthenticationResponse(String id, String email,String token) {
 }

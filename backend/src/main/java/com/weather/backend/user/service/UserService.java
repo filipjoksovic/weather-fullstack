@@ -11,6 +11,8 @@ public interface UserService {
 
     User find(String id) throws UserNotFoundException;
 
+    User findByEmail(String email) throws UserNotFoundException;
+
     User create(User user);
 
     User update(User user);

@@ -12,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -27,20 +26,23 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest request) {
-        LOG.info("Rgstr usr with {} {}", request.username(), request.password());
+        LOG.info("Rgstr usr with {} {}", request.email(), request.password());
         User user = new User();
-        user.setEmail(request.username());
+        user.setEmail(request.email());
         user.setPassword(passwordEncoder.encode(request.password()));
         user = userRepository.save(user);
         String token = jwtService.generateToken(user);
-        LOG.info("Usr rgstrd {} {}",user.getId(), token);
-        return new AuthenticationResponse(token, user.getUsername());
+        LOG.info("Usr rgstrd {} {}", user.getId(), token);
+        return new AuthenticationResponse(user.getId(), user.getEmail(),
+                                          token);
     }
 
     public AuthenticationResponse login(LoginRequest request) throws UserNotFoundException {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.username(), request.password()));
-        User user = userRepository.findByEmail(request.username()).orElseThrow(UserNotFoundException::new);
+        LOG.info("Lgn attmpt for {} {}", request.email(), request.password());
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.email(), request.password()));
+        User user = userRepository.findByEmail(request.email())
+                                  .orElseThrow(UserNotFoundException::new);
         String token = jwtService.generateToken(user);
-        return new AuthenticationResponse(token, user.getUsername());
+        return new AuthenticationResponse(user.getId(), user.getEmail(), token);
     }
 }

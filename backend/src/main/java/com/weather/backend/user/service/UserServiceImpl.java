@@ -25,7 +25,14 @@ public class UserServiceImpl implements UserService {
 
     public User find(String userId) throws UserNotFoundException {
 
-        return this.userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
+        return this.userRepository.findById(userId)
+                                  .orElseThrow(UserNotFoundException::new);
+    }
+
+    @Override
+    public User findByEmail(String email) throws UserNotFoundException {
+        return this.userRepository.findByEmail(email)
+                                  .orElseThrow(() -> new UserNotFoundException(email));
     }
 
     public User create(User user) {
