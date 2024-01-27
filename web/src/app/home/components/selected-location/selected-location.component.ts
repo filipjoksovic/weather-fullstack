@@ -1,4 +1,11 @@
-import { Component, Signal, computed, effect, inject, signal } from '@angular/core';
+import {
+  Component,
+  Signal,
+  computed,
+  effect,
+  inject,
+  signal,
+} from '@angular/core';
 import {
   DataState,
   LocationService,
@@ -11,14 +18,16 @@ import { debouncedSignal } from '../../../util/debounced-signal';
   standalone: true,
   imports: [ProgressBarModule],
   templateUrl: './selected-location.component.html',
-  styleUrl: './selected-location.component.scss',
 })
 export class SelectedLocationComponent {
   private readonly locationService = inject(LocationService);
   private currentLocation = this.locationService.currentLocation;
 
   currentCoords = computed(() => this.currentLocation().coords);
-  locationDataState = debouncedSignal(computed(() => this.currentLocation().loadingState), 250);
+  locationDataState = debouncedSignal(
+    computed(() => this.currentLocation().loadingState),
+    250
+  );
 
   protected DataState = DataState;
 }

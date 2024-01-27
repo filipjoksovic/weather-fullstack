@@ -1,0 +1,64 @@
+.weather-data {
+  width: 100%;
+  gap: $spacer;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  & p-panel {
+    flex: 1;
+    border-radius: 20px;
+    overflow: hidden;
+    & .p-panel-header {
+      overflow-x: hidden;
+      display: flex;
+      gap: $spacer;
+      padding: $spacer;
+    }
+
+    & .p-panel-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: $spacer;
+    }
+    & .p-panel-toggleable:not(.p-panel-expanded) {
+      & .p-panel-header {
+        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+        transition-delay: 250ms;
+      }
+    }
+  }
+}
+
+//Weather measurements display
+.p-panel-header {
+  border: none;
+}
+
+.p-panel-content {
+  background-color: rgba(255, 255, 255, 0.7);
+
+  border: none;
+}
+
+.p-panel-footer {
+  background-color: rgba(255, 255, 255, 0.7);
+
+  border: none;
+}
+
+.weather-overview {
+  display: flex;
+  gap: $spacer;
+
+  & .weather-forecast {
+    flex: 3;
+  }
+
+  & .weather-data {
+    flex: 7;
+  }
+}

@@ -9,7 +9,6 @@ import { NgClass } from '@angular/common';
   standalone: true,
   imports: [AvatarModule, ButtonModule, SidebarLinkComponent, NgClass],
   templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.scss',
 })
 export class SidebarComponent {
   public isOpen: boolean = true;

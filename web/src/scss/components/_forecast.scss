@@ -1,0 +1,23 @@
+.weather-forecast {
+  border-radius: $spacer;
+  overflow-x: clip;
+  & .forecast-measurement {
+    padding: $spacer * 2;
+    width: 100%;
+
+    & .p-slider-handle {
+      display: none;
+    }
+
+    &__temperature-interval {
+      display: flex;
+      gap: $spacer;
+      width: 100%;
+      align-items: center;
+
+      & p-slider {
+        flex: 1;
+      }
+    }
+  }
+}
