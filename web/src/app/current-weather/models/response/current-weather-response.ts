@@ -6,7 +6,7 @@ import { SpeedResponseUnit } from '../../../core/models/api/response/speed.unit'
 import { TemperatureResponseUnit } from '../../../core/models/api/response/temperature.unit';
 import { TimeFormatResponseUnit } from '../../../core/models/api/response/time-format.unit';
 
-export type CurrentWeatherUnitsResponse = {
+export type CurrentWeatherResponseUnits = {
   time: TimeFormatResponseUnit;
   interval: string;
   temperature_2m: TemperatureResponseUnit;
@@ -27,7 +27,7 @@ export type CurrentWeatherUnitsResponse = {
 };
 
 export type CurrentWeatherMeasurementsResponse = {
-  [key in keyof Omit<CurrentWeatherUnitsResponse, 'time' | 'is_day'>]: number;
+  [key in keyof Omit<CurrentWeatherResponseUnits, 'time' | 'is_day'>]: number;
 } & { time: string | number; is_day: 0 | 1 };
 
 export type CurrentWeatherResponse = {
@@ -38,6 +38,6 @@ export type CurrentWeatherResponse = {
   timezone: string;
   timezone_abbreviation: string;
   elevation: number;
-  current_units: CurrentWeatherUnitsResponse;
+  current_units: CurrentWeatherResponseUnits;
   current: CurrentWeatherMeasurementsResponse;
 };

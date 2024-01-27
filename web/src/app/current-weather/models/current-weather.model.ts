@@ -27,6 +27,7 @@ export type CurrentWeather = {
   windGusts: ValueUnit<number, SpeedResponseUnit>;
 };
 
+//TODO improve/automate mappings of individual properties
 export const currentWeatherHeadlessResponseToCurrentWeather = (
   response: CurrentWeatherResponse
 ): CurrentWeather => {
