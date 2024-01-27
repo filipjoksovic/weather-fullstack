@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import "primeicons/primeicons.css";
+@import 'primeicons/primeicons.css';
 
 //--surface-ground;
 //--surface-section;
@@ -12,7 +12,7 @@ $spacer: 0.5rem;
 
 body {
   min-height: 100vh;
-  background: url("./assets/images/blob-scene-light.svg");
+  background: url('./assets/images/blob-scene-blue-dark.svg');
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -21,12 +21,10 @@ app-root {
   min-height: 100vh;
 }
 
-//
-//
 * {
-  //  padding: 0;
-  //  margin: 0;
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 body {
@@ -40,26 +38,26 @@ app-home-routing {
 
 .sidebar {
   height: 100vh;
-  min-width: 300px;
-  width: clamp(15vw, 30rem, 20vw);
+  width: 20rem;
   background-color: rgba(251, 247, 255, 0.55); //purple-50 with 55% opacity
-  backdrop-filter: blur(200px);
+  backdrop-filter: blur(20px);
   padding: $spacer;
   display: flex;
   flex-direction: column;
   align-content: center;
   transition: 250ms ease-in-out width;
 
-  &__closed{
-    width:5vw;
-    min-width:unset;
-    max-width:unset;
+  &__closed {
+    width: 5vw;
+    //min-width:unset;
+    //max-width:unset;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    & .sidebar__link{
-      &__text{
-        display:none;
+
+    & .sidebar__link {
+      &__text {
+        display: none;
       }
     }
   }
@@ -67,9 +65,9 @@ app-home-routing {
   &__title {
     flex: 1;
     flex-grow: 0;
-    display:flex;
+    display: flex;
     justify-content: space-between;
-    align-items:center;
+    align-items: center;
   }
 
   &__body {
@@ -98,15 +96,165 @@ app-home-routing {
     border-radius: $spacer;
     display: flex;
     align-items: center;
-    gap:$spacer * 2;
+    gap: $spacer * 2;
 
-    &:hover{
+    &:hover {
       background-color: rgba(251, 247, 255, 0.85); //purple-50 with 55% opacity
     }
 
-    &__icon{
-
+    &__icon {
     }
   }
+}
 
+//Home layout
+app-home-routing {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: start;
+  gap: $spacer;
+
+  & app-sidebar {
+    flex: 1;
+  }
+
+  & .content {
+    background-color: rgba(251, 247, 255, 0.55); //purple-50 with 55% opacity
+    backdrop-filter: blur(50px);
+    padding: $spacer;
+    margin: $spacer;
+    border-radius: $spacer;
+    flex: 7;
+    height: 95vh;
+    width: 95vw;
+    overflow-y: scroll;
+  }
+}
+
+.location-search {
+  display: flex;
+  gap: $spacer;
+  align-items: center;
+
+  & p-autoComplete {
+    flex-grow: 1;
+
+    & input {
+      width: 100%;
+    }
+  }
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.current-location {
+  padding: $spacer * 2 0;
+  border-radius: $spacer;
+}
+
+//Helpers
+
+.mb-2 {
+  margin-bottom: $spacer * 2;
+}
+
+.m-0 {
+  margin: 0;
+}
+//Weather display
+.p-panel-header {
+  border: none;
+}
+
+.p-panel-content {
+  background-color: rgba(255, 255, 255, 0.7);
+
+  border: none;
+}
+
+.p-panel-footer {
+  background-color: rgba(255, 255, 255, 0.7);
+
+  border: none;
+}
+
+.weather-overview {
+  display: flex;
+  gap: $spacer;
+
+  & .weather-forecast {
+    flex: 3;
+  }
+
+  & .weather-data {
+    flex: 7;
+  }
+}
+
+.weather-forecast {
+  border-radius: $spacer;
+  overflow-x: clip;
+  & .forecast-measurement {
+    padding: $spacer * 2;
+    width: 100%;
+
+    & .p-slider-handle {
+      display: none;
+    }
+
+    &__temperature-interval {
+      display: flex;
+      gap: $spacer;
+      width: 100%;
+      align-items: center;
+
+      & p-slider {
+        flex: 1;
+      }
+    }
+  }
+}
+
+.weather-data {
+  width: 100%;
+  gap: $spacer;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  & p-panel {
+    flex: 1;
+    border-radius: 20px;
+    overflow: hidden;
+    & .p-panel-header {
+      overflow-x: hidden;
+      display: flex;
+      gap: $spacer;
+      padding: $spacer;
+    }
+
+    & .p-panel-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: $spacer;
+    }
+    & .p-panel-toggleable:not(.p-panel-expanded) {
+      & .p-panel-header {
+        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+        transition-delay: 250ms;
+      }
+    }
+  }
+}
+
+p-autoComplete {
+  & input {
+    padding: $spacer;
+  }
 }

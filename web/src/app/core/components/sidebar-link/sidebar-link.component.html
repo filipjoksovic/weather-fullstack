@@ -1,8 +1,7 @@
 <a [class]="linkClasses" [routerLink]="link">
   @if (icon) {
-    <i class="sidebar__link__icon pi pi-user" style="font-size: 2.5rem"></i>
+  <i [class]="'sidebar__link__icon ' + icon" style="font-size: 2.5rem"></i>
   }
   <span class="sidebar__link__text">
     {{ label }}
-  </span></a
->
+  </span></a>
