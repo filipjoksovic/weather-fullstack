@@ -1,0 +1,33 @@
+<div class="card weather-forecast">
+  <p-dataView #dv [value]="forecast.measurements">
+    <ng-template pTemplate="list">
+      <h4>10 Day forecast</h4>
+      @for (measurement of forecast.measurements; track $index) {
+        <div class="forecast-measurement">
+          <div class="">
+            {{ measurement.date | appDayOfWeek }}
+            <i class="fa fa-sun"></i>
+            <div class="forecast-measurement__temperature-interval">
+              {{ measurement.minTemperature | appUnitValueToString }}
+              <p-slider
+                [min]="
+                  measurement.minTemperature.value -
+                  measurement.minTemperature.value / 10
+                "
+                [max]="
+                  measurement.maxTemperature.value +
+                  measurement.maxTemperature.value / 10
+                "
+                [range]="true"
+                [ngModel]="[
+                  measurement.minTemperature.value,
+                  measurement.maxTemperature.value
+                ]"></p-slider>
+              {{ measurement.maxTemperature | appUnitValueToString }}
+            </div>
+          </div>
+        </div>
+      }
+    </ng-template>
+  </p-dataView>
+</div>

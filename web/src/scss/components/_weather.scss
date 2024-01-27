@@ -33,32 +33,15 @@
   }
 }
 
-//Weather measurements display
-.p-panel-header {
-  border: none;
-}
-
-.p-panel-content {
-  background-color: rgba(255, 255, 255, 0.7);
-
-  border: none;
-}
-
-.p-panel-footer {
-  background-color: rgba(255, 255, 255, 0.7);
-
-  border: none;
-}
-
 .weather-overview {
   display: flex;
   gap: $spacer;
 
-  & .weather-forecast {
+  & app-forecast-measurements {
     flex: 3;
   }
 
-  & .weather-data {
+  & app-weather-measurements {
     flex: 7;
   }
 }

@@ -11,7 +11,7 @@ app-home-routing {
   }
 
   & .content {
-    background-color: rgba(251, 247, 255, 0.55); //purple-50 with 55% opacity
+    background-color: $surface-card;
     backdrop-filter: blur(50px);
     padding: $spacer;
     margin: $spacer;
@@ -20,5 +20,6 @@ app-home-routing {
     height: 95vh;
     width: 95vw;
     overflow-y: scroll;
+    box-shadow: $shadow-standard;
   }
 }
