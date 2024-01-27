@@ -4,7 +4,7 @@ import { ToasterService } from './toaster.service';
 export enum DataState {
   LOADING = 'LOADING',
   EMPTY = 'EMPTY',
-  LOADED = 'ERROR',
+  LOADED = 'LOADED',
   ERROR = 'ERROR',
   UNDEFINED = 'UNDEFINED',
 }
@@ -22,7 +22,7 @@ export class LocationService {
     coords: null,
     loadingState: DataState.UNDEFINED,
   });
-  constructor() { }
+  constructor() {}
 
   public getLocation() {
     this.currentLocation.update(currentState => ({
