@@ -1,7 +1,7 @@
 import { Component, OnInit, Signal, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { AutoCompleteModule } from 'primeng/autocomplete';
-import { ButtonDirective, ButtonModule } from 'primeng/button';
+import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
 import { LocationSearchComponent } from '../../components/location-search/location-search.component';
 import { MessageService } from 'primeng/api';
@@ -11,12 +11,11 @@ import { tap } from 'rxjs';
 import { CurrentWeather } from '../../../current-weather/models/current-weather.model';
 import { PanelModule } from 'primeng/panel';
 import { AvatarModule } from 'primeng/avatar';
-import { Menu, MenuModule } from 'primeng/menu';
+import { MenuModule } from 'primeng/menu';
 import { WeatherMeasurementComponent } from '../../components/weather-measurment/weather-measurement.component';
 import { SplitterModule } from 'primeng/splitter';
 import { DataViewModule } from 'primeng/dataview';
 import { RatingModule } from 'primeng/rating';
-import { TagModule } from 'primeng/tag';
 import { ForecastDataService } from '../../../forecast/services/data/forecast.data.service';
 import { ForecastWeather } from '../../../forecast/models/forecast-weather.model';
 import { DayOfWeekPipe } from '../../../core/pipes/day-of-week.pipe';
@@ -28,7 +27,6 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   providers: [MessageService],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
   imports: [
     AutoCompleteModule,
     ButtonModule,

@@ -1,17 +1,11 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { SidebarModule } from 'primeng/sidebar';
-import { MessageService, PrimeNGConfig } from 'primeng/api';
-import {
-  BrowserAnimationsModule,
-  BrowserAnimationsModuleConfig,
-} from '@angular/platform-browser/animations';
+import { PrimeNGConfig } from 'primeng/api';
 import { AvatarModule } from 'primeng/avatar';
-import { Toast, ToastModule } from 'primeng/toast';
-import { MessageModule } from 'primeng/message';
-import { MessagesModule } from 'primeng/messages';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +19,6 @@ import { MessagesModule } from 'primeng/messages';
     ToastModule,
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
   title = 'web';

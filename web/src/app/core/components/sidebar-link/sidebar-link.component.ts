@@ -7,7 +7,6 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   imports: [ButtonModule, RouterLink],
   templateUrl: './sidebar-link.component.html',
-  styleUrl: './sidebar-link.component.scss',
 })
 export class SidebarLinkComponent {
   @Input({ required: true }) label!: string;
