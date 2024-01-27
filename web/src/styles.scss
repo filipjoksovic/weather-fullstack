@@ -23,6 +23,8 @@ app-root {
 
 * {
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 body {
@@ -124,6 +126,9 @@ app-home-routing {
     margin: $spacer;
     border-radius: $spacer;
     flex: 7;
+    height: 95vh;
+    width: 95vw;
+    overflow-y: scroll;
   }
 }
 
@@ -176,6 +181,43 @@ app-home-routing {
   border: none;
 }
 
+.weather-overview {
+  display: flex;
+  gap: $spacer;
+
+  & .weather-forecast {
+    flex: 3;
+  }
+
+  & .weather-data {
+    flex: 7;
+  }
+}
+
+.weather-forecast {
+  border-radius: $spacer;
+  overflow-x: clip;
+  & .forecast-measurement {
+    padding: $spacer * 2;
+    width: 100%;
+
+    & .p-slider-handle {
+      display: none;
+    }
+
+    &__temperature-interval {
+      display: flex;
+      gap: $spacer;
+      width: 100%;
+      align-items: center;
+
+      & p-slider {
+        flex: 1;
+      }
+    }
+  }
+}
+
 .weather-data {
   width: 100%;
   gap: $spacer;
@@ -190,12 +232,14 @@ app-home-routing {
       overflow-x: hidden;
       display: flex;
       gap: $spacer;
+      padding: $spacer;
     }
 
     & .p-panel-content {
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: $spacer;
     }
     & .p-panel-toggleable:not(.p-panel-expanded) {
       & .p-panel-header {
@@ -206,5 +250,11 @@ app-home-routing {
         transition-delay: 250ms;
       }
     }
+  }
+}
+
+p-autoComplete {
+  & input {
+    padding: $spacer;
   }
 }

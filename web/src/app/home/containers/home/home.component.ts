@@ -19,7 +19,10 @@ import { RatingModule } from 'primeng/rating';
 import { TagModule } from 'primeng/tag';
 import { ForecastDataService } from '../../../forecast/services/data/forecast.data.service';
 import { ForecastWeather } from '../../../forecast/models/forecast-weather.model';
-
+import { DayOfWeekPipe } from '../../../core/pipes/day-of-week.pipe';
+import { UnitValueToStringPipe } from '../../../core/pipes/unit-value-to-string.pipe';
+import { SliderModule } from 'primeng/slider';
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -39,6 +42,10 @@ import { ForecastWeather } from '../../../forecast/models/forecast-weather.model
     SplitterModule,
     DataViewModule,
     RatingModule,
+    DayOfWeekPipe,
+    UnitValueToStringPipe,
+    SliderModule,
+    FormsModule,
   ],
 })
 export class HomeComponent implements OnInit {
