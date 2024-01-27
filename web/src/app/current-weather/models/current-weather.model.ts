@@ -40,8 +40,8 @@ export const currentWeatherHeadlessResponseToCurrentWeather = (
       value: response.current.temperature_2m,
     },
     humidity: {
-      unit: response.current_units.relative_humidity,
-      value: response.current.relative_humidity,
+      unit: response.current_units.relative_humidity_2m,
+      value: response.current.relative_humidity_2m,
     },
     apparentTemperature: {
       unit: response.current_units.apparent_temperature,

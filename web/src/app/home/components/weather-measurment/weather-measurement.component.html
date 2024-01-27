@@ -1,0 +1,19 @@
+<p-panel>
+  <ng-template pTemplate="header">
+    @if (icon) {
+      <i [class]="icon"></i>
+    }
+    <p class="m-0">{{ title }}</p>
+  </ng-template>
+
+  <!-- <ng-template pTemplate="footer">
+    <div
+      class="flex flex-wrap align-items-center justify-content-between gap-3">
+      <span class="p-text-secondary">Updated 2 hours ago</span>
+    </div>
+  </ng-template> -->
+
+  <div class="card">
+    <p>{{ measurement.value }} {{ measurement.unit }}</p>
+  </div>
+</p-panel>

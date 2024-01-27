@@ -10,7 +10,7 @@ export type CurrentWeatherUnitsResponse = {
   time: TimeFormatResponseUnit;
   interval: string;
   temperature_2m: TemperatureResponseUnit;
-  relative_humidity: PercentageResponseUnit;
+  relative_humidity_2m: PercentageResponseUnit;
   apparent_temperature: TemperatureResponseUnit;
   is_day: '_';
   precipitation: HeightResponseUnit;
