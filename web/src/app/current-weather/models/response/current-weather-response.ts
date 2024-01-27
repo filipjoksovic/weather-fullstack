@@ -10,7 +10,7 @@ export type CurrentWeatherUnitsResponse = {
   time: TimeFormatResponseUnit;
   interval: string;
   temperature_2m: TemperatureResponseUnit;
-  relative_humidity: '%';
+  relative_humidity: PercentageResponseUnit;
   apparent_temperature: TemperatureResponseUnit;
   is_day: '_';
   precipitation: HeightResponseUnit;
@@ -26,16 +26,18 @@ export type CurrentWeatherUnitsResponse = {
   wind_gusts_10m: SpeedResponseUnit;
 };
 
+export type CurrentWeatherMeasurementsResponse = {
+  [key in keyof Omit<CurrentWeatherUnitsResponse, 'time' | 'is_day'>]: number;
+} & { time: string | number; is_day: 0 | 1 };
+
 export type CurrentWeatherResponse = {
-  lattitude: number;
+  latitude: number;
   longitude: number;
   generationtime_ms: number;
   utc_offset_seconds: number;
   timezone: string;
   timezone_abbreviation: string;
   elevation: number;
-  current_units: CurrentWeatherResponse;
-  current: {
-    [key in keyof Omit<CurrentWeatherResponse, 'time' | 'is_day'>]: number;
-  } & { time: string | number; is_day: 0 | 1 };
+  current_units: CurrentWeatherUnitsResponse;
+  current: CurrentWeatherMeasurementsResponse;
 };
