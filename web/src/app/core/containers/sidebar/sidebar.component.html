@@ -1,24 +1,22 @@
-<div class="sidebar" [ngClass]="{ sidebar__closed: !isOpen }">
-  <div class="sidebar__title">
-    @if (isOpen) {
-    <h1>Weather</h1>
-    }
-    <p-button [icon]="isOpen ? 'pi pi-times' : 'pi pi-chevron-right'" [rounded]="true" severity="help"
-      (onClick)="toggleSidebar()"></p-button>
+<div
+  class="bg-gray-900 shadow-2 sm:border-round sm:p-2 p-0 my-auto sm:m-2 p-3 flex sm:flex-column gap-7 align-items-center justify-content-center w-full">
+  <div>
+    <h1 class="text-gray-50 text-center">W</h1>
   </div>
-  <div class="sidebar__body">
-    <app-sidebar-link label="Location Overview" link="" icon="pi pi-send"></app-sidebar-link>
-    <app-sidebar-link label="Link" link="" icon="pi pi-user"></app-sidebar-link>
-    <app-sidebar-link label="Link" link="" icon="pi pi-user"></app-sidebar-link>
-    <app-sidebar-link label="Link" link="" icon="pi pi-user"></app-sidebar-link>
-    <app-sidebar-link label="Link" link="" icon="pi pi-user"></app-sidebar-link>
+  <div class="flex sm:flex-column justify-content-center align-items-center">
+    <app-sidebar-link
+      label="Location Overview"
+      link=""
+      icon="pi pi-send"></app-sidebar-link>
+    <app-sidebar-link label="Link" link="" icon="fa fa-user"></app-sidebar-link>
+    <app-sidebar-link label="Link" link="" icon="fa fa-user"></app-sidebar-link>
+    <app-sidebar-link label="Link" link="" icon="fa fa-user"></app-sidebar-link>
   </div>
-  <div class="sidebar__footer">
-    <div class="sidebar__footer sidebar__footer__account-section">
-      <p-avatar label="P" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
-      @if (isOpen) {
-      <app-sidebar-link label="Link" link=""></app-sidebar-link>
-      }
-    </div>
+  <div class="flex justify-content-center align-items-center">
+    <p-avatar
+      label="P"
+      styleClass="m-0"
+      size="xlarge"
+      shape="circle"></p-avatar>
   </div>
 </div>
