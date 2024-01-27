@@ -40,8 +40,7 @@ app-home-routing {
 
 .sidebar {
   height: 100vh;
-  min-width: 300px;
-  width: clamp(15vw, 30rem, 20vw);
+  width: 20rem;
   background-color: rgba(251, 247, 255, 0.55); //purple-50 with 55% opacity
   backdrop-filter: blur(200px);
   padding: $spacer;
@@ -50,16 +49,17 @@ app-home-routing {
   align-content: center;
   transition: 250ms ease-in-out width;
 
-  &__closed{
-    width:5vw;
-    min-width:unset;
-    max-width:unset;
+  &__closed {
+    width: 5vw;
+    //min-width:unset;
+    //max-width:unset;
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    & .sidebar__link{
-      &__text{
-        display:none;
+
+    & .sidebar__link {
+      &__text {
+        display: none;
       }
     }
   }
@@ -67,9 +67,9 @@ app-home-routing {
   &__title {
     flex: 1;
     flex-grow: 0;
-    display:flex;
+    display: flex;
     justify-content: space-between;
-    align-items:center;
+    align-items: center;
   }
 
   &__body {
@@ -98,15 +98,66 @@ app-home-routing {
     border-radius: $spacer;
     display: flex;
     align-items: center;
-    gap:$spacer * 2;
+    gap: $spacer * 2;
 
-    &:hover{
+    &:hover {
       background-color: rgba(251, 247, 255, 0.85); //purple-50 with 55% opacity
     }
 
-    &__icon{
-
-    }
+    &__icon {}
   }
 
+}
+
+//Home layout
+app-home-routing {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: start;
+  gap: $spacer;
+
+  & app-sidebar {
+    flex: 1;
+  }
+
+  & .content {
+    background-color: rgba(251, 247, 255, 0.55); //purple-50 with 55% opacity
+    backdrop-filter: blur(200px);
+    padding: $spacer;
+    margin: $spacer;
+    border-radius: $spacer;
+    flex: 7;
+  }
+}
+
+.location-search {
+  display: flex;
+  gap: $spacer;
+  align-items: center;
+
+  & p-autoComplete {
+    flex-grow: 1;
+
+    & input {
+      width: 100%;
+    }
+  }
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.current-location {
+  padding: $spacer * 2 0;
+  border-radius: $spacer;
+
+}
+
+
+//Helpers
+
+.mb-2 {
+  margin-bottom: $spacer * 2;
 }
