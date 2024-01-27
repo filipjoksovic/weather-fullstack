@@ -1,0 +1,14 @@
+body {
+  min-height: 100vh;
+  background: url('../../assets/images/blob-scene-blue-light.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+app-root {
+  min-height: 100vh;
+}
+
+app-home-routing {
+  display: flex;
+}

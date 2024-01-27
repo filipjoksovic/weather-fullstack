@@ -1,0 +1,19 @@
+.location-search {
+  display: flex;
+  gap: $spacer;
+  align-items: center;
+
+  & p-autoComplete {
+    flex-grow: 1;
+
+    & input {
+      width: 100%;
+    }
+  }
+}
+
+p-autoComplete {
+  & input {
+    padding: $spacer;
+  }
+}
