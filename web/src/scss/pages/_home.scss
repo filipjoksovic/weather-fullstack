@@ -6,6 +6,11 @@ app-home-routing {
   justify-content: start;
   gap: $spacer;
   grid-template-areas: 'sidebar content';
+  grid-template-columns: 1fr 1000fr;
+
+  p-toast {
+    position: absolute;
+  }
 
   & app-sidebar {
     display: flex;

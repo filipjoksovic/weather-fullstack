@@ -1,13 +1,18 @@
 <app-location-search></app-location-search>
 <app-selected-location></app-selected-location>
 
-<div class="weather-overview">
+<div class="grid">
   @if (forecast$()) {
-    <app-forecast-measurements
-      [forecast]="forecast$()"></app-forecast-measurements>
+    <div class="col-12 md:col-4">
+      <app-forecast-measurements
+        [forecast]="forecast$()"></app-forecast-measurements>
+    </div>
   }
 
   @if (weather$()) {
-    <app-weather-measurements [weather]="weather$()"></app-weather-measurements>
+    <div class="col-12 md:col-8">
+      <app-weather-measurements
+        [weather]="weather$()"></app-weather-measurements>
+    </div>
   }
 </div>

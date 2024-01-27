@@ -1,9 +1,4 @@
 .weather-data {
-  width: 100%;
-  gap: $spacer;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-
   & p-panel {
     flex: 1;
     border-radius: 20px;
