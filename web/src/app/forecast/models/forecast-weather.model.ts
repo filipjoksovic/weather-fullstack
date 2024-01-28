@@ -32,29 +32,19 @@ export const groupForecastResponseMeasurements = (
       const partialMeasurement: Partial<ForecastMeasurement> = {
         date: date ?? new Date(),
       };
-      if (
-        Object.hasOwn(response.daily, 'temperature_2m_max') &&
-        Object.hasOwn(response.daily_units, 'temperature_2m_max')
-      ) {
-        partialMeasurement.maxTemperature = {
-          value: response.daily.temperature_2m_max
-            ? response.daily.temperature_2m_max[index]
-            : 0,
-          unit: response.daily_units.temperature_2m_max ?? '°C',
-        };
-      }
+      partialMeasurement.maxTemperature = {
+        value: response.daily.temperature_2m_max
+          ? response.daily.temperature_2m_max[index]
+          : 0,
+        unit: response.daily_units.temperature_2m_max ?? '°C',
+      };
 
-      if (
-        Object.hasOwn(response.daily, 'temperature_2m_min') &&
-        Object.hasOwn(response.daily_units, 'temperature_2m_min')
-      ) {
-        partialMeasurement.minTemperature = {
-          value: response.daily.temperature_2m_min
-            ? response.daily.temperature_2m_min[index]
-            : 0,
-          unit: response.daily_units.temperature_2m_min ?? '°C',
-        };
-      }
+      partialMeasurement.minTemperature = {
+        value: response.daily.temperature_2m_min
+          ? response.daily.temperature_2m_min[index]
+          : 0,
+        unit: response.daily_units.temperature_2m_min ?? '°C',
+      };
       return partialMeasurement as ForecastMeasurement;
     }
   );

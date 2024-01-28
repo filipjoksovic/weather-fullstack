@@ -15,6 +15,7 @@ import {
   ForecastWeather,
 } from '../../../forecast/models/forecast-weather.model';
 import { ChartModule } from 'primeng/chart';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-forecast-param-details',
@@ -37,6 +38,10 @@ export class ForecastParamDetailsComponent implements OnInit {
         grid: { color: string; drawBorder: boolean };
       };
     };
+    interaction: {
+      intersect: boolean;
+      mode: string;
+    };
   };
   data!: {
     labels: string[];
@@ -54,21 +59,26 @@ export class ForecastParamDetailsComponent implements OnInit {
   forecastDetailsService = inject(ForecastDetailsService);
 
   showModal = computed(() => this.forecastDetailsService.showDialog());
-  measurementData = computed(
-    () =>
-      this.forecastDetailsService.measurementData()?.daily.temperature_2m_max ??
-      []
-  );
+  measurementData = computed(() => {
+    return {
+      measurements:
+        this.forecastDetailsService.measurementData()?.daily
+          .temperature_2m_max ?? [],
+      dates: this.forecastDetailsService.measurementData()?.daily.time ?? [],
+    };
+  });
   showModalValue = false;
 
   constructor() {
     effect(() => {
-      console.log('Here');
       this.showModalValue = this.showModal();
+      this.data.labels = this.measurementData().dates.map(date =>
+        format(date, 'EEEE')
+      );
       this.data.datasets = [
         {
-          label: 'first',
-          data: this.measurementData(),
+          label: 'Detailed overview for parameter',
+          data: this.measurementData().measurements,
           fill: false,
           borderColor: getComputedStyle(
             document.documentElement
@@ -116,6 +126,10 @@ export class ForecastParamDetailsComponent implements OnInit {
             color: textColor,
           },
         },
+      },
+      interaction: {
+        intersect: false,
+        mode: 'index',
       },
       scales: {
         x: {

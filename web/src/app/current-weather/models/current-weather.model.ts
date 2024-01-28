@@ -5,13 +5,21 @@ import { PressureUnitResponse } from '../../core/models/api/response/pressure.un
 import { SpeedResponseUnit } from '../../core/models/api/response/speed.unit';
 import { TemperatureResponseUnit } from '../../core/models/api/response/temperature.unit';
 import { ValueUnit } from '../../core/models/data/value-unit.type';
-import { CurrentWeatherResponse } from './response/current-weather-response';
+import { CurrentWeatherResponseKeysToModelKeys } from './cw-req-keys.map';
+import {
+  CurrentWeatherMeasurementsResponse,
+  CurrentWeatherResponse,
+  CurrentWeatherResponseUnits,
+} from './response/current-weather-response';
 
-export type CurrentWeather = {
+export type BaseWeatherModel = {
   latitude: number;
   longitude: number;
   timezone: string;
   elevation: number;
+};
+
+export type WeatherMeasurementModel = {
   temperature: ValueUnit<number, TemperatureResponseUnit>;
   humidity: ValueUnit<number, PercentageResponseUnit>;
   apparentTemperature: ValueUnit<number, TemperatureResponseUnit>;
@@ -27,66 +35,32 @@ export type CurrentWeather = {
   windGusts: ValueUnit<number, SpeedResponseUnit>;
 };
 
-//TODO improve/automate mappings of individual properties
+export type CurrentWeather = BaseWeatherModel & WeatherMeasurementModel;
+
 export const currentWeatherHeadlessResponseToCurrentWeather = (
   response: CurrentWeatherResponse
 ): CurrentWeather => {
-  return {
+  const partialWeather: Partial<CurrentWeather> = {
     latitude: response.latitude,
     longitude: response.longitude,
     timezone: response.timezone,
     elevation: response.elevation,
-    temperature: {
-      unit: response.current_units.temperature_2m,
-      value: response.current.temperature_2m,
-    },
-    humidity: {
-      unit: response.current_units.relative_humidity_2m,
-      value: response.current.relative_humidity_2m,
-    },
-    apparentTemperature: {
-      unit: response.current_units.apparent_temperature,
-      value: response.current.apparent_temperature,
-    },
-    precipitation: {
-      unit: response.current_units.precipitation,
-      value: response.current.precipitation,
-    },
-    rain: {
-      unit: response.current_units.rain,
-      value: response.current.rain,
-    },
-    showers: {
-      unit: response.current_units.showers,
-      value: response.current.showers,
-    },
-    snowfall: {
-      unit: response.current_units.snowfall,
-      value: response.current.snowfall,
-    },
-    cloudCover: {
-      unit: response.current_units.cloud_cover,
-      value: response.current.cloud_cover,
-    },
-    pressure: {
-      unit: response.current_units.pressure_msl,
-      value: response.current.pressure_msl,
-    },
-    surfacePressure: {
-      unit: response.current_units.surface_pressure,
-      value: response.current.surface_pressure,
-    },
-    windSpeed: {
-      unit: response.current_units.wind_speed_10m,
-      value: response.current.wind_speed_10m,
-    },
-    windGusts: {
-      unit: response.current_units.wind_gusts_10m,
-      value: response.current.wind_gusts_10m,
-    },
-    windDirection: {
-      unit: response.current_units.wind_direction_10m,
-      value: response.current.wind_direction_10m,
-    },
-  } as CurrentWeather;
+  };
+  for (const key of Object.keys(response.current_units) as Array<
+    keyof CurrentWeatherResponseUnits
+  >) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    partialWeather[
+      CurrentWeatherResponseKeysToModelKeys[
+        key as keyof typeof CurrentWeatherResponseKeysToModelKeys
+      ] as keyof CurrentWeather
+    ] = {
+      unit: response.current_units[key as keyof CurrentWeatherResponseUnits],
+      value: response.current[key as keyof CurrentWeatherMeasurementsResponse],
+    };
+  }
+
+  console.log('Partial weather', partialWeather);
+  return partialWeather as CurrentWeather;
 };

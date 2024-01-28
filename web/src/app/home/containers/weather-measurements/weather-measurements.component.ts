@@ -7,11 +7,7 @@ import {
 } from '@angular/core';
 import { CurrentWeather } from '../../../current-weather/models/current-weather.model';
 import { WeatherMeasurementComponent } from '../../components/weather-measurment/weather-measurement.component';
-import {
-  ComponentLoadedState,
-  ComponentLoadingState,
-  ComponentState,
-} from '../home/home.component';
+import { ComponentState } from '../home/home.component';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CurrentWeatherDataService } from '../../../current-weather/services/data/current-weather.data.service';
 import { delay, map, tap } from 'rxjs';

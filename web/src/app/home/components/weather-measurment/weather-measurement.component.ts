@@ -10,6 +10,7 @@ import { PanelModule } from 'primeng/panel';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { ForecastDetailsService } from '../../../forecast-details/services/data/forecast-details.service';
+import { CurrentWeather } from '../../../current-weather/models/current-weather.model';
 
 @Component({
   selector: 'app-weather-measurement',
@@ -31,6 +32,7 @@ export class WeatherMeasurementComponent {
   title!: string;
   @Input({ required: true })
   measurement!: ValueUnit<unknown, unknown>;
-
+  @Input({ required: true })
+  measurementKey!: keyof CurrentWeather;
   public isCollapsed: boolean = false;
 }
