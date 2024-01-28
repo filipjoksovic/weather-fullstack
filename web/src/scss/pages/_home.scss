@@ -18,15 +18,53 @@ app-home-routing {
   }
 
   & .content {
-    background-color: $surface-card;
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
     padding: $spacer;
-    margin: $spacer;
     border-radius: $spacer;
     flex: 7;
-    height: 95vh;
     overflow-y: scroll;
     box-shadow: $shadow-standard;
     grid-area: content;
+    height: clamp(30vh, 100rem, 80vh);
+    width: clamp(30vw, 100rem, 80vw);
+    margin: auto;
+
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+@media only screen and (max-width: $sm) {
+  app-home-routing {
+    & .content {
+      height: 100%;
+      width: 100%;
+    }
+  }
+}
+@media only screen and (max-width: $md) {
+  app-home-routing {
+    .content {
+      height: clamp(30vh, 100rem, 80vh);
+      width: clamp(30vw, 100rem, 80vw);
+    }
+  }
+}
+@media only screen and (max-width: $lg) {
+  .content {
+    height: clamp(30vh, 100rem, 80vh);
+    width: clamp(30vw, 100rem, 80vw);
+  }
+}
+@media only screen and (max-width: $xl) {
+  .content {
+    height: clamp(30vh, 100rem, 80vh);
+    width: clamp(30vw, 100rem, 80vw);
   }
 }
 

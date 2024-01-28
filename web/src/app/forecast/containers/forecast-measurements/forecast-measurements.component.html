@@ -1,8 +1,8 @@
+<h2>10 Day forecast</h2>
 @if (forecast().state === DataState.LOADED) {
   <div class="card weather-forecast">
     <p-dataView #dv [value]="forecast().data.measurements">
       <ng-template pTemplate="list">
-        <h4>10 Day forecast</h4>
         @for (measurement of forecast().data.measurements; track $index) {
           <app-forecasting-measurement
             class="scalein"
@@ -22,7 +22,10 @@
     </div>
   }
 } @else if (forecast().state === DataState.UNDEFINED) {
-  <h4>10 Day forecast</h4>
-
-  <p>No forecast has been requested yet</p>
+  <div class="empty-state-container">
+    <img
+      src="../../../../assets/empty-state/ghost.svg"
+      alt="ghost empty state" />
+    <p>No forecast has been requested yet</p>
+  </div>
 }

@@ -50,4 +50,8 @@
       <p-skeleton styleClass="p-5"></p-skeleton>
     </div>
   </div>
+} @else if (weather().state === DataState.UNDEFINED) {
+  <div class="h-full">
+    <h4>No weather data</h4>
+  </div>
 }

@@ -1,9 +1,40 @@
+:root {
+  --cold-start: #0061ff;
+  --cold-stop: #60efff;
+
+  --hot-start: #ff0f7b;
+  --hot-stop: #f89b29;
+}
+
+@property --myColor1 {
+  syntax: '<color>';
+  initial-value: #e7e7e7;
+  inherits: false;
+}
+
+@property --myColor2 {
+  syntax: '<color>';
+  initial-value: #e7e7e7;
+  inherits: false;
+}
+
 body {
   min-height: 100vh;
-  // background: url('../../assets/images/blob-scene-blue-light.svg');
-  // background-repeat: no-repeat;
-  // background-size: cover;
-  background-color: $surface-ground;
+}
+
+app-home-routing {
+  background: linear-gradient(90deg, var(--myColor1), var(--myColor2));
+  // transition:
+  //   --myColor1 1s,
+  //   --myColor2 1s;
+}
+app-home-routing.hot {
+  --myColor1: var(--hot-start);
+  --myColor2: var(--hot-stop);
+}
+app-home-routing.cold {
+  --myColor1: var(--cold-stop);
+  --myColor2: var(--cold-start);
 }
 
 app-root {

@@ -4,36 +4,7 @@ import { Observable, map, tap } from 'rxjs';
 import { CurrentWeatherModelKeys } from '../../../current-weather/models/cw-req-keys.map';
 import { DataState } from '@core/models/data.state.enum';
 import { ForecastWeatherResponse } from '@forecast/models/api/response/forecast-weather-response';
-
-export type ForecastDetailsInitialState = {
-  state: DataState.UNDEFINED;
-  activeParameter: never;
-  data: never;
-};
-
-export type ForecastDetailsLoadingState = {
-  state: DataState.LOADING;
-  activeParameter: CurrentWeatherModelKeys;
-  data: never;
-};
-
-export type ForecastDetailsLoadedState = {
-  state: DataState.LOADED;
-  activeParameter: CurrentWeatherModelKeys;
-  data: ForecastWeatherResponse;
-};
-
-export type ForecastDetailsErrorState = {
-  state: DataState.ERROR;
-  activeParameter: CurrentWeatherModelKeys;
-  data: never;
-  error: string;
-};
-export type ForecastDetailsState =
-  | ForecastDetailsInitialState
-  | ForecastDetailsLoadingState
-  | ForecastDetailsLoadedState
-  | ForecastDetailsErrorState;
+import { ForecastDetailsState } from 'app/forecast-details/models/forecast-details.state';
 
 @Injectable({
   providedIn: 'root',
@@ -48,7 +19,6 @@ export class ForecastDetailsService {
     private readonly forecastDetailsApiService: ForecastDetailsApiService
   ) {}
 
-  //TODO type
   public showParams(measurement: CurrentWeatherModelKeys) {
     this.getDetailsForParam(measurement)
       .pipe(
