@@ -1,7 +1,5 @@
 <a [class]="linkClasses" [routerLink]="link">
   @if (icon) {
-  <i [class]="'sidebar__link__icon ' + icon" style="font-size: 2.5rem"></i>
+    <i class="text-gray-50 text-xl md:text-3xl" [class]="icon"></i>
   }
-  <span class="sidebar__link__text">
-    {{ label }}
-  </span></a>
+</a>

@@ -1,0 +1,110 @@
+@if (weather().state === DataState.LOADED) {
+  <div class="weather-data grid">
+    <div class="col-6 md:col-6 sm:col-6">
+      <app-weather-measurement
+        icon="fa fa-temperature-half"
+        title="Temperature"
+        [measurement]="weather().data.temperature"></app-weather-measurement>
+    </div>
+    <div class="col-6 md:col-3 sm:col-6">
+      <app-weather-measurement
+        icon="fa fa-cloud"
+        title="Cloud cover"
+        [measurement]="weather().data.cloudCover"></app-weather-measurement>
+    </div>
+    <div class="col-6 md:col-3 sm:col-6">
+      <app-weather-measurement
+        icon="fa fa-droplet"
+        title="Precipitation"
+        [measurement]="weather().data.precipitation"></app-weather-measurement>
+    </div>
+    <div class="col-6 md:col-4 sm:col-6">
+      <app-weather-measurement
+        icon="fa fa-droplet"
+        title="Humidity"
+        [measurement]="weather().data.humidity"></app-weather-measurement>
+    </div>
+    <div class="col-6 md:col-4 sm:col-6">
+      <app-weather-measurement
+        icon="fa fa-cloud-rain"
+        title="Rain"
+        [measurement]="weather().data.rain"></app-weather-measurement>
+    </div>
+    <div class="col-6 md:col-4 sm:col-6">
+      <app-weather-measurement
+        icon="fa fa-cloud-showers-heavy"
+        title="Showers"
+        [measurement]="weather().data.showers"></app-weather-measurement>
+    </div>
+    <div class="col-6 md:col-5 sm:col-6">
+      <app-weather-measurement
+        icon="fa fa-gauge"
+        title="Pressure"
+        [measurement]="weather().data.pressure"></app-weather-measurement>
+    </div>
+    <div class="col-6 md:col-5 sm:col-6">
+      <app-weather-measurement
+        icon="fa fa-gauge"
+        title="Surface pressure"
+        [measurement]="
+          weather().data.surfacePressure
+        "></app-weather-measurement>
+    </div>
+    <div class="col-6 md:col-2 sm:col-6">
+      <app-weather-measurement
+        icon="fa fa-snowflake"
+        title="Snowfall"
+        [measurement]="weather().data.snowfall"></app-weather-measurement>
+    </div>
+
+    <div class="col-6 md:col-6 sm:col-6">
+      <app-weather-measurement
+        icon="fa-solid fa-compass"
+        title="Wind direction"
+        [measurement]="weather().data.windDirection"></app-weather-measurement>
+    </div>
+    <div class="col-6 md:col-6 sm:col-6">
+      <app-weather-measurement
+        icon="fa fa-wind"
+        title="Wind speed"
+        [measurement]="weather().data.windSpeed"></app-weather-measurement>
+    </div>
+  </div>
+} @else if (weather().state === DataState.LOADING) {
+  <div class="weather-data grid">
+    <div class="col-6 md:col-6 sm:col-6">
+      <p-skeleton styleClass="p-5"></p-skeleton>
+    </div>
+    <div class="col-6 md:col-3 sm:col-6">
+      <p-skeleton styleClass="p-5"></p-skeleton>
+    </div>
+    <div class="col-6 md:col-3 sm:col-6">
+      <p-skeleton styleClass="p-5"></p-skeleton>
+    </div>
+    <div class="col-6 md:col-4 sm:col-6">
+      <p-skeleton styleClass="p-5"></p-skeleton>
+    </div>
+    <div class="col-6 md:col-4 sm:col-6">
+      <p-skeleton styleClass="p-5"></p-skeleton>
+    </div>
+    <div class="col-6 md:col-4 sm:col-6">
+      <p-skeleton styleClass="p-5"></p-skeleton>
+    </div>
+    <div class="col-6 md:col-5 sm:col-6">
+      <p-skeleton styleClass="p-5"></p-skeleton>
+    </div>
+    <div class="col-6 md:col-5 sm:col-6">
+      <p-skeleton styleClass="p-5"></p-skeleton>
+    </div>
+    <div class="col-6 md:col-2 sm:col-6">
+      <p-skeleton styleClass="p-5"></p-skeleton>
+    </div>
+
+    <div class="col-6 md:col-6 sm:col-6">
+      <p-skeleton styleClass="p-5"></p-skeleton>
+    </div>
+    <div class="col-6 md:col-6 sm:col-6">
+      <p-skeleton styleClass="p-5"></p-skeleton>
+    </div>
+  </div>
+}

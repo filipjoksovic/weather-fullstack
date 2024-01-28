@@ -1,0 +1,22 @@
+@if (forecast().state === DataState.LOADED) {
+  <div class="card weather-forecast">
+    <p-dataView #dv [value]="forecast().data.measurements">
+      <ng-template pTemplate="list">
+        <h4>10 Day forecast</h4>
+        @for (measurement of forecast().data.measurements; track $index) {
+          <app-forecasting-measurement
+            [measurement]="measurement"></app-forecasting-measurement>
+        }
+      </ng-template>
+    </p-dataView>
+  </div>
+} @else if (forecast().state === DataState.LOADING) {
+  <h4>10 Day forecast</h4>
+  @for (element of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; track $index) {
+    <div class="forecast-measurement">
+      <div class="">
+        <p-skeleton styleClass="p-5 my-1"></p-skeleton>
+      </div>
+    </div>
+  }
+}

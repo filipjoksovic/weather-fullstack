@@ -1,10 +1,11 @@
 .weather-forecast {
   border-radius: $spacer;
   overflow-x: clip;
-  & .forecast-measurement {
-    padding: $spacer * 2;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: $spacer * 2;
 
+  & .forecast-measurement {
     & .p-slider-handle {
       display: none;
     }
