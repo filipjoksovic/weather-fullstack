@@ -7,7 +7,6 @@ import {
 } from '@angular/core';
 import { CurrentWeather } from '../../../current-weather/models/current-weather.model';
 import { WeatherMeasurementComponent } from '../../components/weather-measurment/weather-measurement.component';
-import { ComponentState } from '../home/home.component';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { CurrentWeatherDataService } from '../../../current-weather/services/data/current-weather.data.service';
 import { delay, map, tap } from 'rxjs';
@@ -16,6 +15,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { DataState } from '@core/models/data.state.enum';
 import { SignalState } from '@core/models/signal-state';
+import { ComponentState } from '@core/models/component.state';
 
 @Component({
   selector: 'app-weather-measurements',

@@ -21,7 +21,6 @@
     "lib": ["ES2022", "dom"],
     "baseUrl": "src",
     "paths": {
-      "@current-weather": ["app/current-weather/*"],
       "@core/*": ["app/core/*"],
       "@forecast/*": ["app/forecast/*"],
       "@current-weather/*": ["app/current-weather/*"],
