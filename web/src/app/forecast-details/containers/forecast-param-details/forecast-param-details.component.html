@@ -1,0 +1,15 @@
+{{ showModalValue }}
+<p-dialog
+  header="Header"
+  [(visible)]="showModalValue"
+  [style]="{ width: '50vw' }"
+  (visibleChange)="dialogClosed()"
+  [maximizable]="true">
+  <p-chart
+    type="line"
+    [data]="data"
+    [options]="options"
+    width="100%"
+    height="100%"
+    [responsive]="true"></p-chart>
+</p-dialog>

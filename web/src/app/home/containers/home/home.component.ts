@@ -27,6 +27,8 @@ import { FormsModule } from '@angular/forms';
 import { WeatherMeasurementsComponent } from '../weather-measurements/weather-measurements.component';
 import { ForecastMeasurementsComponent } from '../forecast-measurements/forecast-measurements.component';
 import { DataState } from '../../../core/services/location.service';
+import { ForecastParamDetailsComponent } from '../../../forecast-details/containers/forecast-param-details/forecast-param-details.component';
+import { ChartModule } from 'primeng/chart';
 
 export type ComponentLoadingState = {
   state: DataState.LOADING;
@@ -74,8 +76,14 @@ export type ComponentState<T> =
     CardModule,
     WeatherMeasurementsComponent,
     ForecastMeasurementsComponent,
+    ForecastParamDetailsComponent,
+    ChartModule,
   ],
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   private readonly forecastWeatherDataService = inject(ForecastDataService);
+  options!: unknown;
+  data!: unknown;
+
+  ngOnInit() {}
 }

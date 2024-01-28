@@ -17,11 +17,19 @@ import { CurrentWeatherDataService } from '../../../current-weather/services/dat
 import { delay, map, tap } from 'rxjs';
 import { DataState } from '../../../core/services/location.service';
 import { SkeletonModule } from 'primeng/skeleton';
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-weather-measurements',
   standalone: true,
-  imports: [CommonModule, WeatherMeasurementComponent, SkeletonModule],
+  imports: [
+    CommonModule,
+    WeatherMeasurementComponent,
+    SkeletonModule,
+    DialogModule,
+    ButtonModule,
+  ],
   templateUrl: `./weather-measurements.component.html`,
   styleUrl: './weather-measurements.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -51,4 +59,10 @@ export class WeatherMeasurementsComponent {
   );
 
   protected DataState = DataState;
+
+  visible: boolean = false;
+
+  showDialog() {
+    this.visible = true;
+  }
 }

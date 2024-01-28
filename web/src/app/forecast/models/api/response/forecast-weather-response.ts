@@ -2,9 +2,9 @@ import { TemperatureResponseUnit } from '../../../../core/models/api/response/te
 import { TimeFormatResponseUnit } from '../../../../core/models/api/response/time-format.unit';
 
 export type ForecastWeatherResponseUnits = {
-  time: TimeFormatResponseUnit;
-  temperature_2m_max: TemperatureResponseUnit;
-  temperature_2m_min: TemperatureResponseUnit;
+  time?: TimeFormatResponseUnit;
+  temperature_2m_max?: TemperatureResponseUnit;
+  temperature_2m_min?: TemperatureResponseUnit;
 };
 
 export type ForecastWeatherMeasurementsResponse = {
