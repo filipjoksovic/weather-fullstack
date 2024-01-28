@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   Signal,
+  computed,
   inject,
 } from '@angular/core';
 import { CurrentWeather } from '../../../current-weather/models/current-weather.model';
@@ -16,6 +17,10 @@ import { ButtonModule } from 'primeng/button';
 import { DataState } from '@core/models/data.state.enum';
 import { SignalState } from '@core/models/signal-state';
 import { ComponentState } from '@core/models/component.state';
+import {
+  WeatherMeasurementComponentDisplaySettings,
+  displaySettings,
+} from '@current-weather/models/weather-measurment.config';
 
 @Component({
   selector: 'app-weather-measurements',
@@ -53,6 +58,19 @@ export class WeatherMeasurementsComponent {
       } as ComponentState<CurrentWeather>,
     }
   );
+  weatherDisplaySettings = computed(() => {
+    return this.weather().data.measurements.map(measurement => {
+      console.log('Measurement', measurement);
+      console.log('Display settings', displaySettings[measurement.key]);
+
+      return {
+        ...displaySettings[measurement.key],
+        key: measurement.key,
+        value: measurement.value,
+        unit: measurement.unit,
+      } as WeatherMeasurementComponentDisplaySettings;
+    });
+  });
 
   protected DataState = DataState;
 

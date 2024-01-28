@@ -1,14 +1,18 @@
 @if (weather().state === DataState.LOADED) {
-  <div class="weather-data grid">
-    @for (measurement of weather().data.measurements; track $index) {
+  <div class="weather-data">
+    @for (measurement of weatherDisplaySettings(); track $index) {
       @if (measurement.key && measurement.unit) {
         <div
-          class="col-6 md:col-4 sm:col-6 scalein"
-          [style]="{ 'animation-duration': 0.5 + $index * 0.1 + 's' }">
+          class=""
+          [style]="{
+            'animation-duration': 0.5 + $index * 0.1 + 's',
+            'grid-column': 'span ' + measurement.colSpan,
+            'grid-row': 'span ' + measurement.rowSpan,
+            resize: 'both',
+            overflow: 'auto'
+          }">
           <app-weather-measurement
-            [unit]="measurement.unit"
-            [value]="measurement.value"
-            [measurementKey]="measurement.key"></app-weather-measurement>
+            [measurement]="measurement"></app-weather-measurement>
         </div>
       }
     }

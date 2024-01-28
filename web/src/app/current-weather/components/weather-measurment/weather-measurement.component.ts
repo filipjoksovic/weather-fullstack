@@ -29,27 +29,12 @@ export class WeatherMeasurementComponent implements OnInit {
   private readonly forecastDetailsService = inject(ForecastDetailsService);
 
   measurementClicked() {
-    this.forecastDetailsService.showParams(this.viewModel.key);
+    this.forecastDetailsService.showParams(this.measurement.key);
   }
 
-  public viewModel: WeatherMeasurementComponentDisplaySettings =
-    displaySettings[CurrentWeatherModelKeys.apparentTemperature];
-
   @Input({ required: true })
-  unit!: BaseUnit;
-  @Input({ required: true })
-  value!: number | string;
-  @Input({ required: true })
-  measurementKey!: CurrentWeatherModelKeys;
+  measurement!: WeatherMeasurementComponentDisplaySettings;
   public isCollapsed: boolean = false;
 
-  ngOnInit(): void {
-    this.viewModel = displaySettings[this.measurementKey];
-    this.viewModel = {
-      ...this.viewModel,
-      value: this.value,
-      unit: this.unit,
-    };
-    console.log('View model', this.viewModel);
-  }
+  ngOnInit(): void {}
 }
