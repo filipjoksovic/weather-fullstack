@@ -8,10 +8,9 @@ describe('HomeRoutingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomeRoutingComponent]
-    })
-    .compileComponents();
-    
+      imports: [HomeRoutingComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(HomeRoutingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

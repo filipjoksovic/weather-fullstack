@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  Input,
   Signal,
   inject,
 } from '@angular/core';
@@ -19,7 +18,7 @@ import {
 } from '../../../forecast/services/data/forecast.data.service';
 import { ComponentState } from '../home/home.component';
 import { DataState } from '../../../core/services/geolocation.service';
-import { delay, filter, map, tap } from 'rxjs';
+import { filter, map, tap } from 'rxjs';
 import { SkeletonModule } from 'primeng/skeleton';
 import { ForecastingMeasurementComponent } from '../../components/forecasting-measurment/forecasting-measurment.component';
 

@@ -1,7 +1,5 @@
-import { TestBed } from '@angular/core/testing';
-
 import { ToasterService } from './toaster.service';
-import { Spectator, SpectatorService } from '@ngneat/spectator/jest';
+import { SpectatorService } from '@ngneat/spectator/jest';
 import { createServiceFactory } from '@ngneat/spectator/jest';
 import { MessageService } from 'primeng/api';
 import SpyInstance = jest.SpyInstance;

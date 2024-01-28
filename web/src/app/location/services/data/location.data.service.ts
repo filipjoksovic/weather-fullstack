@@ -1,7 +1,6 @@
-import { Injectable, computed, effect, signal } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { LocationApiService } from '../api/location.api.service';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { BehaviorSubject, filter, of, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, filter, switchMap, tap } from 'rxjs';
 import { CurrentWeatherDataService } from '../../../current-weather/services/data/current-weather.data.service';
 import { ForecastDataService } from '../../../forecast/services/data/forecast.data.service';
 

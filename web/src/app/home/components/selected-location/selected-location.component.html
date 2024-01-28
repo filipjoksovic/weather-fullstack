@@ -1,14 +1,20 @@
 <div class="current-location">
   @if (locationDataState() === DataState.LOADED) {
-  <span>Current location: {{ currentCoords()?.longitude }},
-    {{ currentCoords()?.latitude }}</span>
+    <span
+      >Current location: {{ currentCoords()?.longitude }},
+      {{ currentCoords()?.latitude }}</span
+    >
   } @else if (locationDataState() === DataState.ERROR) {
-  <span>Error encountered while fetching your location</span>
+    <span>Error encountered while fetching your location</span>
   } @else if (locationDataState() === DataState.LOADING) {
-  <span class="mb-2">Getting your location</span>
-  <p-progressBar mode="indeterminate" [style]="{ height: '6px' }"></p-progressBar>
+    <span class="mb-2">Getting your location</span>
+    <p-progressBar
+      mode="indeterminate"
+      [style]="{ height: '6px' }"></p-progressBar>
   } @else if (locationDataState() === DataState.UNDEFINED) {
-  <span>Enable geolocation services to get weather data based on your
-    location</span>
+    <span
+      >Enable geolocation services to get weather data based on your
+      location</span
+    >
   }
 </div>

@@ -1,14 +1,6 @@
 import { BaseUnit } from '../../core/models/api/response/base.unit';
-import { DirectionUnitResponse } from '../../core/models/api/response/direction.unit';
-import { HeightResponseUnit } from '../../core/models/api/response/height.unit';
-import { PercentageResponseUnit } from '../../core/models/api/response/percentage.unit';
-import { PressureUnitResponse } from '../../core/models/api/response/pressure.unit';
-import { SpeedResponseUnit } from '../../core/models/api/response/speed.unit';
-import { TemperatureResponseUnit } from '../../core/models/api/response/temperature.unit';
-import { ValueUnit } from '../../core/models/data/value-unit.type';
 import {
   CurrentWeatherModelKeys,
-  CurrentWeatherModelKeysToRequestKeys,
   CurrentWeatherResponseKeysToModelKeys,
 } from './cw-req-keys.map';
 import {

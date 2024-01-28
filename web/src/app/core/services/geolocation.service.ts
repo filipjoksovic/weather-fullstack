@@ -1,8 +1,4 @@
-import { Injectable, signal, Signal, WritableSignal } from '@angular/core';
-import { ToasterService } from './toaster.service';
-import { SignalState } from '../../forecast/services/data/forecast.data.service';
-import { tap } from 'rxjs';
-import { LocationDataService } from '../../location/services/data/location.data.service';
+import { Injectable, signal, WritableSignal } from '@angular/core';
 
 export enum DataState {
   LOADING = 'LOADING',

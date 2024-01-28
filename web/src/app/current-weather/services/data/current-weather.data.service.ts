@@ -1,4 +1,4 @@
-import { Injectable, Signal, computed, effect, signal } from '@angular/core';
+import { Injectable, computed, signal } from '@angular/core';
 import { CurrentWeatherApiService } from '../api/current-weather.api.service';
 import {
   CurrentWeather,

@@ -1,23 +1,12 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  OnInit,
-  WritableSignal,
-  computed,
-  effect,
-  inject,
-} from '@angular/core';
+import { Component, OnInit, computed, effect, inject } from '@angular/core';
 import { ForecastDetailsService } from '../../services/data/forecast-details.service';
 import { DialogModule } from 'primeng/dialog';
 import { FormsModule } from '@angular/forms';
-import {
-  ForecastMeasurement,
-  ForecastWeather,
-} from '../../../forecast/models/forecast-weather.model';
+import {} from '../../../forecast/models/forecast-weather.model';
 import { ChartModule } from 'primeng/chart';
 import { format } from 'date-fns';
 import { currentWeatherModelKeyToDailyForecastParams } from '../../models/api/request/forecast-details-request.params';
-import { ForecastWeatherMeasurementsResponse } from '../../../forecast/models/api/response/forecast-weather-response';
 
 //TODO remove tech debt
 @Component({
