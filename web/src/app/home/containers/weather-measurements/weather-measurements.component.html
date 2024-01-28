@@ -2,7 +2,9 @@
   <div class="weather-data grid">
     @for (measurement of weather().data.measurements; track $index) {
       @if (measurement.key && measurement.unit) {
-        <div class="col-6 md:col-4 sm:col-6">
+        <div
+          class="col-6 md:col-4 sm:col-6 scalein"
+          [style]="{ 'animation-duration': 0.5 + $index * 0.1 + 's' }">
           <app-weather-measurement
             [unit]="measurement.unit"
             [value]="measurement.value"

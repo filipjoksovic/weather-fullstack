@@ -46,10 +46,16 @@ export type ComponentErrorState<T> = {
   data: never;
 };
 
+export type ComponentUndefinedState = {
+  state: DataState.UNDEFINED;
+  data: never;
+};
+
 export type ComponentState<T> =
   | ComponentLoadingState
   | ComponentLoadedState<T>
-  | ComponentErrorState<T>;
+  | ComponentErrorState<T>
+  | ComponentUndefinedState;
 
 @Component({
   selector: 'app-home',

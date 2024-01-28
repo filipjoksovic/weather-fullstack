@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CurrentWeatherResponse } from '../../models/response/current-weather-response';
 
@@ -8,9 +8,22 @@ import { CurrentWeatherResponse } from '../../models/response/current-weather-re
 export class CurrentWeatherApiService {
   constructor(private readonly http: HttpClient) {}
 
-  public getCurrentWeather() {
+  public getCurrentWeather(longitude: number, latitude: number) {
+    let params = new HttpParams();
+    params = params.append('latitude', latitude.toString());
+    params = params.append('longitude', longitude.toString());
+    params = params.append(
+      'current',
+      'temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,snowfall,weather_code,cloud_cover,pressure_msl,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m'
+    );
+    params = params.append('temperature_unit', 'fahrenheit');
+    params = params.append('wind_speed_unit', 'kn');
+    params = params.append('precipitation_unit', 'inch');
+    params = params.append('timeformat', 'unixtime');
+
     return this.http.get<CurrentWeatherResponse>(
-      `https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,snowfall,weather_code,cloud_cover,pressure_msl,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m&temperature_unit=fahrenheit&wind_speed_unit=kn&precipitation_unit=inch&timeformat=unixtime`
+      `https://api.open-meteo.com/v1/forecast`,
+      { params }
     );
   }
 }

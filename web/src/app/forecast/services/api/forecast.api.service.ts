@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ForecastWeatherResponse } from '../../models/api/response/forecast-weather-response';
 import { Observable } from 'rxjs';
@@ -9,9 +9,20 @@ import { Observable } from 'rxjs';
 export class ForecastApiService {
   constructor(private readonly http: HttpClient) {}
 
-  public getBasicForecasting(): Observable<ForecastWeatherResponse> {
+  public getBasicForecasting(
+    longitude: number,
+    latitude: number
+  ): Observable<ForecastWeatherResponse> {
+    let params = new HttpParams();
+    params = params.append('latitude', latitude.toString());
+    params = params.append('longitude', longitude.toString());
+    params = params.append('daily', 'temperature_2m_max,temperature_2m_min');
+    params = params.append('wind_speed_unit', 'kn');
+    params = params.append('past_days', '5');
+
     return this.http.get<ForecastWeatherResponse>(
-      `https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&daily=temperature_2m_max,temperature_2m_min&wind_speed_unit=kn&past_days=5`
+      `https://api.open-meteo.com/v1/forecast`,
+      { params }
     );
   }
 }

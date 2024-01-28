@@ -12,11 +12,14 @@ import { SliderModule } from 'primeng/slider';
 import { FormsModule } from '@angular/forms';
 import { DayOfWeekPipe } from '../../../core/pipes/day-of-week.pipe';
 import { UnitValueToStringPipe } from '../../../core/pipes/unit-value-to-string.pipe';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { ForecastDataService } from '../../../forecast/services/data/forecast.data.service';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import {
+  ForecastDataService,
+  SignalState,
+} from '../../../forecast/services/data/forecast.data.service';
 import { ComponentState } from '../home/home.component';
 import { DataState } from '../../../core/services/location.service';
-import { delay, map, tap } from 'rxjs';
+import { delay, filter, map, tap } from 'rxjs';
 import { SkeletonModule } from 'primeng/skeleton';
 import { ForecastingMeasurementComponent } from '../../components/forecasting-measurment/forecasting-measurment.component';
 
@@ -41,19 +44,22 @@ export class ForecastMeasurementsComponent {
   private readonly forecastWeatherDataService = inject(ForecastDataService);
 
   public forecast: Signal<ComponentState<ForecastWeather>> = toSignal(
-    this.forecastWeatherDataService.getBasicForecast().pipe(
-      delay(2000),
-      tap(console.log),
+    toObservable(this.forecastWeatherDataService.forecast).pipe(
+      tap((data: SignalState<ForecastWeather>) => console.log('Data', data)),
+      filter(data => data.state === DataState.LOADED),
       map(
-        (response: ForecastWeather): ComponentState<ForecastWeather> => ({
-          data: response,
-          state: DataState.LOADED,
-        })
+        (
+          response: SignalState<ForecastWeather>
+        ): ComponentState<ForecastWeather> =>
+          ({
+            data: response.data,
+            state: response.state,
+          }) as ComponentState<ForecastWeather>
       )
     ),
     {
       initialValue: {
-        state: DataState.LOADING,
+        state: DataState.UNDEFINED,
       } as ComponentState<ForecastWeather>,
     }
   );
