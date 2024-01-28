@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { LocationSearchResponse } from '../../models/api/response/location-search.response';
 
 @Injectable({
   providedIn: 'root',
@@ -14,8 +15,11 @@ export class LocationApiService {
     params = params.append('language', 'en');
     params = params.append('format', 'json');
 
-    return this.http.get(`https://geocoding-api.open-meteo.com/v1/search`, {
-      params,
-    });
+    return this.http.get<LocationSearchResponse>(
+      `https://geocoding-api.open-meteo.com/v1/search`,
+      {
+        params,
+      }
+    );
   }
 }

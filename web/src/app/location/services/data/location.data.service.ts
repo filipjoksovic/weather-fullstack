@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
 import { LocationApiService } from '../api/location.api.service';
-import { BehaviorSubject, filter, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, filter, map, switchMap, tap } from 'rxjs';
 import { CurrentWeatherDataService } from '../../../current-weather/services/data/current-weather.data.service';
 import { ForecastDataService } from '../../../forecast/services/data/forecast.data.service';
+import {
+  LocationSearchResponse,
+  LocationSearchResult,
+} from '../../models/api/response/location-search.response';
 
 @Injectable({
   providedIn: 'root',
@@ -21,15 +25,17 @@ export class LocationDataService {
         switchMap(search => this.searchForLocation(search))
       )
       .subscribe(results => {
-        this.searchResults.next((results as any).results as any[]);
+        this.searchResults.next(results);
       });
   }
 
   public searchQuery = new BehaviorSubject<string>('');
-  public searchResults = new BehaviorSubject<any[]>([]);
+  public searchResults = new BehaviorSubject<LocationSearchResult[]>([]);
 
   public searchForLocation(search: string) {
-    return this.locationApiService.searchForLocation(search);
+    return this.locationApiService
+      .searchForLocation(search)
+      .pipe(map((results: LocationSearchResponse) => results.results));
   }
 
   public locationSearched(search: string) {
