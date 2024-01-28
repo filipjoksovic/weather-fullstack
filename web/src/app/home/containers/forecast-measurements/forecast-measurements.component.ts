@@ -18,6 +18,7 @@ import { ComponentState } from '../home/home.component';
 import { DataState } from '../../../core/services/location.service';
 import { delay, map, tap } from 'rxjs';
 import { SkeletonModule } from 'primeng/skeleton';
+import { ForecastingMeasurementComponent } from '../../components/forecasting-measurment/forecasting-measurment.component';
 
 @Component({
   selector: 'app-forecast-measurements',
@@ -30,6 +31,7 @@ import { SkeletonModule } from 'primeng/skeleton';
     DayOfWeekPipe,
     UnitValueToStringPipe,
     SkeletonModule,
+    ForecastingMeasurementComponent,
   ],
   templateUrl: './forecast-measurements.component.html',
   styleUrl: './forecast-measurements.component.css',

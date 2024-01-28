@@ -4,30 +4,8 @@
       <ng-template pTemplate="list">
         <h4>10 Day forecast</h4>
         @for (measurement of forecast().data.measurements; track $index) {
-          <div class="forecast-measurement">
-            <div class="">
-              {{ measurement.date | appDayOfWeek }}
-              <i class="fa fa-sun"></i>
-              <div class="forecast-measurement__temperature-interval">
-                {{ measurement.minTemperature | appUnitValueToString }}
-                <p-slider
-                  [min]="
-                    measurement.minTemperature.value -
-                    measurement.minTemperature.value / 10
-                  "
-                  [max]="
-                    measurement.maxTemperature.value +
-                    measurement.maxTemperature.value / 10
-                  "
-                  [range]="true"
-                  [ngModel]="[
-                    measurement.minTemperature.value,
-                    measurement.maxTemperature.value
-                  ]"></p-slider>
-                {{ measurement.maxTemperature | appUnitValueToString }}
-              </div>
-            </div>
-          </div>
+          <app-forecasting-measurement
+            [measurement]="measurement"></app-forecasting-measurement>
         }
       </ng-template>
     </p-dataView>
@@ -37,7 +15,7 @@
   @for (element of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; track $index) {
     <div class="forecast-measurement">
       <div class="">
-        <p-skeleton styleClass="p-6 my-1"></p-skeleton>
+        <p-skeleton styleClass="p-5 my-1"></p-skeleton>
       </div>
     </div>
   }

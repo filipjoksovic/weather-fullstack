@@ -6,11 +6,6 @@
   gap: $spacer * 2;
 
   & .forecast-measurement {
-    padding: $spacer * 2;
-    width: 100%;
-    margin-bottom: $spacer;
-    border-bottom: 1px solid #e7e7e7;
-
     & .p-slider-handle {
       display: none;
     }

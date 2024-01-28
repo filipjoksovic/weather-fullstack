@@ -1,0 +1,26 @@
+<div
+  class="forecast-measurement p-3 surface-border border-solid border-none border-bottom-1"
+  [class]="{ 'bg-primary-reverse': isToday }">
+  <div [class]="{ 'font-bold': isToday }">
+    {{ measurement.date | appDayOfWeek }}
+    <i class="fa fa-sun"></i>
+    <div class="forecast-measurement__temperature-interval">
+      {{ measurement.minTemperature | appUnitValueToString }}
+      <p-slider
+        [min]="
+          measurement.minTemperature.value -
+          measurement.minTemperature.value / 10
+        "
+        [max]="
+          measurement.maxTemperature.value +
+          measurement.maxTemperature.value / 10
+        "
+        [range]="true"
+        [ngModel]="[
+          measurement.minTemperature.value,
+          measurement.maxTemperature.value
+        ]"></p-slider>
+      {{ measurement.maxTemperature | appUnitValueToString }}
+    </div>
+  </div>
+</div>
