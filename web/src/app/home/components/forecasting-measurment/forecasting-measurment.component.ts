@@ -1,18 +1,16 @@
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   Input,
   OnInit,
-  inject,
 } from '@angular/core';
-import { ForecastMeasurement } from '../../../forecast/models/forecast-weather.model';
 import { SliderModule } from 'primeng/slider';
 import { FormsModule } from '@angular/forms';
 import { UnitValueToStringPipe } from '../../../core/pipes/unit-value-to-string.pipe';
 import { DayOfWeekPipe } from '../../../core/pipes/day-of-week.pipe';
 import { isToday } from 'date-fns';
+import { ForecastMeasurement } from '../../../forecast/models/forecast-weather.model';
 
 @Component({
   selector: 'app-forecasting-measurement',
