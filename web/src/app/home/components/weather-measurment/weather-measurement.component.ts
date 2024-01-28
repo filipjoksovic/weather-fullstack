@@ -66,7 +66,7 @@ export const displaySettings: {
   },
   [CurrentWeatherModelKeys.showers]: {
     key: CurrentWeatherModelKeys.showers,
-    icon: 'fa fa-cloud-showers',
+    icon: 'fa-solid fa-cloud-showers-heavy',
     title: 'Showers',
   },
   [CurrentWeatherModelKeys.snowfall]: {

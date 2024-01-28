@@ -16,7 +16,10 @@ import {
 } from '../../../forecast/models/forecast-weather.model';
 import { ChartModule } from 'primeng/chart';
 import { format } from 'date-fns';
+import { currentWeatherModelKeyToDailyForecastParams } from '../../models/api/request/forecast-details-request.params';
+import { ForecastWeatherMeasurementsResponse } from '../../../forecast/models/api/response/forecast-weather-response';
 
+//TODO remove tech debt
 @Component({
   selector: 'app-forecast-param-details',
   standalone: true,
@@ -59,12 +62,22 @@ export class ForecastParamDetailsComponent implements OnInit {
   forecastDetailsService = inject(ForecastDetailsService);
 
   showModal = computed(() => this.forecastDetailsService.showDialog());
+  activeParameter = computed(() => {
+    return this.forecastDetailsService.measurementData().activeParameter;
+  });
   measurementData = computed(() => {
+    //TODO type
     return {
       measurements:
-        this.forecastDetailsService.measurementData()?.daily
-          .temperature_2m_max ?? [],
-      dates: this.forecastDetailsService.measurementData()?.daily.time ?? [],
+        //@ts-ignore
+        this.forecastDetailsService.measurementData().data?.daily[
+          currentWeatherModelKeyToDailyForecastParams[
+            this.activeParameter()
+            //@ts-ignore
+          ] as any
+        ] ?? [],
+      dates:
+        this.forecastDetailsService.measurementData().data?.daily.time ?? [],
     };
   });
   showModalValue = false;

@@ -10,14 +10,47 @@ import {
   CurrentWeatherModelKeys,
   CurrentWeatherModelKeysToRequestKeys,
 } from '../../../current-weather/models/cw-req-keys.map';
+import { DataState } from '../../../core/services/location.service';
+
+export type ForecastDetailsInitialState = {
+  state: DataState.UNDEFINED;
+  activeParameter: never;
+  data: never;
+};
+
+export type ForecastDetailsLoadingState = {
+  state: DataState.LOADING;
+  activeParameter: CurrentWeatherModelKeys;
+  data: never;
+};
+
+export type ForecastDetailsLoadedState = {
+  state: DataState.LOADED;
+  activeParameter: CurrentWeatherModelKeys;
+  data: ForecastWeatherResponse;
+};
+
+export type ForecastDetailsErrorState = {
+  state: DataState.ERROR;
+  activeParameter: CurrentWeatherModelKeys;
+  data: never;
+  error: string;
+};
+export type ForecastDetailsState =
+  | ForecastDetailsInitialState
+  | ForecastDetailsLoadingState
+  | ForecastDetailsLoadedState
+  | ForecastDetailsErrorState;
 
 @Injectable({
   providedIn: 'root',
 })
 export class ForecastDetailsService {
   showDialog: WritableSignal<boolean> = signal(false);
-  measurementData: WritableSignal<ForecastWeatherResponse | null> =
-    signal(null);
+  measurementData: WritableSignal<ForecastDetailsState> = signal({
+    state: DataState.UNDEFINED,
+  } as ForecastDetailsState);
+
   constructor(
     private readonly forecastDetailsApiService: ForecastDetailsApiService
   ) {}
@@ -27,7 +60,22 @@ export class ForecastDetailsService {
     this.getDetailsForParam(measurement)
       .pipe(
         tap(() => this.showDialog.set(true)),
-        tap(this.measurementData.set)
+        tap({
+          next: response => {
+            this.measurementData.set({
+              state: DataState.LOADED,
+              activeParameter: measurement,
+              data: response,
+            } as ForecastDetailsState);
+          },
+          error: error => {
+            this.measurementData.set({
+              state: DataState.ERROR,
+              activeParameter: measurement,
+              error: error,
+            } as ForecastDetailsState);
+          },
+        })
       )
       .subscribe();
   }
