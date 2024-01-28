@@ -7,7 +7,7 @@ import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
 import { GeoLocationService } from '../../../core/services/geolocation.service';
 import { MessageService } from 'primeng/api';
-import { LocationDataService } from '../../../location/services/data/location.data.service';
+import { LocationDataService } from '../../services/data/location.data.service';
 import { take, tap } from 'rxjs';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import getUnicodeFlagIcon from 'country-flag-icons/unicode';
