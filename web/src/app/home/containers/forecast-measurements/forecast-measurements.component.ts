@@ -12,15 +12,13 @@ import { FormsModule } from '@angular/forms';
 import { DayOfWeekPipe } from '../../../core/pipes/day-of-week.pipe';
 import { UnitValueToStringPipe } from '../../../core/pipes/unit-value-to-string.pipe';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import {
-  ForecastDataService,
-  SignalState,
-} from '../../../forecast/services/data/forecast.data.service';
 import { ComponentState } from '../home/home.component';
-import { DataState } from '../../../core/services/geolocation.service';
 import { filter, map, tap } from 'rxjs';
 import { SkeletonModule } from 'primeng/skeleton';
-import { ForecastingMeasurementComponent } from '../../components/forecasting-measurment/forecasting-measurment.component';
+import { ForecastDataService } from '@forecast/services/data/forecast.data.service';
+import { SignalState } from '@core/models/signal-state';
+import { DataState } from '@core/models/data.state.enum';
+import { ForecastingMeasurementComponent } from 'app/home/components/forecasting-measurment/forecasting-measurment.component';
 
 @Component({
   selector: 'app-forecast-measurements',

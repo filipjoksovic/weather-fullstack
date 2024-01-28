@@ -1,12 +1,5 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
-
-export enum DataState {
-  LOADING = 'LOADING',
-  EMPTY = 'EMPTY',
-  LOADED = 'LOADED',
-  ERROR = 'ERROR',
-  UNDEFINED = 'UNDEFINED',
-}
+import { DataState } from '@core/models/data.state.enum';
 
 export interface GeoLocationState {
   coords: GeolocationCoordinates | null;

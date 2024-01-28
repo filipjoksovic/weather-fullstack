@@ -1,16 +1,9 @@
 import { Injectable, WritableSignal, signal } from '@angular/core';
 import { ForecastDetailsApiService } from '../api/forecast-details.api.service';
-import {
-  ForecastWeather,
-  forecastWeatherHeadlessResponseToForecastMeasurement,
-} from '../../../forecast/models/forecast-weather.model';
 import { Observable, map, tap } from 'rxjs';
-import { ForecastWeatherResponse } from '../../../forecast/models/api/response/forecast-weather-response';
-import {
-  CurrentWeatherModelKeys,
-  CurrentWeatherModelKeysToRequestKeys,
-} from '../../../current-weather/models/cw-req-keys.map';
-import { DataState } from '../../../core/services/geolocation.service';
+import { CurrentWeatherModelKeys } from '../../../current-weather/models/cw-req-keys.map';
+import { DataState } from '@core/models/data.state.enum';
+import { ForecastWeatherResponse } from '@forecast/models/api/response/forecast-weather-response';
 
 export type ForecastDetailsInitialState = {
   state: DataState.UNDEFINED;

@@ -6,12 +6,10 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import {
-  DataState,
-  GeoLocationService,
-} from '../../../core/services/geolocation.service';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { debouncedSignal } from '../../../util/debounced-signal';
+import { GeoLocationService } from '@core/services/geolocation.service';
+import { DataState } from '@core/models/data.state.enum';
 
 @Component({
   selector: 'app-selected-location',

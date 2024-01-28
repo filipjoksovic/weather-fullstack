@@ -5,12 +5,10 @@ import {
   currentWeatherHeadlessResponseToCurrentWeather,
 } from '../../models/current-weather.model';
 import { Observable, map, tap } from 'rxjs';
-import { SignalState } from '../../../forecast/services/data/forecast.data.service';
-import {
-  DataState,
-  GeoLocationService,
-} from '../../../core/services/geolocation.service';
 import { toObservable } from '@angular/core/rxjs-interop';
+import { GeoLocationService } from '@core/services/geolocation.service';
+import { DataState } from '@core/models/data.state.enum';
+import { SignalState } from '@core/models/signal-state';
 
 @Injectable({
   providedIn: 'root',
@@ -22,8 +20,6 @@ export class CurrentWeatherDataService {
   ) {
     toObservable(this.location).subscribe(location => {
       if (location) {
-        console.log('Getting current weather');
-
         this.getCurrentWeather(location.longitude, location.latitude).subscribe(
           data => console.log('Current weather', data)
         );

@@ -1,41 +1,14 @@
-import { Injectable, computed, effect, signal } from '@angular/core';
-import { Observable, map, tap } from 'rxjs';
+import { Injectable, computed, signal } from '@angular/core';
+import { Observable, filter, map, tap } from 'rxjs';
+import { ForecastApiService } from '../api/forecast.api.service';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { GeoLocationService } from '@core/services/geolocation.service';
+import { DataState } from '@core/models/data.state.enum';
+import { SignalState } from '@core/models/signal-state';
 import {
   ForecastWeather,
   forecastWeatherHeadlessResponseToForecastMeasurement,
-} from '../../models/forecast-weather.model';
-import { ForecastApiService } from '../api/forecast.api.service';
-import {
-  DataState,
-  GeoLocationService,
-} from '../../../core/services/geolocation.service';
-import { Data } from '@angular/router';
-
-export type SignalLoadingState = {
-  state: DataState.LOADING;
-  data: never;
-};
-
-export type SignalLoadedState<T> = {
-  state: DataState.LOADED;
-  data: T;
-};
-
-export type SignalErrorState = {
-  state: DataState.ERROR;
-  data: never;
-};
-
-export type SignalUndefinedState = {
-  state: DataState.UNDEFINED;
-  data: never;
-};
-
-export type SignalState<T> =
-  | SignalLoadingState
-  | SignalLoadedState<T>
-  | SignalErrorState
-  | SignalUndefinedState;
+} from '@forecast/models/forecast-weather.model';
 
 @Injectable({
   providedIn: 'root',
@@ -45,16 +18,16 @@ export class ForecastDataService {
     private readonly forecastApiService: ForecastApiService,
     private readonly locationService: GeoLocationService
   ) {
-    effect(() => {
-      if (this.location()) {
-        console.log('Getting basic forecast');
-
-        this.getBasicForecast(
-          this.location()?.longitude ?? 0,
-          this.location()?.latitude ?? 0
-        ).subscribe(data => console.log('Basic forecast', data));
-      }
-    });
+    toObservable(this.location)
+      .pipe(filter(location => location !== null))
+      .subscribe(location => {
+        if (location) {
+          this.getBasicForecast(
+            location.longitude,
+            location.latitude
+          ).subscribe(data => console.log('Basic forecast', data));
+        }
+      });
   }
 
   public forecast = signal<SignalState<ForecastWeather>>({
