@@ -32,8 +32,6 @@ export class ForecastingMeasurementComponent implements OnInit {
   public isToday: boolean = false;
 
   ngOnInit(): void {
-    console.log('Checking for', this.measurement.date);
-
     this.isToday = isToday(new Date(this.measurement.date));
   }
 }

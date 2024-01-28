@@ -6,6 +6,10 @@ import {
 } from '../../../forecast/models/forecast-weather.model';
 import { Observable, map, tap } from 'rxjs';
 import { ForecastWeatherResponse } from '../../../forecast/models/api/response/forecast-weather-response';
+import {
+  CurrentWeatherModelKeys,
+  CurrentWeatherModelKeysToRequestKeys,
+} from '../../../current-weather/models/cw-req-keys.map';
 
 @Injectable({
   providedIn: 'root',
@@ -19,8 +23,8 @@ export class ForecastDetailsService {
   ) {}
 
   //TODO type
-  public showParams(measurement: string) {
-    this.getDetailsForParam()
+  public showParams(measurement: CurrentWeatherModelKeys) {
+    this.getDetailsForParam(measurement)
       .pipe(
         tap(() => this.showDialog.set(true)),
         tap(this.measurementData.set)
@@ -28,7 +32,11 @@ export class ForecastDetailsService {
       .subscribe();
   }
 
-  private getDetailsForParam(): Observable<ForecastWeatherResponse> {
-    return this.forecastDetailsApiService.getDetailsForParam().pipe();
+  private getDetailsForParam(
+    measurement: CurrentWeatherModelKeys
+  ): Observable<ForecastWeatherResponse> {
+    return this.forecastDetailsApiService
+      .getDetailsForParam(measurement)
+      .pipe();
   }
 }

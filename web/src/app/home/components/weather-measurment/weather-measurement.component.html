@@ -4,12 +4,12 @@
   (keyup)="measurementClicked()"
   tabindex="0">
   <div class="flex gap-2 p-2">
-    @if (icon) {
-      <i [class]="icon"></i>
+    @if (viewModel.icon) {
+      <i [class]="viewModel.icon"></i>
     }
-    <p class="m-0">{{ title }}</p>
+    <p class="m-0">{{ viewModel.title }}</p>
   </div>
   <div class="">
-    <p>{{ measurement.value }} {{ measurement.unit }}</p>
+    <p>{{ viewModel.value }} {{ viewModel.unit }}</p>
   </div>
 </div>

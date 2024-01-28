@@ -38,7 +38,7 @@ export class WeatherMeasurementsComponent {
   weather: Signal<ComponentState<CurrentWeather>> = toSignal(
     this.currentWeatherDataService.getCurrentWeather().pipe(
       delay(2000),
-      tap(console.log),
+      tap(data => console.log('Raw data', data)),
       map(
         (data: CurrentWeather) =>
           ({

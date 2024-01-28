@@ -15,6 +15,23 @@ export enum CurrentWeatherModelKeysToRequestKeys {
   'time' = 'time',
 }
 
+export enum CurrentWeatherModelKeys {
+  'temperature' = 'temperature',
+  'humidity' = 'humidity',
+  'apparentTemperature' = 'apparentTemperature',
+  'precipitation' = 'precipitation',
+  'rain' = 'rain',
+  'showers' = 'showers',
+  'snowfall' = 'snowfall',
+  'cloudCover' = 'cloudCover',
+  'pressure' = 'pressure',
+  'surfacePressure' = 'surfacePressure',
+  'windSpeed' = 'windSpeed',
+  'windDirection' = 'windDirection',
+  'windGusts' = 'windGusts',
+  'time' = 'time',
+}
+
 export enum CurrentWeatherResponseKeysToModelKeys {
   'time' = 'time',
   'temperature_2m' = 'temperature',
