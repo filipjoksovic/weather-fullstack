@@ -8,8 +8,8 @@ import {
 } from '@angular/core';
 import {
   DataState,
-  LocationService,
-} from '../../../core/services/location.service';
+  GeoLocationService,
+} from '../../../core/services/geolocation.service';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { debouncedSignal } from '../../../util/debounced-signal';
 
@@ -20,7 +20,7 @@ import { debouncedSignal } from '../../../util/debounced-signal';
   templateUrl: './selected-location.component.html',
 })
 export class SelectedLocationComponent {
-  private readonly locationService = inject(LocationService);
+  private readonly locationService = inject(GeoLocationService);
   private currentLocation = this.locationService.currentLocation;
 
   currentCoords = computed(() => this.currentLocation().coords);

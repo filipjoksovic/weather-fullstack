@@ -1,5 +1,8 @@
 import { Injectable, signal, Signal, WritableSignal } from '@angular/core';
 import { ToasterService } from './toaster.service';
+import { SignalState } from '../../forecast/services/data/forecast.data.service';
+import { tap } from 'rxjs';
+import { LocationDataService } from '../../location/services/data/location.data.service';
 
 export enum DataState {
   LOADING = 'LOADING',
@@ -17,12 +20,13 @@ export interface GeoLocationState {
 @Injectable({
   providedIn: 'root',
 })
-export class LocationService {
+export class GeoLocationService {
+  constructor() {}
+
   currentLocation: WritableSignal<GeoLocationState> = signal({
     coords: null,
     loadingState: DataState.UNDEFINED,
   });
-  constructor() {}
 
   public getLocation() {
     this.currentLocation.update(currentState => ({

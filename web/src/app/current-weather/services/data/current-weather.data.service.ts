@@ -8,8 +8,8 @@ import { Observable, map, tap } from 'rxjs';
 import { SignalState } from '../../../forecast/services/data/forecast.data.service';
 import {
   DataState,
-  LocationService,
-} from '../../../core/services/location.service';
+  GeoLocationService,
+} from '../../../core/services/geolocation.service';
 import { toObservable } from '@angular/core/rxjs-interop';
 
 @Injectable({
@@ -18,7 +18,7 @@ import { toObservable } from '@angular/core/rxjs-interop';
 export class CurrentWeatherDataService {
   constructor(
     private currentWeatherApiService: CurrentWeatherApiService,
-    private readonly locationService: LocationService
+    private readonly geoLocationService: GeoLocationService
   ) {
     toObservable(this.location).subscribe(location => {
       if (location) {
@@ -32,7 +32,7 @@ export class CurrentWeatherDataService {
   }
 
   private location = computed(() => {
-    const locationSignal = this.locationService.currentLocation();
+    const locationSignal = this.geoLocationService.currentLocation();
     if (locationSignal.loadingState === DataState.LOADED) {
       return locationSignal.coords;
     }

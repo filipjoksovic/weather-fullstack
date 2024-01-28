@@ -10,7 +10,7 @@ import {
   CurrentWeatherModelKeys,
   CurrentWeatherModelKeysToRequestKeys,
 } from '../../../current-weather/models/cw-req-keys.map';
-import { DataState } from '../../../core/services/location.service';
+import { DataState } from '../../../core/services/geolocation.service';
 
 export type ForecastDetailsInitialState = {
   state: DataState.UNDEFINED;

@@ -11,7 +11,7 @@ import { ComponentState } from '../home/home.component';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { CurrentWeatherDataService } from '../../../current-weather/services/data/current-weather.data.service';
 import { delay, map, tap } from 'rxjs';
-import { DataState } from '../../../core/services/location.service';
+import { DataState } from '../../../core/services/geolocation.service';
 import { SkeletonModule } from 'primeng/skeleton';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';

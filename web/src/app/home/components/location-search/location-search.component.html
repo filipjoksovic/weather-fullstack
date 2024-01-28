@@ -1,7 +1,18 @@
 <div class="location-search">
   <p-autoComplete
     placeholder="Search for location"
-    styleClass="w-100"></p-autoComplete>
+    [suggestions]="suggestions"
+    styleClass="w-100"
+    field="name"
+    (onSelect)="countrySelected($event)"
+    (completeMethod)="searchChanged($event)">
+    <ng-template let-country pTemplate="item">
+      <div class="flex align-items-center gap-2">
+        <div>{{ country.name }}</div>
+        <span class="text-3xl">{{ getFlagIcon(country.country_code) }}</span>
+      </div>
+    </ng-template>
+  </p-autoComplete>
   <p-button
     icon="pi pi-send"
     [rounded]="true"

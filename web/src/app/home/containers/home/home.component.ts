@@ -16,7 +16,6 @@ import { WeatherMeasurementComponent } from '../../components/weather-measurment
 import { SplitterModule } from 'primeng/splitter';
 import { DataViewModule } from 'primeng/dataview';
 import { RatingModule } from 'primeng/rating';
-import { ForecastDataService } from '../../../forecast/services/data/forecast.data.service';
 import { ForecastWeather } from '../../../forecast/models/forecast-weather.model';
 import { DayOfWeekPipe } from '../../../core/pipes/day-of-week.pipe';
 import { UnitValueToStringPipe } from '../../../core/pipes/unit-value-to-string.pipe';
@@ -26,9 +25,10 @@ import { CardModule } from 'primeng/card';
 import { FormsModule } from '@angular/forms';
 import { WeatherMeasurementsComponent } from '../weather-measurements/weather-measurements.component';
 import { ForecastMeasurementsComponent } from '../forecast-measurements/forecast-measurements.component';
-import { DataState } from '../../../core/services/location.service';
+import { DataState } from '../../../core/services/geolocation.service';
 import { ForecastParamDetailsComponent } from '../../../forecast-details/containers/forecast-param-details/forecast-param-details.component';
 import { ChartModule } from 'primeng/chart';
+import { ForecastDataService } from '../../../forecast/services/data/forecast.data.service';
 
 export type ComponentLoadingState = {
   state: DataState.LOADING;

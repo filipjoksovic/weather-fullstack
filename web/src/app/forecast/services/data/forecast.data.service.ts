@@ -1,5 +1,5 @@
 import { Injectable, computed, effect, signal } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 import {
   ForecastWeather,
   forecastWeatherHeadlessResponseToForecastMeasurement,
@@ -7,8 +7,8 @@ import {
 import { ForecastApiService } from '../api/forecast.api.service';
 import {
   DataState,
-  LocationService,
-} from '../../../core/services/location.service';
+  GeoLocationService,
+} from '../../../core/services/geolocation.service';
 import { Data } from '@angular/router';
 
 export type SignalLoadingState = {
@@ -43,7 +43,7 @@ export type SignalState<T> =
 export class ForecastDataService {
   constructor(
     private readonly forecastApiService: ForecastApiService,
-    private readonly locationService: LocationService
+    private readonly locationService: GeoLocationService
   ) {
     effect(() => {
       if (this.location()) {
@@ -52,18 +52,7 @@ export class ForecastDataService {
         this.getBasicForecast(
           this.location()?.longitude ?? 0,
           this.location()?.latitude ?? 0
-        )
-          .pipe(
-            map(
-              (forecastWeather: ForecastWeather) =>
-                ({
-                  state: DataState.LOADED,
-                  data: forecastWeather,
-                }) as SignalState<ForecastWeather>
-            )
-          )
-          .subscribe(forecast => this.forecast.set(forecast));
-      } else {
+        ).subscribe(data => console.log('Basic forecast', data));
       }
     });
   }
@@ -84,8 +73,27 @@ export class ForecastDataService {
     longitude: number,
     latitude: number
   ): Observable<ForecastWeather> {
+    this.forecast.set({
+      state: DataState.LOADING,
+      data: null,
+    } as SignalState<ForecastWeather>);
+
     return this.forecastApiService
       .getBasicForecasting(longitude, latitude)
-      .pipe(map(forecastWeatherHeadlessResponseToForecastMeasurement));
+      .pipe(
+        map(forecastWeatherHeadlessResponseToForecastMeasurement),
+        tap({
+          next: (data: ForecastWeather) =>
+            this.forecast.set({
+              state: DataState.LOADED,
+              data,
+            } as SignalState<ForecastWeather>),
+          error: () =>
+            this.forecast.set({
+              state: DataState.ERROR,
+              data: null,
+            } as SignalState<ForecastWeather>),
+        })
+      );
   }
 }
