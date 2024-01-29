@@ -1,5 +1,6 @@
 //Home layout
 app-home-routing {
+  background-color: #e7e7e7;
   display: grid;
   width: 100vw;
   height: 100vh;
@@ -37,47 +38,47 @@ app-home-routing {
       display: none;
     }
   }
-}
 
-@media only screen and (max-width: $sm) {
-  app-home-routing {
-    & .content {
-      height: 100%;
-      width: 100%;
+  @media only screen and (max-width: $sm) {
+    app-home-routing {
+      & .content {
+        height: 100%;
+        width: 100%;
+      }
     }
   }
-}
-@media only screen and (max-width: $md) {
-  app-home-routing {
+  @media only screen and (max-width: $md) {
+    app-home-routing {
+      .content {
+        height: clamp(30vh, 100rem, 80vh);
+        width: clamp(30vw, 100rem, 80vw);
+      }
+    }
+  }
+  @media only screen and (max-width: $lg) {
     .content {
       height: clamp(30vh, 100rem, 80vh);
       width: clamp(30vw, 100rem, 80vw);
     }
   }
-}
-@media only screen and (max-width: $lg) {
-  .content {
-    height: clamp(30vh, 100rem, 80vh);
-    width: clamp(30vw, 100rem, 80vw);
-  }
-}
-@media only screen and (max-width: $xl) {
-  .content {
-    height: clamp(30vh, 100rem, 80vh);
-    width: clamp(30vw, 100rem, 80vw);
-  }
-}
-
-@media only screen and (max-width: 576px) {
-  app-home-routing {
-    grid-template-areas:
-      'sidebar sidebar'
-      'content content';
+  @media only screen and (max-width: $xl) {
+    .content {
+      height: clamp(30vh, 100rem, 80vh);
+      width: clamp(30vw, 100rem, 80vw);
+    }
   }
 
   @media only screen and (max-width: 576px) {
-    app-sidebar {
-      flex-direction: row;
+    app-home-routing {
+      grid-template-areas:
+        'sidebar sidebar'
+        'content content';
+    }
+
+    @media only screen and (max-width: 576px) {
+      app-sidebar {
+        flex-direction: row;
+      }
     }
   }
 }

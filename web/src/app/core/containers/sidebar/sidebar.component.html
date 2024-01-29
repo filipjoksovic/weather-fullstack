@@ -1,5 +1,5 @@
 <div
-  class="bg-gray-900 shadow-2 sm:border-round sm:p-2 p-0 my-auto sm:m-2 p-3 flex sm:flex-column gap-7 align-items-center justify-content-center w-full">
+  class="bg-gray-900 shadow-2 sm:border-round sm:p-2 p-0 my-auto sm:m-2 p-3 flex sm:flex-column gap-7 align-items-center justify-content-center">
   <div>
     <h1 class="text-gray-50 text-center">W</h1>
   </div>
@@ -13,10 +13,10 @@
     <app-sidebar-link label="Link" link="" icon="fa fa-user"></app-sidebar-link>
   </div>
   <div class="flex justify-content-center align-items-center">
-    <p-avatar
-      label="P"
-      styleClass="m-0"
-      size="xlarge"
-      shape="circle"></p-avatar>
+    <p-avatar styleClass="m-0" size="xlarge" shape="circle">
+      <a [routerLink]="['/profile/user-data']">
+        <i class="fa fa-user w-full h-full"></i>
+      </a>
+    </p-avatar>
   </div>
 </div>

@@ -10,4 +10,9 @@ export const routes: Routes = [
       ),
     children: [{ path: '', component: HomeComponent }],
   },
+  {
+    path: 'profile',
+    loadChildren: () =>
+      import('./user/user.routes').then(module => module.routes),
+  },
 ];
