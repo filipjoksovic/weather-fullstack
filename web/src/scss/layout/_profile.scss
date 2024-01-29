@@ -14,7 +14,9 @@ app-user-layout {
 
   & .content {
     grid-area: content;
-    padding-inline: $spacer * 20;
-    padding-block: $spacer * 5;
+    width: clamp(0rem, 100%, 100rem);
+    padding-block: $spacer * 3;
+    margin-inline: auto;
+    padding-inline: $spacer * 3;
   }
 }

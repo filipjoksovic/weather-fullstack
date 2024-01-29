@@ -1,0 +1,26 @@
+<div class="p-5 surface-ground border-round h-full shadow-1">
+  <div class="flex flex-column justify-content-between h-full">
+    <form
+      class="flex flex-column gap-2 align-items-center"
+      [formGroup]="loginForm">
+      <h1 class="text-center mb-2">Log in</h1>
+      <div class="flex flex-column gap-2 w-full">
+        <label for="firstname">Email</label>
+        <input
+          pInputText
+          id="firstname"
+          aria-describedby="username-help"
+          formControlName="email" />
+      </div>
+      <div class="flex flex-column gap-2 w-full">
+        <label for="firstname">Password</label>
+        <p-password
+          [toggleMask]="true"
+          formControlName="password"
+          [feedback]="false"
+          styleClass=""></p-password>
+      </div>
+    </form>
+    <p-button label="Continue" styleClass="mx-auto block"></p-button>
+  </div>
+</div>

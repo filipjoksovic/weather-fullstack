@@ -1,0 +1,15 @@
+.p-inputtext {
+  padding: $spacer * 1.5;
+}
+
+.p-password {
+  width: 100%;
+  & input {
+    width: 100%;
+  }
+
+  & eyeicon,
+  eyeslashicon {
+    margin-top: -$spacer !important;
+  }
+}

@@ -1,1 +1,41 @@
-<p>personal-settings works!</p>
+<h2 class="my-3">Personal details</h2>
+<div class="grid mb-3">
+  <div class="flex flex-column gap-2 col-6">
+    <label for="firstname">First name</label>
+    <input pInputText id="firstname" aria-describedby="username-help" />
+  </div>
+  <div class="flex flex-column gap-2 col-6">
+    <label for="lastname">Last name</label>
+    <input pInputText id="firstname" aria-describedby="username-help" />
+  </div>
+  <div class="flex flex-column gap-2 col-6">
+    <label for="lastname">Email</label>
+    <input pInputText id="firstname" aria-describedby="username-help" />
+  </div>
+</div>
+
+<p-divider></p-divider>
+
+<h2 class="my-3">Data formatting</h2>
+<div class="grid mb-3">
+  <div class="flex flex-column gap-2 col-6">
+    <label for="firstname">Time format</label>
+    <p-dropdown
+      formControlName="selectedCity"
+      optionLabel="name"
+      [options]="timeFormats"
+      optionLabel="name"
+      placeholder="Time format"
+      styleClass="w-full"></p-dropdown>
+  </div>
+  <div class="flex flex-column gap-2 col-6">
+    <label for="lastname">Date format</label>
+    <p-dropdown
+      formControlName="selectedCity"
+      optionLabel="name"
+      [options]="dateFormats"
+      optionLabel="name"
+      placeholder="Date format"
+      styleClass="w-full"></p-dropdown>
+  </div>
+</div>
