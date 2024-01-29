@@ -8,7 +8,7 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
-import { AuthService } from '@auth/services/auth.service';
+import { AuthService } from '@auth/services/data/auth.service';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';

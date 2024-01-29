@@ -1,4 +1,11 @@
 app-auth-layout {
+  & > div {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    padding: $spacer * 4;
+  }
+  flex-direction: column;
   height: 100vh;
   width: 100vw;
   display: flex;

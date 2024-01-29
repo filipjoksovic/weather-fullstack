@@ -21,6 +21,18 @@
           styleClass=""></p-password>
       </div>
     </form>
-    <p-button label="Continue" styleClass="mx-auto block"></p-button>
+    <p-button
+      label="Continue"
+      styleClass="mx-auto block"
+      (onClick)="onSubmit()"></p-button>
+
+    <span class="text-center"
+      >Don't have an account? Sign up
+      <a
+        class="text-primary no-underline font-bold hover:underline"
+        [routerLink]="'/register'"
+        >here</a
+      ></span
+    >
   </div>
 </div>

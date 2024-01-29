@@ -34,6 +34,8 @@ public class AuthenticationService {
         String token = jwtService.generateToken(user);
         LOG.info("Usr rgstrd {} {}", user.getId(), token);
         return new AuthenticationResponse(user.getId(), user.getEmail(),
+                                          user.getFirstName(),
+                                          user.getLastName(),
                                           token);
     }
 
@@ -43,6 +45,7 @@ public class AuthenticationService {
         User user = userRepository.findByEmail(request.email())
                                   .orElseThrow(UserNotFoundException::new);
         String token = jwtService.generateToken(user);
-        return new AuthenticationResponse(user.getId(), user.getEmail(), token);
+        return new AuthenticationResponse(user.getId(), user.getEmail(),
+                                          user.getFirstName(), user.getLastName(), token);
     }
 }
