@@ -6,7 +6,9 @@ import {
   FormBuilder,
   FormGroup,
   FormControl,
+  Validators,
 } from '@angular/forms';
+import { AuthService } from '@auth/services/auth.service';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
@@ -28,16 +30,19 @@ import { PasswordModule } from 'primeng/password';
 })
 export class SignupFormComponent {
   private readonly fb = inject(FormBuilder);
+  private readonly authService = inject(AuthService);
 
   public signupForm: FormGroup<{
     email: FormControl<string | null>;
     password: FormControl<string | null>;
   }> = this.fb.group({
-    email: new FormControl('', []),
-    password: new FormControl('', []),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required]),
   });
 
   public onSubmit() {
-    console.log('submit');
+    console.log('Submit');
+
+    this.authService.signup(this.signupForm.value);
   }
 }
