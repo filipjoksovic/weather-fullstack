@@ -6,7 +6,6 @@
       pInputText
       id="firstName"
       aria-describedby="firstname-help"
-      (blur)="updateUserDetails('firstName', $event)"
       [formControl]="personalSettingsForm.controls.firstName" />
   </div>
   <div class="flex flex-column gap-2 col-6">
@@ -15,7 +14,6 @@
       pInputText
       id="lastName"
       aria-describedby="lastname-help"
-      (blur)="updateUserDetails('lastName', $event)"
       [formControl]="personalSettingsForm.controls.lastName" />
   </div>
   <div class="flex flex-column gap-2 col-6">
@@ -24,7 +22,6 @@
       pInputText
       id="email"
       aria-describedby="email-help"
-      (blur)="updateUserDetails('email', $event)"
       [formControl]="personalSettingsForm.controls.email" />
   </div>
 </form>
