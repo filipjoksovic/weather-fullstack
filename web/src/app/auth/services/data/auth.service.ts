@@ -4,6 +4,8 @@ import { StorageService } from '@core/services/storage.service';
 import { AuthApiService } from '../api/auth.api.service';
 import { AuthStoreService } from '../auth.store.service';
 import { StoredUserData, UserData } from 'app/user/models/user-data.model';
+import { UserStoreService } from '../../../user/services/user.store.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +14,9 @@ export class AuthService {
   constructor(
     private readonly storageService: StorageService,
     private readonly authApiService: AuthApiService,
-    private readonly authStoreService: AuthStoreService
+    private readonly authStoreService: AuthStoreService,
+    private readonly userStore: UserStoreService,
+    private readonly router: Router
   ) {}
 
   public isLoggedIn() {
@@ -24,8 +28,9 @@ export class AuthService {
       .signup(value.email!, value.password!)
       .subscribe((res: StoredUserData) => {
         this.storageService.setObject(StorageKeys.USER, res);
-        this.storageService.set(StorageKeys.TOKEN, res.token);
-        this.authStoreService.setUser(res);
+        this.storageService.set(StorageKeys.TOKEN, res.token ?? '');
+        this.userStore.user.set(res);
+        this.router.navigate(['/']);
       });
   }
 
@@ -34,8 +39,9 @@ export class AuthService {
       .login(value.email!, value.password!)
       .subscribe((res: StoredUserData) => {
         this.storageService.setObject(StorageKeys.USER, res);
-        this.storageService.set(StorageKeys.TOKEN, res.token);
-        this.authStoreService.setUser(res);
+        this.storageService.set(StorageKeys.TOKEN, res.token ?? '');
+        this.userStore.user.set(res);
+        this.router.navigate(['/']);
       });
   }
 }

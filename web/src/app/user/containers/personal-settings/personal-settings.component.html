@@ -1,18 +1,33 @@
 <h2 class="my-3">Personal details</h2>
-<div class="grid mb-3">
+<form class="grid mb-3" [formGroup]="personalSettingsForm">
   <div class="flex flex-column gap-2 col-6">
     <label for="firstname">First name</label>
-    <input pInputText id="firstname" aria-describedby="username-help" />
+    <input
+      pInputText
+      id="firstName"
+      aria-describedby="firstname-help"
+      (blur)="updateUserDetails('firstName', $event)"
+      [formControl]="personalSettingsForm.controls.firstName" />
   </div>
   <div class="flex flex-column gap-2 col-6">
-    <label for="lastname">Last name</label>
-    <input pInputText id="firstname" aria-describedby="username-help" />
+    <label for="lastName">Last name</label>
+    <input
+      pInputText
+      id="lastName"
+      aria-describedby="lastname-help"
+      (blur)="updateUserDetails('lastName', $event)"
+      [formControl]="personalSettingsForm.controls.lastName" />
   </div>
   <div class="flex flex-column gap-2 col-6">
-    <label for="lastname">Email</label>
-    <input pInputText id="firstname" aria-describedby="username-help" />
+    <label for="email">Email</label>
+    <input
+      pInputText
+      id="email"
+      aria-describedby="email-help"
+      (blur)="updateUserDetails('email', $event)"
+      [formControl]="personalSettingsForm.controls.email" />
   </div>
-</div>
+</form>
 
 <p-divider></p-divider>
 
@@ -21,20 +36,16 @@
   <div class="flex flex-column gap-2 col-6">
     <label for="firstname">Time format</label>
     <p-dropdown
-      formControlName="selectedCity"
       optionLabel="name"
       [options]="timeFormats"
-      optionLabel="name"
       placeholder="Time format"
       styleClass="w-full"></p-dropdown>
   </div>
   <div class="flex flex-column gap-2 col-6">
     <label for="lastname">Date format</label>
     <p-dropdown
-      formControlName="selectedCity"
       optionLabel="name"
       [options]="dateFormats"
-      optionLabel="name"
       placeholder="Date format"
       styleClass="w-full"></p-dropdown>
   </div>

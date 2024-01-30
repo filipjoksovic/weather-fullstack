@@ -1,5 +1,8 @@
 package com.weather.backend.user.controller;
 
+import com.weather.backend.user.dto.UpdateUserRequest;
+import com.weather.backend.user.dto.UserDto;
+import com.weather.backend.user.exception.UserDoesNotExistException;
 import com.weather.backend.user.exception.UserNotFoundException;
 import com.weather.backend.user.models.User;
 import com.weather.backend.user.service.UserService;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @Controller
 @RequestMapping("/api/users")
 public class UserHttpController {
@@ -37,12 +41,13 @@ public class UserHttpController {
     }
 
     @PostMapping()
-    public User createUser(@RequestBody User user) {
-        return this.userService.create(user);
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        return ResponseEntity.ok(this.userService.create(user));
     }
 
-    @PatchMapping
-    public User updateUser(@RequestBody User user) {
-        return this.userService.update(user);
+    @PatchMapping("/{userId}")
+    public ResponseEntity<UserDto> updateUser(@PathVariable String userId,
+                                              @RequestBody UpdateUserRequest updateUserRequest) throws UserDoesNotExistException {
+        return ResponseEntity.ok(this.userService.update(userId, updateUserRequest));
     }
 }

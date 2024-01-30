@@ -43,10 +43,8 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         System.out.println("Configuring security");
         httpSecurity.cors(cors -> cors.disable()).csrf(csrf -> csrf.disable())
-                    .authorizeHttpRequests((authorize) -> authorize.requestMatchers("/api/auth/**")
-                                                                   .permitAll()
-                                                                   .anyRequest()
-                                                                   .authenticated())
+                    .authorizeHttpRequests((authorize) -> authorize.anyRequest()
+                                                                   .permitAll())
                     .sessionManagement((sessionManagement) -> sessionManagement.sessionCreationPolicy(STATELESS))
                     .authenticationProvider(authenticationProvider)
                     .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);

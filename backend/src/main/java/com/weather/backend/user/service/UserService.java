@@ -1,5 +1,8 @@
 package com.weather.backend.user.service;
 
+import com.weather.backend.user.dto.UpdateUserRequest;
+import com.weather.backend.user.dto.UserDto;
+import com.weather.backend.user.exception.UserDoesNotExistException;
 import com.weather.backend.user.exception.UserNotFoundException;
 import com.weather.backend.user.models.User;
 
@@ -15,6 +18,5 @@ public interface UserService {
 
     User create(User user);
 
-    User update(User user);
-
+    UserDto update(String userId, UpdateUserRequest userRequest) throws UserDoesNotExistException;
 }

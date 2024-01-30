@@ -1,5 +1,9 @@
-<div class="bg-primary p-3 w-full text-center">
-  Don't wanna create an account? Try out the application in
-  <span class="text-help font-bold">headless</span> mode
+<div
+  class="bg-primary p-3 w-full text-center flex align-items-center justify-content-center gap-3">
+  <span>
+    Don't wanna create an account? Try out the application in
+    <span class="text-help font-bold">headless</span> mode
+  </span>
+  <p-button severity="info" (onClick)="headlessModeClicked()">Try it</p-button>
 </div>
 <router-outlet></router-outlet>

@@ -9,6 +9,10 @@ import { ToastModule } from 'primeng/toast';
 import { AuthStoreService } from '@auth/services/auth.store.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { filter, tap } from 'rxjs';
+import { StorageService } from '@core/services/storage.service';
+import { UserStoreService } from './user/services/user.store.service';
+import { StorageKeys } from '@core/models/config/storage-keys.enum';
+import { StoredUserData } from './user/models/user-data.model';
 
 @UntilDestroy()
 @Component({
@@ -29,19 +33,18 @@ export class AppComponent implements OnInit {
   constructor(
     private primengConfig: PrimeNGConfig,
     private readonly authStore: AuthStoreService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly storageService: StorageService,
+    private readonly userStoreService: UserStoreService
   ) {}
 
   ngOnInit() {
     this.primengConfig.ripple = true;
-    this.authStore.user$
-      .pipe(
-        filter(user => user !== null),
-        tap(() => {
-          this.router.navigate(['/']);
-        }),
-        untilDestroyed(this)
-      )
-      .subscribe();
+
+    //TODO implement this in a global resolver, this has no place being in the app componnet
+    const userFromStorage = this.storageService.getObject(StorageKeys.USER);
+    if (userFromStorage) {
+      this.userStoreService.user.set(userFromStorage as StoredUserData);
+    }
   }
 }

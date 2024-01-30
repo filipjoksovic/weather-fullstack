@@ -9,7 +9,7 @@ export type StoredUserData = {
   firstName: string;
   lastName: string;
   email: string;
-  token: string;
+  token?: string;
 };
 
 export type UserData = UserDataHeadless | StoredUserData;

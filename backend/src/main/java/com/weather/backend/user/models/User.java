@@ -22,6 +22,7 @@ public class User implements UserDetails {
     private String password;
     private String firstName;
     private String lastName;
+    private UserSettings userSettings;
     private Date createdAt = new Date();
 
     public User() {

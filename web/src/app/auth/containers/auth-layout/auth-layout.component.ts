@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { EnvironmentService } from '@core/services/environment.service';
 import { ButtonModule } from 'primeng/button';
 import { MessagesModule } from 'primeng/messages';
 
@@ -12,5 +13,9 @@ import { MessagesModule } from 'primeng/messages';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthLayoutComponent {
-  constructor() {}
+  constructor(private readonly environmentService: EnvironmentService) {}
+
+  headlessModeClicked() {
+    this.environmentService.activateHeadless();
+  }
 }
