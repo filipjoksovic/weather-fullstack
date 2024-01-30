@@ -1,9 +1,9 @@
 package com.weather.backend.auth.service;
 
-import com.weather.backend.auth.models.AuthenticationResponse;
 import com.weather.backend.auth.models.LoginRequest;
 import com.weather.backend.auth.models.RegisterRequest;
 import com.weather.backend.security.JwtService;
+import com.weather.backend.user.dto.UserDto;
 import com.weather.backend.user.exception.UserNotFoundException;
 import com.weather.backend.user.models.User;
 import com.weather.backend.user.repository.UserRepository;
@@ -25,7 +25,7 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
-    public AuthenticationResponse register(RegisterRequest request) {
+    public UserDto register(RegisterRequest request) {
         LOG.info("Rgstr usr with {} {}", request.email(), request.password());
         User user = new User();
         user.setEmail(request.email());
@@ -33,19 +33,15 @@ public class AuthenticationService {
         user = userRepository.save(user);
         String token = jwtService.generateToken(user);
         LOG.info("Usr rgstrd {} {}", user.getId(), token);
-        return new AuthenticationResponse(user.getId(), user.getEmail(),
-                                          user.getFirstName(),
-                                          user.getLastName(),
-                                          token);
+        return UserDto.to(user, token);
     }
 
-    public AuthenticationResponse login(LoginRequest request) throws UserNotFoundException {
+    public UserDto login(LoginRequest request) throws UserNotFoundException {
         LOG.info("Lgn attmpt for {} {}", request.email(), request.password());
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.email(), request.password()));
         User user = userRepository.findByEmail(request.email())
                                   .orElseThrow(UserNotFoundException::new);
         String token = jwtService.generateToken(user);
-        return new AuthenticationResponse(user.getId(), user.getEmail(),
-                                          user.getFirstName(), user.getLastName(), token);
+        return UserDto.to(user, token);
     }
 }

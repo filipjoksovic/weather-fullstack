@@ -1,7 +1,10 @@
+import { UserSettings } from './user.settings.model';
+
 export type UserDataHeadless = {
   firstName: string;
   lastName: string;
   email: never;
+  userSettings: UserSettings;
 };
 
 export type StoredUserData = {
@@ -9,6 +12,7 @@ export type StoredUserData = {
   firstName: string;
   lastName: string;
   email: string;
+  userSettings: UserSettings;
   token?: string;
 };
 

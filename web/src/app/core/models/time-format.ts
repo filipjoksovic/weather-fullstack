@@ -1,14 +1,30 @@
 export enum TimeFormatEnum {
-  SHORT = 'HH:mm',
-  LONG = 'hh:mm a',
+  LONG = 'LONG',
+  SHORT = 'SHORT',
 }
 
+export type TimeFormat = 'HH:mm' | 'hh:mm a';
+
+export const TimeFormats: Record<TimeFormatEnum, TimeFormatConfig> = {
+  [TimeFormatEnum.LONG]: {
+    key: TimeFormatEnum.LONG,
+    format: 'HH:mm',
+    name: 'Long',
+  },
+  [TimeFormatEnum.SHORT]: {
+    key: TimeFormatEnum.SHORT,
+    format: 'hh:mm a',
+    name: 'Short',
+  },
+};
+
 export type TimeFormatConfig = {
-  format: TimeFormatEnum;
+  key: TimeFormatEnum;
+  format: TimeFormat;
   name: string;
 };
 
 export const getTimeFormats = (): TimeFormatConfig[] => [
-  { format: TimeFormatEnum.SHORT, name: 'Short (10:00PM)' },
-  { format: TimeFormatEnum.LONG, name: 'Long (22:00)' },
+  TimeFormats.LONG,
+  TimeFormats.SHORT,
 ];

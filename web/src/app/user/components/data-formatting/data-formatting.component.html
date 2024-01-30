@@ -1,0 +1,27 @@
+<h2 class="my-3">Data formatting</h2>
+<form [formGroup]="dataFormattingForm">
+  <div class="grid mb-3">
+    <div class="flex flex-column gap-2 col-6">
+      <label for="timeFormat">Time format</label>
+      <p-dropdown
+        id="timeFormat"
+        optionLabel="name"
+        optionValue="key"
+        [options]="timeFormats"
+        placeholder="Time format"
+        styleClass="w-full"
+        [formControl]="dataFormattingForm.controls.timeFormat"></p-dropdown>
+    </div>
+    <div class="flex flex-column gap-2 col-6">
+      <label for="dateFormat">Date format</label>
+      <p-dropdown
+        id="dateFormat"
+        optionLabel="name"
+        optionValue="key"
+        [options]="dateFormats"
+        placeholder="Date format"
+        styleClass="w-full"
+        [formControl]="dataFormattingForm.controls.dateFormat"></p-dropdown>
+    </div>
+  </div>
+</form>

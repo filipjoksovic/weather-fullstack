@@ -1,0 +1,27 @@
+<h2 class="my-3">Personal details</h2>
+<form class="grid mb-3" [formGroup]="personalSettingsForm">
+  <div class="flex flex-column gap-2 col-6">
+    <label for="firstname">First name</label>
+    <input
+      pInputText
+      id="firstName"
+      aria-describedby="firstname-help"
+      [formControl]="personalSettingsForm.controls.firstName" />
+  </div>
+  <div class="flex flex-column gap-2 col-6">
+    <label for="lastName">Last name</label>
+    <input
+      pInputText
+      id="lastName"
+      aria-describedby="lastname-help"
+      [formControl]="personalSettingsForm.controls.lastName" />
+  </div>
+  <div class="flex flex-column gap-2 col-6">
+    <label for="email">Email</label>
+    <input
+      pInputText
+      id="email"
+      aria-describedby="email-help"
+      [formControl]="personalSettingsForm.controls.email" />
+  </div>
+</form>

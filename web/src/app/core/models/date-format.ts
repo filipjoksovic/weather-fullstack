@@ -1,14 +1,30 @@
 export enum DateFormatEnum {
-  SHORT = 'MM/dd/yyyy',
-  LONG = 'MMMM dd, yyyy',
+  SHORT = 'SHORT',
+  LONG = 'LONG',
 }
 
+export type DateFormat = 'MM/dd/yyyy' | 'MMMM dd, yyyy';
+
+export const DateFormats: Record<DateFormatEnum, DateFormatConfig> = {
+  [DateFormatEnum.SHORT]: {
+    key: DateFormatEnum.SHORT,
+    format: 'MM/dd/yyyy',
+    name: 'Short',
+  },
+  [DateFormatEnum.LONG]: {
+    key: DateFormatEnum.LONG,
+    format: 'MMMM dd, yyyy',
+    name: 'Long',
+  },
+};
+
 export type DateFormatConfig = {
-  format: DateFormatEnum;
+  key: DateFormatEnum;
+  format: DateFormat;
   name: string;
 };
 
 export const getDateFormats = (): DateFormatConfig[] => [
-  { format: DateFormatEnum.SHORT, name: 'Short (10/31/2019)' },
-  { format: DateFormatEnum.LONG, name: 'Long (October 31, 2019)' },
+  DateFormats.SHORT,
+  DateFormats.LONG,
 ];
