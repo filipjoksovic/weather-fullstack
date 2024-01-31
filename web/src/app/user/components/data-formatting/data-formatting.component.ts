@@ -17,7 +17,6 @@ import { UserData } from '../../models/user-data.model';
   standalone: true,
   imports: [DropdownModule, ReactiveFormsModule],
   templateUrl: './data-formatting.component.html',
-  styleUrl: './data-formatting.component.scss',
 })
 export class DataFormattingComponent {
   private readonly fb = inject(FormBuilder);

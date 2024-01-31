@@ -8,7 +8,6 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [DropdownModule, FormsModule],
   templateUrl: './unit-dropdown.component.html',
-  styleUrl: './unit-dropdown.component.scss',
 })
 export class UnitDropdownComponent {
   @Input({ required: true })
