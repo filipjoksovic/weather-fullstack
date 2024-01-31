@@ -1,22 +1,22 @@
-import { DirectionUnitResponse } from '../../../../core/models/api/response/direction.unit';
-import { HeightResponseUnit } from '../../../../core/models/api/response/height.unit';
-import { SpeedResponseUnit } from '../../../../core/models/api/response/speed.unit';
-import { TemperatureResponseUnit } from '../../../../core/models/api/response/temperature.unit';
-import { TimeFormatResponseUnit } from '../../../../core/models/api/response/time-format.unit';
+import { DirectionUnit } from '../../../../core/models/api/response/direction.unit';
+import { HeightUnit } from '../../../../core/models/api/response/height.unit';
+import { SpeedUnit } from '../../../../core/models/api/response/speed.unit';
+import { TemperatureUnit } from '../../../../core/models/api/response/temperature.unit';
+import { TimeUnit } from '../../../../core/models/api/response/time-format.unit';
 
 export type ForecastWeatherResponseUnits = {
-  time?: TimeFormatResponseUnit;
-  temperature_2m_max?: TemperatureResponseUnit;
-  temperature_2m_min?: TemperatureResponseUnit;
-  apparent_temperature_max?: TemperatureResponseUnit;
-  apparent_temperature_min?: TemperatureResponseUnit;
-  precipitation_sum?: HeightResponseUnit;
-  rain_sum?: HeightResponseUnit;
-  showers_sum?: HeightResponseUnit;
-  snowfall_sum?: HeightResponseUnit;
-  wind_speed_10m_max?: SpeedResponseUnit;
-  wind_gusts_10m_max?: SpeedResponseUnit;
-  wind_direction_10m_dominant?: DirectionUnitResponse;
+  time?: TimeUnit;
+  temperature_2m_max?: TemperatureUnit;
+  temperature_2m_min?: TemperatureUnit;
+  apparent_temperature_max?: TemperatureUnit;
+  apparent_temperature_min?: TemperatureUnit;
+  precipitation_sum?: HeightUnit;
+  rain_sum?: HeightUnit;
+  showers_sum?: HeightUnit;
+  snowfall_sum?: HeightUnit;
+  wind_speed_10m_max?: SpeedUnit;
+  wind_gusts_10m_max?: SpeedUnit;
+  wind_direction_10m_dominant?: DirectionUnit;
 };
 
 export type ForecastWeatherMeasurementsResponse = {

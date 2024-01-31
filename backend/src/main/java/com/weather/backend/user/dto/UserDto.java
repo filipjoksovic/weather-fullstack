@@ -6,6 +6,7 @@ import lombok.Builder;
 @Builder
 public record UserDto(String id, String firstName, String lastName,
                       String email, UserSettingsDto userSettings,
+                      UserUnitSettingsDto unitSettings,
                       String token) {
     public static UserDto to(User user) {
         return UserDto.builder()
@@ -13,6 +14,7 @@ public record UserDto(String id, String firstName, String lastName,
                       .firstName(user.getFirstName())
                       .lastName(user.getLastName())
                       .email(user.getEmail())
+                      .unitSettings(UserUnitSettingsDto.to(user.getUserUnitSettings()))
                       .userSettings(UserSettingsDto.to(user.getUserSettings()))
                       .build();
 
@@ -24,6 +26,7 @@ public record UserDto(String id, String firstName, String lastName,
                       .firstName(user.getFirstName())
                       .lastName(user.getLastName())
                       .email(user.getEmail())
+                      .unitSettings(UserUnitSettingsDto.to(user.getUserUnitSettings()))
                       .userSettings(UserSettingsDto.to(user.getUserSettings()))
                       .token(token)
                       .build();

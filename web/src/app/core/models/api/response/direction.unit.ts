@@ -1,1 +1,5 @@
-export type DirectionUnitResponse = '°';
+export type DirectionUnit = '°';
+
+export const getDirectionUnits = () => {
+  return ['°'];
+};

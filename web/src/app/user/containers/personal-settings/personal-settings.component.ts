@@ -22,6 +22,7 @@ import { StoredUserData } from '../../models/user-data.model';
 import { UserStoreService } from '../../services/user.store.service';
 import { PersonalDetailsComponent } from '../../components/personal-details/personal-details.component';
 import { DataFormattingComponent } from '../../components/data-formatting/data-formatting.component';
+import { UnitSettingsComponent } from '../unit-settings/unit-settings.component';
 
 export type PersonalDetailsFormKeys = Record<
   keyof Pick<StoredUserData, 'firstName' | 'lastName' | 'email'>,
@@ -41,6 +42,7 @@ export type PersonalDetailsFormKeys = Record<
     PersonalDetailsComponent,
     PersonalDetailsComponent,
     DataFormattingComponent,
+    UnitSettingsComponent,
   ],
   templateUrl: './personal-settings.component.html',
   styleUrl: './personal-settings.component.scss',

@@ -35,13 +35,13 @@ export class DataFormattingComponent {
     this.dataFormattingForm.controls.dateFormat.valueChanges.subscribe(
       value => {
         console.log('here');
-        this.userStore.updateUserSettings('dateFormat', value);
+        this.userStore.updateUserSettings('dateFormat', value ?? ''); //TODO fallback to default
       }
     );
 
     this.dataFormattingForm.controls.timeFormat.valueChanges.subscribe(
       value => {
-        this.userStore.updateUserSettings('timeFormat', value);
+        this.userStore.updateUserSettings('timeFormat', value ?? ''); //TODO fallback to default;
       }
     );
   }

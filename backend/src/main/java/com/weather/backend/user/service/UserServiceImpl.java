@@ -1,13 +1,11 @@
 package com.weather.backend.user.service;
 
-import com.weather.backend.user.dto.UpdateUserRequest;
-import com.weather.backend.user.dto.UpdateUserSettingsRequest;
-import com.weather.backend.user.dto.UserDto;
-import com.weather.backend.user.dto.UserSettingsDto;
+import com.weather.backend.user.dto.*;
 import com.weather.backend.user.exception.UserDoesNotExistException;
 import com.weather.backend.user.exception.UserNotFoundException;
 import com.weather.backend.user.models.User;
 import com.weather.backend.user.models.UserSettings;
+import com.weather.backend.user.models.UserUnitSettings;
 import com.weather.backend.user.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,9 +50,8 @@ public class UserServiceImpl implements UserService {
     public UserDto update(String userId, UpdateUserRequest userRequest) throws UserDoesNotExistException {
         LOG.info("upd usr {}", userId);
 
-        User user =
-                userRepository.findById(userId)
-                              .orElseThrow(() -> new UserDoesNotExistException(userId));
+        User user = userRepository.findById(userId)
+                                  .orElseThrow(() -> new UserDoesNotExistException(userId));
 
         if (userRequest.firstName() != null) {
             user.setFirstName(userRequest.firstName());
@@ -71,13 +68,11 @@ public class UserServiceImpl implements UserService {
 
     //TODO improve this by using mappings or something that doesn't require
     // Read followed by write
-    public UserSettingsDto updateUserSettings(String userId,
-                                              UpdateUserSettingsRequest userSettingsRequest) throws UserDoesNotExistException {
+    public UserSettingsDto updateUserSettings(String userId, UpdateUserSettingsRequest userSettingsRequest) throws UserDoesNotExistException {
         LOG.info("upd usr sttg {}", userId);
 
-        User user =
-                userRepository.findById(userId)
-                              .orElseThrow(() -> new UserDoesNotExistException(userId));
+        User user = userRepository.findById(userId)
+                                  .orElseThrow(() -> new UserDoesNotExistException(userId));
 
         UserSettings settingsFromUser = user.getUserSettings();
 
@@ -100,12 +95,47 @@ public class UserServiceImpl implements UserService {
         return UserSettingsDto.to(userId, settingsFromUser);
     }
 
+    public UserUnitSettingsDto updateUserUnitSettings(String userId, UpdateUserUnitSettingsRequest userUnitSettingsRequest) throws UserDoesNotExistException {
+        LOG.info("upd usr unit sttg {}", userId);
 
-    private boolean assertUserExists(String userId) throws UserDoesNotExistException {
-        if (userRepository.existsById(userId)) {
-            return true;
-        } else {
-            throw new UserDoesNotExistException(userId);
+        User user = userRepository.findById(userId)
+                                  .orElseThrow(() -> new UserDoesNotExistException(userId));
+
+        UserUnitSettings settingsFromUser = user.getUserUnitSettings();
+
+        //TODO this can be done at the data layer by running a migration
+        // ensuring that all users have default values
+        if (settingsFromUser == null) {
+            settingsFromUser = new UserUnitSettings();
         }
+
+        if (userUnitSettingsRequest.direction() != null) {
+            settingsFromUser.setDirection(userUnitSettingsRequest.direction());
+        }
+
+        if (userUnitSettingsRequest.percentage() != null) {
+            settingsFromUser.setPercentage(userUnitSettingsRequest.percentage());
+        }
+
+        if (userUnitSettingsRequest.speed() != null) {
+            settingsFromUser.setSpeed(userUnitSettingsRequest.speed());
+        }
+
+        if (userUnitSettingsRequest.pressure() != null) {
+            settingsFromUser.setPressure(userUnitSettingsRequest.pressure());
+        }
+
+        if (userUnitSettingsRequest.height() != null) {
+            settingsFromUser.setHeight(userUnitSettingsRequest.height());
+        }
+        if (userUnitSettingsRequest.temperature() != null) {
+            settingsFromUser.setTemperature(userUnitSettingsRequest.temperature());
+        }
+
+        user.setUserUnitSettings(settingsFromUser);
+
+        userRepository.save(user);
+
+        return UserUnitSettingsDto.to(userId, user.getUserUnitSettings());
     }
 }

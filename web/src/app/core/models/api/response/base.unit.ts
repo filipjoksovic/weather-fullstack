@@ -1,16 +1,16 @@
-import { DirectionUnitResponse } from './direction.unit';
-import { HeightResponseUnit } from './height.unit';
-import { PercentageResponseUnit } from './percentage.unit';
-import { PressureUnitResponse } from './pressure.unit';
-import { SpeedResponseUnit } from './speed.unit';
-import { TemperatureResponseUnit } from './temperature.unit';
-import { TimeFormatResponseUnit } from './time-format.unit';
+import { DirectionUnit } from './direction.unit';
+import { HeightUnit } from './height.unit';
+import { PercentageUnit } from './percentage.unit';
+import { PressureUnit } from './pressure.unit';
+import { SpeedUnit } from './speed.unit';
+import { TemperatureUnit } from './temperature.unit';
+import { TimeUnit } from './time-format.unit';
 
 export type BaseUnit =
-  | DirectionUnitResponse
-  | HeightResponseUnit
-  | PercentageResponseUnit
-  | PressureUnitResponse
-  | SpeedResponseUnit
-  | TemperatureResponseUnit
-  | TimeFormatResponseUnit;
+  | DirectionUnit
+  | HeightUnit
+  | PercentageUnit
+  | PressureUnit
+  | SpeedUnit
+  | TemperatureUnit
+  | TimeUnit;

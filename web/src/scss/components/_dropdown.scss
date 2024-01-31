@@ -4,3 +4,11 @@
 .p-dropdown-item{
   padding: $spacer * 2;
 }
+
+app-unit-dropdown{
+  width:100%;
+  display: block;
+  & > div{
+    width: 100%;
+  }
+}

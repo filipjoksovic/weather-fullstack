@@ -1,29 +1,29 @@
-import { DirectionUnitResponse } from '../../../core/models/api/response/direction.unit';
-import { HeightResponseUnit } from '../../../core/models/api/response/height.unit';
-import { PercentageResponseUnit } from '../../../core/models/api/response/percentage.unit';
-import { PressureUnitResponse } from '../../../core/models/api/response/pressure.unit';
-import { SpeedResponseUnit } from '../../../core/models/api/response/speed.unit';
-import { TemperatureResponseUnit } from '../../../core/models/api/response/temperature.unit';
-import { TimeFormatResponseUnit } from '../../../core/models/api/response/time-format.unit';
+import { DirectionUnit } from '../../../core/models/api/response/direction.unit';
+import { HeightUnit } from '../../../core/models/api/response/height.unit';
+import { PercentageUnit } from '../../../core/models/api/response/percentage.unit';
+import { PressureUnit } from '../../../core/models/api/response/pressure.unit';
+import { SpeedUnit } from '../../../core/models/api/response/speed.unit';
+import { TemperatureUnit } from '../../../core/models/api/response/temperature.unit';
+import { TimeUnit } from '../../../core/models/api/response/time-format.unit';
 
 export type CurrentWeatherResponseUnits = {
-  time: TimeFormatResponseUnit;
+  time: TimeUnit;
   interval: string;
-  temperature_2m: TemperatureResponseUnit;
-  relative_humidity_2m: PercentageResponseUnit;
-  apparent_temperature: TemperatureResponseUnit;
+  temperature_2m: TemperatureUnit;
+  relative_humidity_2m: PercentageUnit;
+  apparent_temperature: TemperatureUnit;
   is_day: '_';
-  precipitation: HeightResponseUnit;
-  rain: HeightResponseUnit;
-  showers: HeightResponseUnit;
-  snowfall: HeightResponseUnit;
+  precipitation: HeightUnit;
+  rain: HeightUnit;
+  showers: HeightUnit;
+  snowfall: HeightUnit;
   weather_code: string;
-  cloud_cover: PercentageResponseUnit;
-  pressure_msl: PressureUnitResponse;
-  surface_pressure: PressureUnitResponse;
-  wind_speed_10m: SpeedResponseUnit;
-  wind_direction_10m: DirectionUnitResponse;
-  wind_gusts_10m: SpeedResponseUnit;
+  cloud_cover: PercentageUnit;
+  pressure_msl: PressureUnit;
+  surface_pressure: PressureUnit;
+  wind_speed_10m: SpeedUnit;
+  wind_direction_10m: DirectionUnit;
+  wind_gusts_10m: SpeedUnit;
 };
 
 export type CurrentWeatherMeasurementsResponse = {

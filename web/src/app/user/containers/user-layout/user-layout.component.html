@@ -1,24 +1,4 @@
 <app-sidebar></app-sidebar>
-<div class="content">
-  <p-tabView (activeIndexChange)="redirectToPage($event)">
-    <p-tabPanel>
-      <ng-template pTemplate="header">
-        <i class="fa-solid fa-user mr-2"></i>
-        <span>Personal Settings</span>
-      </ng-template>
-    </p-tabPanel>
-    <p-tabPanel>
-      <ng-template pTemplate="header">
-        <i class="fa-solid fa-sliders mr-2"></i>
-        <span>Units configuration</span>
-      </ng-template>
-    </p-tabPanel>
-    <p-tabPanel>
-      <ng-template pTemplate="header">
-        <i class="fa-solid fa-gears mr-2"></i>
-        <span>Additional settings</span>
-      </ng-template>
-    </p-tabPanel>
-  </p-tabView>
+<div class="content border-round">
   <router-outlet></router-outlet>
 </div>

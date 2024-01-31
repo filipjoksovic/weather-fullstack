@@ -1,1 +1,60 @@
-<p>unit-settings works!</p>
+<div class="my-3 mb-2">
+  <h2 class="">Unit settings</h2>
+  <p class="text-sm text-gray-400 mt-1">
+    Configure your preferred units for temperature, time, speed, etc... Disabled
+    units cannot be configured due to them being the only option
+  </p>
+</div>
+<p-divider></p-divider>
+<div class="flex flex-column gap-4 mt-3">
+  <app-unit-dropdown
+    id="speed"
+    label="Speed"
+    [options]="getSpeedUnits()"
+    placeholder="Select speed unit"
+    [selectedValue]="user()?.unitSettings?.speed ?? ''"
+    (unitConfigured)="unitConfigured($event)"></app-unit-dropdown>
+
+  <app-unit-dropdown
+    id="temperature"
+    label="Temperature"
+    [options]="getTemperatureUnits()"
+    placeholder="Select direction unit"
+    [selectedValue]="user()?.unitSettings?.temperature ?? ''"
+    (unitConfigured)="unitConfigured($event)"></app-unit-dropdown>
+  <app-unit-dropdown
+    id="height"
+    label="Height"
+    [options]="getHeightUnits()"
+    placeholder="Select direction unit"
+    [selectedValue]="user()?.unitSettings?.height ?? ''"
+    (unitConfigured)="unitConfigured($event)"></app-unit-dropdown>
+  <div class="grid">
+    <app-unit-dropdown
+      class="col-4"
+      id="percentage"
+      label="Percentage"
+      placeholder="Select percentage"
+      [options]="getPercentageUnits()"
+      [selectedValue]="user()?.unitSettings?.percentage ?? ''"
+      (unitConfigured)="unitConfigured($event)"></app-unit-dropdown>
+
+    <app-unit-dropdown
+      class="col-4"
+      id="direction"
+      label="Direction"
+      [options]="getDirectionUnits()"
+      placeholder="Select direction unit"
+      [selectedValue]="user()?.unitSettings?.direction ?? ''"
+      (unitConfigured)="unitConfigured($event)"></app-unit-dropdown>
+
+    <app-unit-dropdown
+      class="col-4"
+      id="pressure"
+      label="Pressure"
+      [options]="getPressureUnits()"
+      placeholder="Select pressure unit"
+      [selectedValue]="user()?.unitSettings?.pressure ?? ''"
+      (unitConfigured)="unitConfigured($event)"></app-unit-dropdown>
+  </div>
+</div>

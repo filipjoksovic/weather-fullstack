@@ -26,4 +26,5 @@ public class MongoConfiguration {
     MongoOperations mongoTemplate(MongoClient mongoClient) {
         return new MongoTemplate(mongoClient, databaseName);
     }
+
 }

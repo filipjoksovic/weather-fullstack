@@ -1,4 +1,4 @@
-import { TemperatureResponseUnit } from '../../core/models/api/response/temperature.unit';
+import { TemperatureUnit } from '../../core/models/api/response/temperature.unit';
 import { ValueUnit } from '../../core/models/data/value-unit.type';
 import { ForecastWeatherResponse } from './api/response/forecast-weather-response';
 
@@ -10,8 +10,8 @@ export type ForecastWeather = {
 
 export type ForecastMeasurement = {
   date: string | number;
-  maxTemperature: ValueUnit<number, TemperatureResponseUnit>;
-  minTemperature: ValueUnit<number, TemperatureResponseUnit>;
+  maxTemperature: ValueUnit<number, TemperatureUnit>;
+  minTemperature: ValueUnit<number, TemperatureUnit>;
 };
 
 export const forecastWeatherHeadlessResponseToForecastMeasurement = (

@@ -1,9 +1,6 @@
 package com.weather.backend.user.controller;
 
-import com.weather.backend.user.dto.UpdateUserRequest;
-import com.weather.backend.user.dto.UpdateUserSettingsRequest;
-import com.weather.backend.user.dto.UserDto;
-import com.weather.backend.user.dto.UserSettingsDto;
+import com.weather.backend.user.dto.*;
 import com.weather.backend.user.exception.UserDoesNotExistException;
 import com.weather.backend.user.exception.UserNotFoundException;
 import com.weather.backend.user.models.User;
@@ -57,5 +54,10 @@ public class UserHttpController {
     public ResponseEntity<UserSettingsDto> updateUserSettings(@PathVariable String userId, @RequestBody UpdateUserSettingsRequest updateUserSettingsRequest) throws UserDoesNotExistException {
         return ResponseEntity.ok(this.userService.updateUserSettings(userId,
                                                                      updateUserSettingsRequest));
+    }
+
+    @PatchMapping("/{userId}/unit-settings")
+    public ResponseEntity<UserUnitSettingsDto> updateUserUnitSettings(@PathVariable String userId, @RequestBody UpdateUserUnitSettingsRequest updateUserUnitSettingsRequest) throws UserDoesNotExistException {
+        return ResponseEntity.ok(this.userService.updateUserUnitSettings(userId, updateUserUnitSettingsRequest));
     }
 }

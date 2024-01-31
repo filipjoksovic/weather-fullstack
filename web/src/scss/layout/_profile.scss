@@ -18,5 +18,8 @@ app-user-layout {
     padding-block: $spacer * 3;
     margin-inline: auto;
     padding-inline: $spacer * 3;
+    background: $surface-ground;
+    margin-block: $spacer * 4;
+    box-shadow: $shadow-standard;
   }
 }

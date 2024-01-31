@@ -1,0 +1,11 @@
+<div class="flex flex-column gap-2 p-0 w-full">
+  <label [for]="id">{{ label }}</label>
+  <p-dropdown
+    [id]="id"
+    [ngModel]="selectedValue"
+    [options]="options"
+    [placeholder]="placeholder"
+    [disabled]="options.length === 1"
+    (onChange)="dropdownChanged($event)"
+    styleClass="w-full"></p-dropdown>
+</div>

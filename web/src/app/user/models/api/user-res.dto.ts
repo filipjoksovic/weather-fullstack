@@ -1,6 +1,7 @@
 import { UserReqDto } from './userReqDto';
 import { UserData } from '../user-data.model';
 import { UserSettingsResDto } from './user-settings-res.dto';
+import { UserUnitSettingsResDto } from './user-unit-settings-res.dto';
 
 export type UserResDto = {
   id: string;
@@ -8,6 +9,7 @@ export type UserResDto = {
   lastName: string;
   email: string;
   userSettings: UserSettingsResDto;
+  unitSettings: UserUnitSettingsResDto;
 };
 
 export const userRestDtoToUserData = (userRes: UserResDto): UserData => {
@@ -17,5 +19,6 @@ export const userRestDtoToUserData = (userRes: UserResDto): UserData => {
     lastName: userRes.lastName,
     email: userRes.email,
     userSettings: userRes.userSettings,
+    unitSettings: userRes.unitSettings,
   };
 };

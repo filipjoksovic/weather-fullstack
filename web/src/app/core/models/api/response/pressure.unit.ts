@@ -1,1 +1,5 @@
-export type PressureUnitResponse = 'hPa';
+export type PressureUnit = 'hPa';
+
+export const getPressureUnits = () => {
+  return ['hPa'];
+};
