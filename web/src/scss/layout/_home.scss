@@ -23,14 +23,13 @@ app-home-routing {
     backdrop-filter: blur(10px);
     padding: $spacer * 2;
     border-radius: $spacer;
-    flex: 7;
     overflow-y: scroll;
     box-shadow: $shadow-standard;
     grid-area: content;
-    height: clamp(30vh, 100rem, 80vh);
-    width: clamp(30vw, 100rem, 80vw);
-    margin: auto;
-
+    width: clamp(0rem, 100%, 100rem);
+    padding-block: $spacer * 3;
+    margin-inline: auto;
+    margin-block: $spacer * 4;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
 

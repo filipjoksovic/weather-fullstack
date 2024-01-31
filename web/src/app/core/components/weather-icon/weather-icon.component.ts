@@ -10,11 +10,12 @@ import {
   WeatherCodeConfig,
   WeatherConfig,
 } from '@core/models/api/response/weather-code.enum';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-weather-icon',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TooltipModule],
   templateUrl: './weather-icon.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

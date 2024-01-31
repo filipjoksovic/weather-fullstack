@@ -18,8 +18,8 @@ export const displaySettings: {
     key: CurrentWeatherModelKeys.apparentTemperature,
     icon: 'fa fa-temperature-half',
     title: 'Apparent temperature',
-    rowSpan: 4,
-    colSpan: 4,
+    rowSpan: 2,
+    colSpan: 2,
   },
   [CurrentWeatherModelKeys.surfacePressure]: {
     key: CurrentWeatherModelKeys.surfacePressure,
@@ -32,8 +32,8 @@ export const displaySettings: {
     key: CurrentWeatherModelKeys.temperature,
     icon: 'fa fa-temperature-full',
     title: 'Temperature',
-    rowSpan: 3,
-    colSpan: 3,
+    rowSpan: 2,
+    colSpan: 2,
   },
   [CurrentWeatherModelKeys.cloudCover]: {
     key: CurrentWeatherModelKeys.cloudCover,
@@ -74,8 +74,8 @@ export const displaySettings: {
     key: CurrentWeatherModelKeys.showers,
     icon: 'fa-solid fa-cloud-showers-heavy',
     title: 'Showers',
-    rowSpan: 4,
-    colSpan: 4,
+    rowSpan: 2,
+    colSpan: 2,
   },
   [CurrentWeatherModelKeys.snowfall]: {
     key: CurrentWeatherModelKeys.snowfall,

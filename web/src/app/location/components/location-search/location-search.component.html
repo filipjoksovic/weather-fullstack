@@ -2,7 +2,7 @@
   <p-autoComplete
     placeholder="Search for location"
     [suggestions]="suggestions"
-    styleClass="w-100"
+    styleClass="w-100 border-round-3xl"
     field="name"
     (onSelect)="countrySelected($event)"
     (completeMethod)="searchChanged($event)">
@@ -17,7 +17,6 @@
     icon="pi pi-send"
     [rounded]="true"
     severity="help"
-    [outlined]="true"
     pTooltip="Enable geolocation to be able to look at the forecast for your location"
     tooltipPosition="right"
     [showDelay]="500"

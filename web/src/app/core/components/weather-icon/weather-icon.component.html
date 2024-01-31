@@ -1,4 +1,8 @@
 <div
-  class="weather-icon flex h-full w-full align-items-center justify-content-center">
+  class="weather-icon flex h-full w-full align-items-center justify-content-center"
+  pInputText
+  [pTooltip]="weatherIconConfig.name"
+  tooltipPosition="bottom">
+  {{ weatherIconConfig.description }}
   <i [class]="weatherIconConfig.icon"></i>
 </div>
