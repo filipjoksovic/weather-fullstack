@@ -12,7 +12,9 @@ import { filter, tap } from 'rxjs';
 import { StorageService } from '@core/services/storage.service';
 import { UserStoreService } from './user/services/user.store.service';
 import { StorageKeys } from '@core/models/config/storage-keys.enum';
-import { StoredUserData } from './user/models/user-data.model';
+import { StoredUserData, UserData } from './user/models/user-data.model';
+import { DateFormatEnum } from '@core/models/date-format';
+import { TimeFormatEnum } from '@core/models/time-format';
 
 @UntilDestroy()
 @Component({
@@ -44,7 +46,26 @@ export class AppComponent implements OnInit {
     //TODO implement this in a global resolver, this has no place being in the app componnet
     const userFromStorage = this.storageService.getObject(StorageKeys.USER);
     if (userFromStorage) {
-      this.userStoreService.user.set(userFromStorage as StoredUserData);
+      this.userStoreService.user.set(userFromStorage as UserData);
+    } else {
+      const defaultUser = {
+        firstName: 'Test',
+        lastName: 'Account',
+        userSettings: {
+          dateFormat: DateFormatEnum.SHORT,
+          timeFormat: TimeFormatEnum.LONG,
+        },
+        unitSettings: {
+          speed: 'km/h',
+          temperature: '°C',
+          height: 'mm',
+          percentage: '%',
+          direction: '°',
+          pressure: 'hPa',
+        },
+      } as UserData;
+      this.storageService.setObject(StorageKeys.USER, defaultUser);
+      this.userStoreService.user.set(defaultUser);
     }
   }
 }

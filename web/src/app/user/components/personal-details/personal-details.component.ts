@@ -9,7 +9,7 @@ import {
 } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { filter, map, pairwise, startWith } from 'rxjs';
-import { StoredUserData, UserData } from '../../models/user-data.model';
+import { UserData } from '../../models/user-data.model';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { PersonalDetailsFormKeys } from '../../containers/personal-settings/personal-settings.component';
 import { UserStoreService } from '../../services/user.store.service';
@@ -35,13 +35,13 @@ export class PersonalDetailsComponent {
         startWith(this.personalSettingsForm.value),
         pairwise(),
         map(([prev, next]: [any, any]) => {
-          const changes: { key: keyof StoredUserData; value: string }[] = [];
+          const changes: { key: keyof UserData; value: string }[] = [];
           for (const key in next) {
             const trimmedPrev = prev[key].trim();
             const trimmerNext = next[key].trim();
             if (trimmedPrev !== trimmerNext && trimmedPrev !== undefined) {
               changes.push({
-                key: key as keyof StoredUserData,
+                key: key as keyof UserData,
                 value: trimmerNext,
               });
             }
@@ -53,7 +53,10 @@ export class PersonalDetailsComponent {
       )
       .subscribe(updated => {
         updated.forEach(update => {
-          this.userStoreService.updateUserDetails(update.key, update.value);
+          this.userStoreService.updateUserDetails(
+            update.key as keyof UserData, //TODO improve typing
+            update.value
+          );
         });
       });
   }

@@ -19,4 +19,4 @@ export type StoredUserData = {
   token?: string;
 };
 
-export type UserData = UserDataHeadless | StoredUserData;
+export type UserData = UserDataHeadless;

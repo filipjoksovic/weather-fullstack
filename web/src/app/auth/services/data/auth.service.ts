@@ -20,7 +20,7 @@ export class AuthService {
   ) {}
 
   public isLoggedIn() {
-    return !!this.storageService.get(StorageKeys.TOKEN);
+    return !!this.storageService.get(StorageKeys.USER);
   }
 
   signup(value: Partial<{ email: string | null; password: string | null }>) {
@@ -28,8 +28,8 @@ export class AuthService {
       .signup(value.email!, value.password!)
       .subscribe((res: StoredUserData) => {
         this.storageService.setObject(StorageKeys.USER, res);
-        this.storageService.set(StorageKeys.TOKEN, res.token ?? '');
-        this.userStore.user.set(res);
+        this.storageService.set(StorageKeys.TOKEN, res.token ?? ''); //TODO remove token
+        this.userStore.user.set(res as any as UserData);
         this.router.navigate(['/']);
       });
   }
@@ -39,8 +39,8 @@ export class AuthService {
       .login(value.email!, value.password!)
       .subscribe((res: StoredUserData) => {
         this.storageService.setObject(StorageKeys.USER, res);
-        this.storageService.set(StorageKeys.TOKEN, res.token ?? '');
-        this.userStore.user.set(res);
+        this.storageService.set(StorageKeys.TOKEN, res.token ?? ''); //TODO remove token
+        this.userStore.user.set(res as any as UserData);
         this.router.navigate(['/']);
       });
   }

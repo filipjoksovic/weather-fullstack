@@ -3,6 +3,9 @@ import { Injectable } from '@angular/core';
 import { StoredUserData, UserData } from 'app/user/models/user-data.model';
 import { Observable } from 'rxjs';
 
+/**
+ * @deprecated - The application will not be using backend to store data
+ */
 @Injectable({
   providedIn: 'root',
 })

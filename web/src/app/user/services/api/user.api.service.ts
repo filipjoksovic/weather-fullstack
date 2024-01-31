@@ -11,6 +11,12 @@ import { UserUnitSettingsResDto } from '../../models/api/user-unit-settings-res.
 export class UserApiService {
   constructor(private readonly http: HttpClient) {}
 
+  /**
+   * @deprecated - The application will not be using backend to store data
+   * @param userId
+   * @param request
+   * @returns
+   */
   public updateUser(userId: string, request: Partial<UserReqDto>) {
     return this.http.patch<UserResDto>(
       `http://localhost:8080/api/users/${userId}`,
