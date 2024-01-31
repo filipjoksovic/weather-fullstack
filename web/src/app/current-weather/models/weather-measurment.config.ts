@@ -10,6 +10,7 @@ export type WeatherMeasurementComponentDisplaySettings = {
   rowSpan?: number;
   colSpan?: number;
   componentType?: 'text' | 'gauge' | 'compass';
+  order: number;
 };
 
 export const componentsToIgnore: CurrentWeatherModelKeys[] = [
@@ -25,6 +26,7 @@ export const displaySettings: {
     title: 'Apparent temperature',
     rowSpan: 4,
     colSpan: 4,
+    order: 1,
   },
   [CurrentWeatherModelKeys.surfacePressure]: {
     key: CurrentWeatherModelKeys.surfacePressure,
@@ -32,6 +34,7 @@ export const displaySettings: {
     title: 'Surface pressure',
     rowSpan: 2,
     colSpan: 2,
+    order: 3,
   },
   [CurrentWeatherModelKeys.temperature]: {
     key: CurrentWeatherModelKeys.temperature,
@@ -39,6 +42,7 @@ export const displaySettings: {
     title: 'Temperature',
     rowSpan: 4,
     colSpan: 4,
+    order: 4,
   },
   [CurrentWeatherModelKeys.cloudCover]: {
     key: CurrentWeatherModelKeys.cloudCover,
@@ -47,6 +51,7 @@ export const displaySettings: {
     rowSpan: 2,
     colSpan: 2,
     componentType: 'gauge',
+    order: 5,
   },
   [CurrentWeatherModelKeys.humidity]: {
     key: CurrentWeatherModelKeys.humidity,
@@ -55,6 +60,7 @@ export const displaySettings: {
     rowSpan: 2,
     colSpan: 2,
     componentType: 'gauge',
+    order: 6,
   },
   [CurrentWeatherModelKeys.precipitation]: {
     key: CurrentWeatherModelKeys.precipitation,
@@ -62,6 +68,7 @@ export const displaySettings: {
     title: 'Precipitation',
     rowSpan: 2,
     colSpan: 2,
+    order: 7,
   },
   [CurrentWeatherModelKeys.pressure]: {
     key: CurrentWeatherModelKeys.pressure,
@@ -69,6 +76,7 @@ export const displaySettings: {
     title: 'Pressure',
     rowSpan: 2,
     colSpan: 2,
+    order: 8,
   },
   [CurrentWeatherModelKeys.rain]: {
     key: CurrentWeatherModelKeys.rain,
@@ -76,6 +84,7 @@ export const displaySettings: {
     title: 'Rain',
     rowSpan: 2,
     colSpan: 2,
+    order: 9,
   },
   [CurrentWeatherModelKeys.showers]: {
     key: CurrentWeatherModelKeys.showers,
@@ -83,6 +92,7 @@ export const displaySettings: {
     title: 'Showers',
     rowSpan: 2,
     colSpan: 2,
+    order: 10,
   },
   [CurrentWeatherModelKeys.snowfall]: {
     key: CurrentWeatherModelKeys.snowfall,
@@ -90,6 +100,7 @@ export const displaySettings: {
     title: 'Snowfall',
     rowSpan: 2,
     colSpan: 2,
+    order: 11,
   },
   [CurrentWeatherModelKeys.time]: {
     key: CurrentWeatherModelKeys.time,
@@ -97,6 +108,7 @@ export const displaySettings: {
     title: 'Time',
     rowSpan: 2,
     colSpan: 2,
+    order: 12,
   },
   [CurrentWeatherModelKeys.windDirection]: {
     key: CurrentWeatherModelKeys.windDirection,
@@ -104,6 +116,7 @@ export const displaySettings: {
     title: 'Wind direction',
     rowSpan: 2,
     colSpan: 2,
+    order: 13,
   },
   [CurrentWeatherModelKeys.windGusts]: {
     key: CurrentWeatherModelKeys.windGusts,
@@ -111,6 +124,7 @@ export const displaySettings: {
     title: 'Wind gusts',
     rowSpan: 2,
     colSpan: 2,
+    order: 14,
   },
   [CurrentWeatherModelKeys.windSpeed]: {
     key: CurrentWeatherModelKeys.windSpeed,
@@ -118,5 +132,6 @@ export const displaySettings: {
     title: 'Wind speed',
     rowSpan: 2,
     colSpan: 2,
+    order: 15,
   },
 };

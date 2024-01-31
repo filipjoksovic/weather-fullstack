@@ -73,7 +73,8 @@ export class WeatherMeasurementsComponent {
           value: measurement.value,
           unit: measurement.unit,
         } as WeatherMeasurementComponentDisplaySettings;
-      });
+      })
+      .sort((a, b) => a.order - b.order);
   });
 
   protected DataState = DataState;
