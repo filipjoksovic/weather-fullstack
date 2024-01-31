@@ -2,7 +2,7 @@
   <div class="p-2 surface-ground border-round-2xl p-3 mb-3">
     <h2>Current weather data</h2>
   </div>
-  <div class="weather-data">
+  <div class="weather-data" appDraggable>
     @for (measurement of weatherDisplaySettings(); track $index) {
       @if (measurement.key && measurement.unit) {
         <div

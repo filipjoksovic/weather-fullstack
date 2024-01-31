@@ -19,8 +19,10 @@ import { SignalState } from '@core/models/signal-state';
 import { ComponentState } from '@core/models/component.state';
 import {
   WeatherMeasurementComponentDisplaySettings,
+  componentsToIgnore,
   displaySettings,
 } from '@current-weather/models/weather-measurment.config';
+import { DraggableDirective } from '@current-weather/directives/draggable.directive';
 
 @Component({
   selector: 'app-weather-measurements',
@@ -31,6 +33,7 @@ import {
     SkeletonModule,
     DialogModule,
     ButtonModule,
+    DraggableDirective,
   ],
   templateUrl: `./weather-measurements.component.html`,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -59,14 +62,18 @@ export class WeatherMeasurementsComponent {
     }
   );
   weatherDisplaySettings = computed(() => {
-    return this.weather().data.measurements.map(measurement => {
-      return {
-        ...displaySettings[measurement.key],
-        key: measurement.key,
-        value: measurement.value,
-        unit: measurement.unit,
-      } as WeatherMeasurementComponentDisplaySettings;
-    });
+    return this.weather()
+      .data.measurements.filter(
+        measurements => !componentsToIgnore.includes(measurements.key)
+      )
+      .map(measurement => {
+        return {
+          ...displaySettings[measurement.key],
+          key: measurement.key,
+          value: measurement.value,
+          unit: measurement.unit,
+        } as WeatherMeasurementComponentDisplaySettings;
+      });
   });
 
   protected DataState = DataState;

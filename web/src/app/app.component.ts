@@ -15,6 +15,7 @@ import { StorageKeys } from '@core/models/config/storage-keys.enum';
 import { StoredUserData, UserData } from './user/models/user-data.model';
 import { DateFormatEnum } from '@core/models/date-format';
 import { TimeFormatEnum } from '@core/models/time-format';
+import { GeoLocationService } from '@core/services/geolocation.service';
 
 @UntilDestroy()
 @Component({
@@ -37,7 +38,8 @@ export class AppComponent implements OnInit {
     private readonly authStore: AuthStoreService,
     private readonly router: Router,
     private readonly storageService: StorageService,
-    private readonly userStoreService: UserStoreService
+    private readonly userStoreService: UserStoreService,
+    private readonly geoLocationService: GeoLocationService
   ) {}
 
   ngOnInit() {
@@ -67,5 +69,6 @@ export class AppComponent implements OnInit {
       this.storageService.setObject(StorageKeys.USER, defaultUser);
       this.userStoreService.user.set(defaultUser);
     }
+    this.geoLocationService.getLocation();
   }
 }

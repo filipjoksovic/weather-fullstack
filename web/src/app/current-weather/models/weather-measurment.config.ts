@@ -9,7 +9,12 @@ export type WeatherMeasurementComponentDisplaySettings = {
   unit?: BaseUnit;
   rowSpan?: number;
   colSpan?: number;
+  componentType?: 'text' | 'gauge' | 'compass';
 };
+
+export const componentsToIgnore: CurrentWeatherModelKeys[] = [
+  CurrentWeatherModelKeys.time,
+];
 
 export const displaySettings: {
   [key in CurrentWeatherModelKeys]: WeatherMeasurementComponentDisplaySettings;
@@ -18,8 +23,8 @@ export const displaySettings: {
     key: CurrentWeatherModelKeys.apparentTemperature,
     icon: 'fa fa-temperature-half',
     title: 'Apparent temperature',
-    rowSpan: 2,
-    colSpan: 2,
+    rowSpan: 4,
+    colSpan: 4,
   },
   [CurrentWeatherModelKeys.surfacePressure]: {
     key: CurrentWeatherModelKeys.surfacePressure,
@@ -32,8 +37,8 @@ export const displaySettings: {
     key: CurrentWeatherModelKeys.temperature,
     icon: 'fa fa-temperature-full',
     title: 'Temperature',
-    rowSpan: 2,
-    colSpan: 2,
+    rowSpan: 4,
+    colSpan: 4,
   },
   [CurrentWeatherModelKeys.cloudCover]: {
     key: CurrentWeatherModelKeys.cloudCover,
@@ -41,6 +46,7 @@ export const displaySettings: {
     title: 'Cloud cover',
     rowSpan: 2,
     colSpan: 2,
+    componentType: 'gauge',
   },
   [CurrentWeatherModelKeys.humidity]: {
     key: CurrentWeatherModelKeys.humidity,
@@ -48,6 +54,7 @@ export const displaySettings: {
     title: 'Humidity',
     rowSpan: 2,
     colSpan: 2,
+    componentType: 'gauge',
   },
   [CurrentWeatherModelKeys.precipitation]: {
     key: CurrentWeatherModelKeys.precipitation,
