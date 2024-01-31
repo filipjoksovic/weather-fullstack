@@ -11,19 +11,21 @@ import { UnitValueToStringPipe } from '../../../core/pipes/unit-value-to-string.
 import { DayOfWeekPipe } from '../../../core/pipes/day-of-week.pipe';
 import { isToday } from 'date-fns';
 import { ForecastMeasurement } from '../../../forecast/models/forecast-weather.model';
+import { WeatherIconComponent } from '../../../core/components/weather-icon/weather-icon.component';
 
 @Component({
   selector: 'app-forecasting-measurement',
   standalone: true,
+  templateUrl: './forecasting-measurment.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     CommonModule,
     SliderModule,
     FormsModule,
     UnitValueToStringPipe,
     DayOfWeekPipe,
+    WeatherIconComponent,
   ],
-  templateUrl: './forecasting-measurment.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ForecastingMeasurementComponent implements OnInit {
   @Input({ required: true })

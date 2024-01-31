@@ -1,3 +1,7 @@
+import {
+  WeatherCodeConfig,
+  WeatherConfig,
+} from '@core/models/api/response/weather-code.enum';
 import { TemperatureUnit } from '../../core/models/api/response/temperature.unit';
 import { ValueUnit } from '../../core/models/data/value-unit.type';
 import { ForecastWeatherResponse } from './api/response/forecast-weather-response';
@@ -12,6 +16,7 @@ export type ForecastMeasurement = {
   date: string | number;
   maxTemperature: ValueUnit<number, TemperatureUnit>;
   minTemperature: ValueUnit<number, TemperatureUnit>;
+  weatherCode: number;
 };
 
 export const forecastWeatherHeadlessResponseToForecastMeasurement = (
@@ -45,6 +50,10 @@ export const groupForecastResponseMeasurements = (
           : 0,
         unit: response.daily_units.temperature_2m_min ?? '°C',
       };
+
+      partialMeasurement.weatherCode = response.daily.weather_code
+        ? response.daily.weather_code[index]
+        : 0;
       return partialMeasurement as ForecastMeasurement;
     }
   );

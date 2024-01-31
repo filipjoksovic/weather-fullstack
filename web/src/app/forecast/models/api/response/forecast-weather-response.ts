@@ -1,3 +1,4 @@
+import { WeatherCode } from '@core/models/api/response/weather-code.enum';
 import { DirectionUnit } from '../../../../core/models/api/response/direction.unit';
 import { HeightUnit } from '../../../../core/models/api/response/height.unit';
 import { SpeedUnit } from '../../../../core/models/api/response/speed.unit';
@@ -17,11 +18,12 @@ export type ForecastWeatherResponseUnits = {
   wind_speed_10m_max?: SpeedUnit;
   wind_gusts_10m_max?: SpeedUnit;
   wind_direction_10m_dominant?: DirectionUnit;
+  weather_code?: WeatherCode[];
 };
 
 export type ForecastWeatherMeasurementsResponse = {
   [key in keyof Omit<ForecastWeatherResponseUnits, 'time'>]: number[];
-} & { time: string[] | number[] };
+} & { time: string[] | number[]; weather_code: WeatherCode[] };
 
 export type ForecastWeatherResponse = {
   latitude: number;

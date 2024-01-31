@@ -32,6 +32,7 @@ export class ForecastApiService {
     params = params.append('latitude', latitude.toString());
     params = params.append('longitude', longitude.toString());
     params = params.append('daily', 'temperature_2m_max,temperature_2m_min');
+    params = params.append('daily', 'weather_code');
     params = params.append(
       'wind_speed_unit',
       speedUnitToSpeedUnitParamMapper(speedUnit)
