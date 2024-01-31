@@ -10,12 +10,7 @@ import { PanelModule } from 'primeng/panel';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { ForecastDetailsService } from '../../../forecast-details/services/data/forecast-details.service';
-import { CurrentWeatherModelKeys } from '../../../current-weather/models/cw-req-keys.map';
-import { BaseUnit } from '../../../core/models/api/response/base.unit';
-import {
-  WeatherMeasurementComponentDisplaySettings,
-  displaySettings,
-} from '@current-weather/models/weather-measurment.config';
+import { WeatherMeasurementComponentDisplaySettings } from '@current-weather/models/weather-measurment.config';
 
 @Component({
   selector: 'app-weather-measurement',

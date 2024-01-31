@@ -60,9 +60,6 @@ export class WeatherMeasurementsComponent {
   );
   weatherDisplaySettings = computed(() => {
     return this.weather().data.measurements.map(measurement => {
-      console.log('Measurement', measurement);
-      console.log('Display settings', displaySettings[measurement.key]);
-
       return {
         ...displaySettings[measurement.key],
         key: measurement.key,

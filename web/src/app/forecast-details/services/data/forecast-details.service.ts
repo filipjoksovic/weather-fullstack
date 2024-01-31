@@ -5,6 +5,9 @@ import { CurrentWeatherModelKeys } from '../../../current-weather/models/cw-req-
 import { DataState } from '@core/models/data.state.enum';
 import { ForecastWeatherResponse } from '@forecast/models/api/response/forecast-weather-response';
 import { ForecastDetailsState } from 'app/forecast-details/models/forecast-details.state';
+import { UserStoreService } from 'app/user/services/user.store.service';
+import { GeoLocationService } from '@core/services/geolocation.service';
+import { getSpeedUnits } from '@core/models/api/response/speed.unit';
 
 @Injectable({
   providedIn: 'root',
@@ -15,8 +18,13 @@ export class ForecastDetailsService {
     state: DataState.UNDEFINED,
   } as ForecastDetailsState);
 
+  user = this.userService.user;
+  location = this.geoLocationService.currentLocation;
+
   constructor(
-    private readonly forecastDetailsApiService: ForecastDetailsApiService
+    private readonly forecastDetailsApiService: ForecastDetailsApiService,
+    private readonly userService: UserStoreService,
+    private readonly geoLocationService: GeoLocationService
   ) {}
 
   public showParams(measurement: CurrentWeatherModelKeys) {
@@ -47,7 +55,14 @@ export class ForecastDetailsService {
     measurement: CurrentWeatherModelKeys
   ): Observable<ForecastWeatherResponse> {
     return this.forecastDetailsApiService
-      .getDetailsForParam(measurement)
+      .getDetailsForParam(
+        measurement,
+        this.location().coords?.longitude,
+        this.location().coords?.latitude,
+        this.user()?.unitSettings?.speed,
+        this.user()?.unitSettings?.temperature,
+        this.user()?.unitSettings.height
+      )
       .pipe();
   }
 }

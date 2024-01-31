@@ -6,7 +6,10 @@ import { FormsModule } from '@angular/forms';
 import {} from '../../../forecast/models/forecast-weather.model';
 import { ChartModule } from 'primeng/chart';
 import { format } from 'date-fns';
-import { currentWeatherModelKeyToDailyForecastParams } from '../../models/api/request/forecast-details-request.params';
+import {
+  currentWeatherModelKeyToDailyForecastParams,
+  dailyForecastParamsToText,
+} from '../../models/api/request/forecast-details-request.params';
 
 //TODO remove tech debt
 @Component({
@@ -55,19 +58,24 @@ export class ForecastParamDetailsComponent implements OnInit {
     return this.forecastDetailsService.measurementData().activeParameter;
   });
   measurementData = computed(() => {
-    //TODO type
-    return {
-      measurements:
-        //@ts-ignore
-        this.forecastDetailsService.measurementData().data?.daily[
+    if (this.activeParameter()) {
+      return {
+        measurements:
           currentWeatherModelKeyToDailyForecastParams[
             this.activeParameter()
-            //@ts-ignore
-          ] as any
-        ] ?? [],
-      dates:
-        this.forecastDetailsService.measurementData().data?.daily.time ?? [],
-    };
+          ].map((key: string) => {
+            return (
+              //@ts-ignore
+              this.forecastDetailsService.measurementData().data?.daily[key] ??
+              []
+            );
+          }) ?? [],
+
+        dates:
+          this.forecastDetailsService.measurementData().data?.daily.time ?? [],
+      };
+    }
+    return { measurements: [], dates: [] };
   });
   showModalValue = false;
 
@@ -77,17 +85,40 @@ export class ForecastParamDetailsComponent implements OnInit {
       this.data.labels = this.measurementData().dates.map(date =>
         format(date, 'EEEE')
       );
-      this.data.datasets = [
-        {
-          label: 'Detailed overview for parameter',
-          data: this.measurementData().measurements,
-          fill: false,
-          borderColor: getComputedStyle(
-            document.documentElement
-          ).getPropertyValue('--blue-500'),
-          tension: 0.4,
-        },
-      ];
+      this.data.datasets = this.measurementData().measurements.map(
+        (measurement: number[], index: number) => {
+          return {
+            label:
+              dailyForecastParamsToText[
+                currentWeatherModelKeyToDailyForecastParams[
+                  this.activeParameter()
+                ][index]
+              ],
+            data: measurement,
+            borderColor: currentWeatherModelKeyToDailyForecastParams[
+              this.activeParameter()
+            ][index].includes('max')
+              ? getComputedStyle(document.documentElement).getPropertyValue(
+                  '--red-500'
+                ) + '66'
+              : getComputedStyle(document.documentElement).getPropertyValue(
+                  '--blue-500'
+                ) + '66',
+            tension: 0.4,
+            backgroundColor: currentWeatherModelKeyToDailyForecastParams[
+              this.activeParameter()
+            ][index].includes('max')
+              ? getComputedStyle(document.documentElement).getPropertyValue(
+                  '--red-500'
+                ) + '66'
+              : getComputedStyle(document.documentElement).getPropertyValue(
+                  '--blue-500'
+                ) + '66',
+            fill: true,
+            fillOpacity: 0.5,
+          };
+        }
+      );
     });
   }
 

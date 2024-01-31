@@ -7,9 +7,7 @@
           [style]="{
             'animation-duration': 0.5 + $index * 0.1 + 's',
             'grid-column': 'span ' + measurement.colSpan,
-            'grid-row': 'span ' + measurement.rowSpan,
-            resize: 'both',
-            overflow: 'auto'
+            'grid-row': 'span ' + measurement.rowSpan
           }">
           <app-weather-measurement
             [measurement]="measurement"></app-weather-measurement>
