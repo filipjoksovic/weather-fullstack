@@ -15,6 +15,7 @@ import { toObservable } from '@angular/core/rxjs-interop';
 import { GeoLocationService } from '@core/services/geolocation.service';
 import { DataState } from '@core/models/data.state.enum';
 import { SignalState } from '@core/models/signal-state';
+import { UserStoreService } from '../../../user/services/user.store.service';
 
 //TODO split responsibilities into smaller services
 @Injectable({
@@ -25,7 +26,8 @@ export class CurrentWeatherDataService {
   constructor(
     private currentWeatherApiService: CurrentWeatherApiService,
     private readonly geoLocationService: GeoLocationService,
-    private readonly rendererFactory: RendererFactory2
+    private readonly rendererFactory: RendererFactory2,
+    private readonly userService: UserStoreService
   ) {
     this.renderer = rendererFactory.createRenderer(null, null);
     toObservable(this.location).subscribe(location => {
@@ -53,13 +55,23 @@ export class CurrentWeatherDataService {
     longitude: number,
     latitude: number
   ): Observable<CurrentWeather> {
+    const userSpeedUnit = this.userService.user()!.unitSettings.speed;
+    const userTemperatureUnit =
+      this.userService.user()!.unitSettings.temperature;
+    const userHeightUnit = this.userService.user()!.unitSettings.height;
     this.currentWeather.set({
       state: DataState.LOADING,
       data: null,
     } as SignalState<CurrentWeather>);
 
     return this.currentWeatherApiService
-      .getCurrentWeather(longitude, latitude)
+      .getCurrentWeather(
+        longitude,
+        latitude,
+        userSpeedUnit,
+        userHeightUnit,
+        userTemperatureUnit
+      )
       .pipe(
         map(currentWeatherHeadlessResponseToCurrentWeather),
         tap(data => {

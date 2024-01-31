@@ -9,6 +9,8 @@ import {
   ForecastWeather,
   forecastWeatherHeadlessResponseToForecastMeasurement,
 } from '@forecast/models/forecast-weather.model';
+import { CurrentWeather } from '@current-weather/models/current-weather.model';
+import { UserStoreService } from '../../../user/services/user.store.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +18,8 @@ import {
 export class ForecastDataService {
   constructor(
     private readonly forecastApiService: ForecastApiService,
-    private readonly locationService: GeoLocationService
+    private readonly locationService: GeoLocationService,
+    private readonly userService: UserStoreService
   ) {
     toObservable(this.location)
       .pipe(filter(location => location !== null))
@@ -46,13 +49,24 @@ export class ForecastDataService {
     longitude: number,
     latitude: number
   ): Observable<ForecastWeather> {
+    const userSpeedUnit = this.userService.user()!.unitSettings.speed;
+    const userTemperatureUnit =
+      this.userService.user()!.unitSettings.temperature;
+    const userHeightUnit = this.userService.user()!.unitSettings.height;
+
     this.forecast.set({
       state: DataState.LOADING,
       data: null,
     } as SignalState<ForecastWeather>);
 
     return this.forecastApiService
-      .getBasicForecasting(longitude, latitude)
+      .getBasicForecasting(
+        longitude,
+        latitude,
+        userSpeedUnit,
+        userTemperatureUnit,
+        userHeightUnit
+      )
       .pipe(
         map(forecastWeatherHeadlessResponseToForecastMeasurement),
         tap({

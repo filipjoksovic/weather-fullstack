@@ -34,7 +34,6 @@ import { ComponentState } from '@core/models/component.state';
     ForecastingMeasurementComponent,
   ],
   templateUrl: './forecast-measurements.component.html',
-  styleUrl: './forecast-measurements.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ForecastMeasurementsComponent {

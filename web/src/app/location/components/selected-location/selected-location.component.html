@@ -1,9 +1,11 @@
 <div class="current-location">
   @if (locationDataState() === DataState.LOADED) {
-    <span
-      >Current location: {{ currentCoords()?.longitude }},
-      {{ currentCoords()?.latitude }}</span
-    >
+    <div class="surface-ground p-3 border-round-2xl">
+      <h4>
+        Current location: {{ currentCoords()?.longitude }},
+        {{ currentCoords()?.latitude }}
+      </h4>
+    </div>
   } @else if (locationDataState() === DataState.ERROR) {
     <span>Error encountered while fetching your location</span>
   } @else if (locationDataState() === DataState.LOADING) {

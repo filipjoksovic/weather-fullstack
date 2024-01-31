@@ -22,3 +22,9 @@
     }
   }
 }
+
+app-forecast-measurements{
+  display:flex;
+  flex-direction: column;
+  gap: $spacer * 2;
+}

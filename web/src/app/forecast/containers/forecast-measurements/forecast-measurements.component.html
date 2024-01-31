@@ -1,4 +1,6 @@
-<h2>10 Day forecast</h2>
+<div class="p-2 surface-ground border-round-2xl p-3">
+  <h2>10 Day forecast</h2>
+</div>
 @if (forecast().state === DataState.LOADED) {
   <div class="card weather-forecast">
     <p-dataView #dv [value]="forecast().data.measurements">
@@ -6,6 +8,10 @@
         @for (measurement of forecast().data.measurements; track $index) {
           <app-forecasting-measurement
             class="scalein"
+            [class]="{
+              'border-primary border-solid border-bottom-1 ':
+                $index !== forecast().data.measurements.length - 1
+            }"
             [style]="{ 'animation-duration': 0.5 + $index * 0.1 + 's' }"
             [measurement]="measurement"></app-forecasting-measurement>
         }
@@ -22,10 +28,18 @@
     </div>
   }
 } @else if (forecast().state === DataState.UNDEFINED) {
-  <div class="empty-state-container">
+  <div
+    class="empty-state-container h-full flex flex-column align-items-center justify-content-center surface-ground border-round-2xl p-4 mt-4">
     <img
       src="../../../../assets/empty-state/ghost.svg"
       alt="ghost empty state" />
-    <p>No forecast has been requested yet</p>
+    <div
+      class="flex flex-column gap-1 justify-content-center align-items-center">
+      <p class="text-center mb-0">No forecast has been requested yet.</p>
+      <p class="text-center mb-0">
+        Either grant location access or search for a location to get some data
+        displayed!
+      </p>
+    </div>
   </div>
 }

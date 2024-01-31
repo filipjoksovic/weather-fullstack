@@ -6,6 +6,18 @@ import {
   currentWeatherModelKeyToDailyForecastParams,
   isParameterSupported,
 } from '../../models/api/request/forecast-details-request.params';
+import {
+  SpeedUnit,
+  speedUnitToSpeedUnitParamMapper,
+} from '@core/models/api/response/speed.unit';
+import {
+  TemperatureUnit,
+  temperatureUnitToTemperatureUnitParamMapper,
+} from '@core/models/api/response/temperature.unit';
+import {
+  HeightUnit,
+  heightUnitToHeightUnitParamMapper,
+} from '@core/models/api/response/height.unit';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +29,9 @@ export class ForecastDetailsApiService {
     parameter: CurrentWeatherModelKeys,
     latitude: number = 52.52,
     longitude: number = 13.41,
+    speedUnit?: SpeedUnit,
+    temperatureUnit?: TemperatureUnit,
+    heightUnit?: HeightUnit,
     strategy: 'daily' | 'hourly' = 'daily'
   ) {
     if (!isParameterSupported(parameter)) {
@@ -30,7 +45,15 @@ export class ForecastDetailsApiService {
       longitude: longitude,
       strategy: strategy,
       daily: currentWeatherModelKeyToDailyForecastParams[parameter].join(','),
-      wind_speed_unit: 'kn',
+      wind_speed_unit: speedUnit
+        ? speedUnitToSpeedUnitParamMapper(speedUnit)
+        : 'kmh',
+      temperature_unit: temperatureUnit
+        ? temperatureUnitToTemperatureUnitParamMapper(temperatureUnit)
+        : 'celsius',
+      precipitation_unit: heightUnit
+        ? heightUnitToHeightUnitParamMapper(heightUnit)
+        : 'mm',
       past_days: 5,
     });
     return this.http.get<ForecastWeatherResponse>(
