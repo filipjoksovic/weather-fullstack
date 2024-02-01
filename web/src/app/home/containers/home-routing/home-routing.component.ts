@@ -7,10 +7,13 @@ import { SidebarComponent } from '../../../core/containers/sidebar/sidebar.compo
 import { SidebarModule } from 'primeng/sidebar';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { LocationSearchComponent } from '../../../location/components/location-search/location-search.component';
 
 @Component({
   selector: 'app-home-routing',
   standalone: true,
+  providers: [MessageService],
+  templateUrl: './home-routing.component.html',
   imports: [
     RouterOutlet,
     CommonModule,
@@ -19,8 +22,7 @@ import { MessageService } from 'primeng/api';
     SidebarComponent,
     SidebarModule,
     ToastModule,
+    LocationSearchComponent,
   ],
-  providers: [MessageService],
-  templateUrl: './home-routing.component.html',
 })
 export class HomeRoutingComponent {}

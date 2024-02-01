@@ -1,32 +1,39 @@
 <div
-  class="bg-primary border-round p-2 shadow-1s hover:bg-primary-reverse cursor-pointer border-primary border-solid transition-colors transition-duration-300"
   (click)="measurementClicked()"
   (keyup)="measurementClicked()"
-  tabindex="0">
-  <div class="flex gap-2 p-2">
-    @if (measurement.icon) {
-      <i [class]="measurement.icon"></i>
-    }
-    <p class="m-0">{{ measurement.title }}</p>
-  </div>
-  <div
-    class="flex flex-row align-items-center justify-content-center flex-1 align-items-center">
-    @if (measurement.componentType) {
-      @if (measurement.componentType === 'gauge') {
-        <div class="bg-primary-reverse p-4 border-round-2xl">
-          <p-knob
-            [readonly]="true"
-            textColor="Primary"
-            [min]="0"
-            [max]="100"
-            [ngModel]="measurement.value"></p-knob>
-          <p class="text-center font-bold text-xl w-full">
-            {{ measurement.unit }}
-          </p>
-        </div>
-      }
-    } @else {
-      <p class="text-center">{{ measurement.value }} {{ measurement.unit }}</p>
-    }
-  </div>
+  tabindex="0"
+  class="h-full">
+  @if (!measurement.componentType || measurement.componentType === 'text') {
+    <div
+      class="bg-primary border-round-2xl p-2 shadow-1s hover:bg-primary-reverse cursor-pointer border-primary border-solid transition-colors transition-duration-300 flex-grow-1 h-full flex flex-column">
+      <div class="flex gap-2 p-2">
+        @if (measurement.icon) {
+          <i [class]="measurement.icon"></i>
+        }
+        <p class="m-0">{{ measurement.title }}</p>
+      </div>
+      <p class="my-auto text-center font-bold">
+        {{ measurement.value }} {{ measurement.unit }}
+      </p>
+    </div>
+  } @else if (measurement.componentType === 'gauge') {
+    <div
+      class="bg-primary-reverse p-2 border-round-2xl h-full flex justify-content-center flex-column align-items-center">
+      <div class="flex gap-2 p-2">
+        @if (measurement.icon) {
+          <i [class]="measurement.icon"></i>
+        }
+        <p class="m-0">{{ measurement.title }}</p>
+      </div>
+      <p-knob
+        [readonly]="true"
+        textColor="Primary"
+        [min]="0"
+        [max]="100"
+        [ngModel]="measurement.value"></p-knob>
+      <p class="text-center font-bold text-xl w-full">
+        {{ measurement.unit }}
+      </p>
+    </div>
+  }
 </div>

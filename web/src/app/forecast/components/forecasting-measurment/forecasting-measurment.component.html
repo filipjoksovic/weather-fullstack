@@ -1,31 +1,28 @@
 <div
-  class="forecast-measurement p-4 surface-ground"
+  class="forecast-measurement p-4 bg-gray-100 hover:bg-gray-200 transition-all"
   [class]="{ 'bg-primary-reverse': isToday }">
-  <div [class]="{ 'font-bold': isToday }">
-    <div class="flex gap-2 align-items-center mb-3">
+  <div [class]="{ 'font-bold': isToday }" class="grid align-items-center">
+    <div class="lg:col-3 md:col-10">
       <app-weather-icon
-        class="bg-primary w-3rem h-3rem text-lg border-round-2xl"
+        class=""
         [weatherCode]="measurement.weatherCode"></app-weather-icon>
+    </div>
 
+    <div class="flex gap-2 align-items-center md:col-2 lg:col-2">
       {{ measurement.date | appDayOfWeek }}
     </div>
-    <div class="forecast-measurement__temperature-interval pointer-events-none">
-      {{ measurement.minTemperature | appUnitValueToString }}
-      <p-slider
-        [min]="
-          measurement.minTemperature.value -
-          measurement.minTemperature.value / 10
-        "
-        [max]="
-          measurement.maxTemperature.value +
-          measurement.maxTemperature.value / 10
-        "
-        [range]="true"
-        [ngModel]="[
-          measurement.minTemperature.value,
-          measurement.maxTemperature.value
-        ]"></p-slider>
-      {{ measurement.maxTemperature | appUnitValueToString }}
+
+    <div
+      class="forecast-measurement__temperature-interval pointer-events-none lg:col-7 md:col-12 flex flex-column justify-content-end align-items-end text-sm">
+      <div class="flex gap-3 bg-red-200 p-2 border-round-3xl">
+        <i class="fa fa-arrow-up"></i>
+
+        {{ measurement.maxTemperature | appUnitValueToString }}
+      </div>
+      <div class="flex gap-3 bg-blue-200 p-2 border-round-3xl">
+        <i class="fa fa-arrow-down"></i>
+        {{ measurement.minTemperature | appUnitValueToString }}
+      </div>
     </div>
   </div>
 </div>

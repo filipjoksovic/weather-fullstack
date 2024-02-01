@@ -7,6 +7,6 @@ import { format, isDate } from 'date-fns';
 })
 export class DayOfWeekPipe implements PipeTransform {
   transform(value: string | number): string {
-    return format(new Date(value), 'EEEE');
+    return format(new Date(value), 'EEE');
   }
 }

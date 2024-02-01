@@ -1,13 +1,19 @@
+app-location-search {
+  position: absolute;
+  top: $spacer * 2;
+  right: $spacer * 2;
+}
 .location-search {
   display: flex;
   gap: $spacer;
   align-items: center;
-
   & p-autoComplete {
     flex-grow: 1;
 
     & input {
       width: 100%;
+      background-color: #e7e7e7aa;
+      backdrop-filter: blur(10px);
     }
   }
 }

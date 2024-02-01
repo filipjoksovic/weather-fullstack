@@ -23,18 +23,17 @@ body {
 }
 
 app-home-routing {
-  background: linear-gradient(90deg, var(--myColor1), var(--myColor2));
   // transition:
   //   --myColor1 1s,
   //   --myColor2 1s;
 }
 app-home-routing.hot {
-  --myColor1: var(--hot-start);
-  --myColor2: var(--hot-stop);
+  // --myColor1: var(--hot-start);
+  // --myColor2: var(--hot-stop);
 }
 app-home-routing.cold {
-  --myColor1: var(--cold-stop);
-  --myColor2: var(--cold-start);
+  // --myColor1: var(--cold-stop);
+  // --myColor2: var(--cold-start);
 }
 
 app-root {

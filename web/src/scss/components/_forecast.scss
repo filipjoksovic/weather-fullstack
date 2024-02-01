@@ -13,9 +13,6 @@
     &__temperature-interval {
       display: flex;
       gap: $spacer;
-      width: 100%;
-      align-items: center;
-
       & p-slider {
         flex: 1;
       }
@@ -23,8 +20,17 @@
   }
 }
 
-app-forecast-measurements{
-  display:flex;
+app-forecast-measurements {
+  display: flex;
   flex-direction: column;
   gap: $spacer * 2;
+  container: frc / inline-size;
+}
+
+@container frc (max-width: 1200px) {
+  app-forecast-measurements {
+    flex-direction: row;
+    gap: $spacer * 2;
+    container: frc / inline-size;
+  }
 }
