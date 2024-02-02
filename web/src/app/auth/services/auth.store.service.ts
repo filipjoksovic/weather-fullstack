@@ -1,20 +1,9 @@
-import { Injectable, WritableSignal, signal } from '@angular/core';
-import { toObservable } from '@angular/core/rxjs-interop';
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { DataState } from '@core/models/data.state.enum';
-import { SignalState } from '@core/models/signal-state';
 import { EnvironmentService } from '@core/services/environment.service';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { UntilDestroy } from '@ngneat/until-destroy';
 import { UserData } from 'app/user/models/user-data.model';
-import { Environment } from 'environments/environment.base';
-import {
-  BehaviorSubject,
-  Subject,
-  combineLatest,
-  filter,
-  merge,
-  tap,
-} from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { StorageService } from '@core/services/storage.service';
 import { StorageKeys } from '@core/models/config/storage-keys.enum';
 
@@ -23,14 +12,8 @@ import { StorageKeys } from '@core/models/config/storage-keys.enum';
   providedIn: 'root',
 })
 export class AuthStoreService {
-  private loggedOut: Subject<void> = new Subject();
-
   private localUser: UserData;
-  constructor(
-    private readonly router: Router,
-    private readonly environmentService: EnvironmentService,
-    private readonly storageService: StorageService
-  ) {
+  constructor(private readonly storageService: StorageService) {
     this.localUser = this.storageService.getObject(
       StorageKeys.USER
     ) as UserData;
