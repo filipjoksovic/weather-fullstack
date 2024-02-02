@@ -9,8 +9,10 @@ import { GeoLocationService } from '../../../core/services/geolocation.service';
 import { MessageService } from 'primeng/api';
 import { LocationDataService } from '../../services/data/location.data.service';
 import { take, tap } from 'rxjs';
-import { AsyncPipe, CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule, DecimalPipe } from '@angular/common';
 import getUnicodeFlagIcon from 'country-flag-icons/unicode';
+import { LocationSearchResult } from 'app/location/models/api/response/location-search.response';
+import { DataState } from '@core/models/data.state.enum';
 
 @Component({
   selector: 'app-location-search',
@@ -21,42 +23,26 @@ import getUnicodeFlagIcon from 'country-flag-icons/unicode';
     TooltipModule,
     AsyncPipe,
     CommonModule,
+    DecimalPipe,
   ],
   templateUrl: './location-search.component.html',
   providers: [MessageService],
 })
-export class LocationSearchComponent implements OnInit {
-  getFlagIcon(countryCode: string) {
-    return getUnicodeFlagIcon(countryCode);
-  }
+export class LocationSearchComponent {
   private readonly geoLocationService = inject(GeoLocationService);
   private readonly locationService = inject(LocationDataService);
 
-  public searchResults = this.locationService.searchResults
-    .asObservable()
-    .pipe(tap(results => console.log('Search results', results)));
+  public searchResults = this.locationService.searchResults.asObservable();
+  public location = this.geoLocationService.currentLocation;
 
-  public suggestions: any[] = [
-    'Berlin',
-    'Poland',
-    'Warsaw',
-    'Krakow',
-    'Wroclaw',
-    'Gdansk',
-    'Poznan',
-    'Lodz',
-    'Szczecin',
-    'Bydgoszcz',
-  ];
-
+  public suggestions: LocationSearchResult[] = [];
+  DataState = DataState;
   getLocation() {
     this.geoLocationService.getLocation();
   }
 
   public searchChanged(event: { originalEvent: object; query: string }): void {
-    // console.log('Search changed', event);
     this.locationService.locationSearched(event.query);
-    // this.suggestions = [...this.suggestions];
   }
 
   ngOnInit(): void {
@@ -64,7 +50,10 @@ export class LocationSearchComponent implements OnInit {
   }
 
   countrySelected(event: AutoCompleteSelectEvent) {
-    console.log('Country selected', event);
     this.locationService.locationSelected(event.value);
+  }
+
+  getFlagIcon(countryCode: string) {
+    return getUnicodeFlagIcon(countryCode);
   }
 }

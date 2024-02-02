@@ -1,4 +1,13 @@
 <div class="location-search">
+  @if (location().loadingState === DataState.LOADED) {
+    <div class="bg-green-300 p-3 border-round-3xl">
+      {{ location().coords?.latitude | number: '1.0-2' }}
+    </div>
+    <div class="bg-green-300 p-3 border-round-3xl">
+      {{ location().coords?.longitude | number: '1.0-2' }}
+    </div>
+  }
+
   <p-autoComplete
     placeholder="Search for location"
     [suggestions]="suggestions"

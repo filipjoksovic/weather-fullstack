@@ -39,7 +39,6 @@ export class LocationDataService {
   }
 
   public locationSearched(search: string) {
-    console.log('Received searched event', search);
     this.searchQuery.next(search);
   }
 
