@@ -41,7 +41,6 @@ export class ForecastMeasurementsComponent {
 
   public forecast: Signal<ComponentState<ForecastWeather>> = toSignal(
     toObservable(this.forecastWeatherDataService.forecast).pipe(
-      tap((data: SignalState<ForecastWeather>) => console.log('Data', data)),
       filter(data => data.state === DataState.LOADED),
       map(
         (

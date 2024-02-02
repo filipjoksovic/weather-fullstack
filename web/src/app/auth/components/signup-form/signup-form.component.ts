@@ -41,8 +41,6 @@ export class SignupFormComponent {
   });
 
   public onSubmit() {
-    console.log('Submit');
-
     this.authService.signup(this.signupForm.value);
   }
 }

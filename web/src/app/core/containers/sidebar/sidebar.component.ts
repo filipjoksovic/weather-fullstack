@@ -24,7 +24,6 @@ import { NgClass } from '@angular/common';
 export class SidebarComponent {
   public isOpen: boolean = true;
   toggleSidebar() {
-    console.log('sidebar toggled');
     this.isOpen = !this.isOpen;
   }
 }

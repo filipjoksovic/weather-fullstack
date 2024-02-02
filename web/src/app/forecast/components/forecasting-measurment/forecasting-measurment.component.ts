@@ -55,7 +55,6 @@ export class ForecastingMeasurementComponent implements OnInit {
   constructor() {
     effect(() => {
       if (this.hourlyForecast().state === DataState.LOADED) {
-        console.log(Object.keys(this.hourlyForecast().data.hourly_units));
         this.data = Object.keys(this.hourlyForecast().data.hourly_units)
           .filter(
             key =>

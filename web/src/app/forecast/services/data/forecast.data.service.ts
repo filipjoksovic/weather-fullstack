@@ -32,7 +32,7 @@ export class ForecastDataService {
           this.getBasicForecast(
             location.longitude,
             location.latitude
-          ).subscribe(data => console.log('Basic forecast', data));
+          ).subscribe();
         }
       });
   }

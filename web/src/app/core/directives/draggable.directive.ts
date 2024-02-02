@@ -1,11 +1,7 @@
 import {
   AfterContentInit,
-  AfterViewChecked,
-  AfterViewInit,
   Directive,
   ElementRef,
-  Host,
-  HostListener,
   Renderer2,
   RendererFactory2,
 } from '@angular/core';
@@ -27,7 +23,5 @@ export class DraggableDirective implements AfterContentInit {
     this.renderer = rendererFactory.createRenderer(null, null);
   }
 
-  ngAfterContentInit(): void {
-    console.log(this.elementRef);
-  }
+  ngAfterContentInit(): void {}
 }

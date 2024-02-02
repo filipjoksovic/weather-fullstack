@@ -31,18 +31,6 @@ export class AuthStoreService {
     private readonly environmentService: EnvironmentService,
     private readonly storageService: StorageService
   ) {
-    // this.user$
-    //   .pipe(
-    //     filter(user => user !== null),
-    //     tap(v => {
-    //       console.log('redirecting', v);
-    //
-    //       this.router.navigate(['/']);
-    //     }),
-    //     untilDestroyed(this)
-    //   )
-    //   .subscribe();
-
     this.localUser = this.storageService.getObject(
       StorageKeys.USER
     ) as UserData;

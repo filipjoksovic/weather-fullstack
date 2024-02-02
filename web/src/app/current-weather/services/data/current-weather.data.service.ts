@@ -22,19 +22,17 @@ import { UserStoreService } from '../../../user/services/user.store.service';
   providedIn: 'root',
 })
 export class CurrentWeatherDataService {
-  private renderer: Renderer2;
   constructor(
     private currentWeatherApiService: CurrentWeatherApiService,
     private readonly geoLocationService: GeoLocationService,
-    private readonly rendererFactory: RendererFactory2,
     private readonly userService: UserStoreService
   ) {
-    this.renderer = rendererFactory.createRenderer(null, null);
     toObservable(this.location).subscribe(location => {
       if (location) {
-        this.getCurrentWeather(location.longitude, location.latitude).subscribe(
-          data => console.log('Current weather', data)
-        );
+        this.getCurrentWeather(
+          location.longitude,
+          location.latitude
+        ).subscribe();
       }
     });
   }
@@ -74,22 +72,6 @@ export class CurrentWeatherDataService {
       )
       .pipe(
         map(currentWeatherHeadlessResponseToCurrentWeather),
-        tap(data => {
-          const temperature = data.measurements.find(
-            m => m.key === 'temperature'
-          );
-          if (Number(temperature?.value) > 50) {
-            this.renderer.addClass(
-              document.querySelector('app-home-routing'),
-              'hot'
-            );
-          } else {
-            this.renderer.addClass(
-              document.querySelector('app-home-routing'),
-              'cold'
-            );
-          }
-        }),
         tap({
           next: (data: CurrentWeather) =>
             this.currentWeather.set({

@@ -21,7 +21,6 @@ export class LocationDataService {
       .asObservable()
       .pipe(
         filter(query => query !== ''),
-        tap(query => console.log('Search query changed')),
         switchMap(search => this.searchForLocation(search))
       )
       .subscribe(results => {

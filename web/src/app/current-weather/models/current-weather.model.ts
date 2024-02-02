@@ -52,6 +52,5 @@ export const currentWeatherHeadlessResponseToCurrentWeather = (
     });
   }
 
-  console.log('Partial weather', partialWeather);
   return partialWeather as CurrentWeather;
 };
