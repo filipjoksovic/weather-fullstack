@@ -21,8 +21,11 @@ export type ForecastWeatherResponseUnits = {
   wind_direction_10m_dominant?: DirectionUnit;
   weather_code?: WeatherCode[];
   relative_humidity_2m?: PercentageUnit;
+  rain: PercentageUnit;
+  precipitation_probability?: PercentageUnit;
   uv_index?: number[];
   is_day?: number[];
+  temperature_2m?: TemperatureUnit;
 };
 
 export type ForecastWeatherMeasurementsResponse = {

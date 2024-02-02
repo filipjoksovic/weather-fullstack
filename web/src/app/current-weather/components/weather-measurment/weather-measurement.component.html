@@ -35,5 +35,20 @@
         {{ measurement.unit }}
       </p>
     </div>
+  } @else if (measurement.componentType === 'compass') {
+    <div
+      class="bg-primary p-2 border-round-2xl h-full flex justify-content-center flex-column align-items-center">
+      <div class="flex gap-2 p-2">
+        @if (measurement.icon) {
+          <i [class]="measurement.icon"></i>
+        }
+        <p class="m-0">{{ measurement.title }}</p>
+      </div>
+      <i class="wi wi-wind from-{{ measurement.value }}-deg text-8xl"></i>
+
+      <p class="text-center font-bold text-xl w-full">
+        {{ measurement.value }}{{ measurement.unit }}
+      </p>
+    </div>
   }
 </div>

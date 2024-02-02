@@ -10,8 +10,9 @@ import {
   currentWeatherModelKeyToDailyForecastParams,
   dailyForecastParamsToText,
 } from '../../models/api/request/forecast-details-request.params';
+import { getDefaultChartOptions } from '@core/models/chart.options';
+import { ChartData, ChartOptions } from 'chart.js';
 
-//TODO remove tech debt
 @Component({
   selector: 'app-forecast-param-details',
   standalone: true,
@@ -19,66 +20,6 @@ import {
   templateUrl: './forecast-param-details.component.html',
 })
 export class ForecastParamDetailsComponent implements OnInit {
-  options!: {
-    maintainAspectRatio: boolean;
-    aspectRatio: number;
-    plugins: { legend: { labels: { color: string } } };
-    scales: {
-      x: {
-        ticks: { color: string };
-        grid: { color: string; drawBorder: boolean };
-      };
-      y: {
-        ticks: { color: string };
-        grid: { color: string; drawBorder: boolean };
-      };
-    };
-    interaction: {
-      intersect: boolean;
-      mode: string;
-    };
-  };
-  data!: {
-    labels: string[];
-    datasets: {
-      label: string;
-      data: number[];
-      fill: boolean;
-      borderColor: string;
-      tension: number;
-    }[];
-  };
-  dialogClosed() {
-    this.forecastDetailsService.showDialog.set(false);
-  }
-  forecastDetailsService = inject(ForecastDetailsService);
-
-  showModal = computed(() => this.forecastDetailsService.showDialog());
-  activeParameter = computed(() => {
-    return this.forecastDetailsService.measurementData().activeParameter;
-  });
-  measurementData = computed(() => {
-    if (this.activeParameter()) {
-      return {
-        measurements:
-          currentWeatherModelKeyToDailyForecastParams[
-            this.activeParameter()
-          ].map((key: string) => {
-            return (
-              //@ts-ignore
-              this.forecastDetailsService.measurementData().data?.daily[key] ??
-              []
-            );
-          }) ?? [],
-
-        dates:
-          this.forecastDetailsService.measurementData().data?.daily.time ?? [],
-      };
-    }
-    return { measurements: [], dates: [] };
-  });
-  showModalValue = false;
-
   constructor() {
     effect(() => {
       this.showModalValue = this.showModal();
@@ -123,67 +64,45 @@ export class ForecastParamDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const documentStyle = getComputedStyle(document.documentElement);
-    const textColor = documentStyle.getPropertyValue('--text-color');
-    const textColorSecondary = documentStyle.getPropertyValue(
-      '--text-color-secondary'
-    );
-    const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
+    this.options = getDefaultChartOptions(true);
+  }
 
-    this.data = {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-      datasets: [
-        {
-          label: 'First Dataset',
-          data: [65, 59, 80, 81, 56, 55, 40],
-          fill: false,
-          borderColor: documentStyle.getPropertyValue('--blue-500'),
-          tension: 0.4,
-        },
-        {
-          label: 'Second Dataset',
-          data: [28, 48, 40, 19, 86, 27, 90],
-          fill: false,
-          borderColor: documentStyle.getPropertyValue('--pink-500'),
-          tension: 0.4,
-        },
-      ],
-    };
+  public options!: ChartOptions;
 
-    this.options = {
-      maintainAspectRatio: false,
-      aspectRatio: 0.6,
-      plugins: {
-        legend: {
-          labels: {
-            color: textColor,
-          },
-        },
-      },
-      interaction: {
-        intersect: false,
-        mode: 'index',
-      },
-      scales: {
-        x: {
-          ticks: {
-            color: textColorSecondary,
-          },
-          grid: {
-            color: surfaceBorder,
-            drawBorder: false,
-          },
-        },
-        y: {
-          ticks: {
-            color: textColorSecondary,
-          },
-          grid: {
-            color: surfaceBorder,
-            drawBorder: false,
-          },
-        },
-      },
-    };
+  public data!: ChartData;
+
+  public forecastDetailsService = inject(ForecastDetailsService);
+
+  public showModal = computed(() => this.forecastDetailsService.showDialog());
+
+  public activeParameter = computed(() => {
+    return this.forecastDetailsService.measurementData().activeParameter;
+  });
+
+  public measurementData = computed(() => {
+    if (this.activeParameter()) {
+      return {
+        measurements:
+          currentWeatherModelKeyToDailyForecastParams[
+            this.activeParameter()
+          ].map((key: string) => {
+            return (
+              //@ts-ignore
+              this.forecastDetailsService.measurementData().data?.daily[key] ??
+              []
+            );
+          }) ?? [],
+
+        dates:
+          this.forecastDetailsService.measurementData().data?.daily.time ?? [],
+      };
+    }
+    return { measurements: [], dates: [] };
+  });
+
+  public showModalValue = false;
+
+  dialogClosed() {
+    this.forecastDetailsService.showDialog.set(false);
   }
 }

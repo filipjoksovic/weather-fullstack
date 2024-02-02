@@ -117,6 +117,7 @@ export const displaySettings: {
     rowSpan: 2,
     colSpan: 2,
     order: 13,
+    componentType: 'compass',
   },
   [CurrentWeatherModelKeys.windGusts]: {
     key: CurrentWeatherModelKeys.windGusts,

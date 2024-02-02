@@ -1,7 +1,12 @@
 .p-toast-message {
   padding: $spacer * 2;
+  margin-bottom: $spacer;
 }
 
-.p-toast-icon	 {
+.p-toast-message-icon {
+  margin-inline-end: $spacer * 2;
+}
+
+.p-toast-icon {
   margin-inline: $spacer;
 }

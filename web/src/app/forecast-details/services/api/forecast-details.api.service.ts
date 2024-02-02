@@ -18,12 +18,16 @@ import {
   HeightUnit,
   heightUnitToHeightUnitParamMapper,
 } from '@core/models/api/response/height.unit';
+import { MessageService } from 'primeng/api';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ForecastDetailsApiService {
-  constructor(private readonly http: HttpClient) {}
+  constructor(
+    private readonly http: HttpClient,
+    private readonly messageService: MessageService
+  ) {}
 
   public getDetailsForParam(
     parameter: CurrentWeatherModelKeys,
@@ -35,6 +39,11 @@ export class ForecastDetailsApiService {
     strategy: 'daily' | 'hourly' = 'daily'
   ) {
     if (!isParameterSupported(parameter)) {
+      this.messageService.add({
+        severity: 'info',
+        summary: 'Unsupported parameter',
+        detail: `Parameter ${parameter} is not supported by the API or the application.`,
+      });
       throw new Error(
         `Parameter ${parameter} is not supported by the API or the application.`
       );

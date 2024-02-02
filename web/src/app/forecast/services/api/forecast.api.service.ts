@@ -14,6 +14,7 @@ import {
   HeightUnit,
   heightUnitToHeightUnitParamMapper,
 } from '@core/models/api/response/height.unit';
+import { formatDate } from 'date-fns';
 
 @Injectable({
   providedIn: 'root',
@@ -59,8 +60,23 @@ export class ForecastApiService {
     latitude: number,
     date: Date
   ): Observable<ForecastWeatherResponse> {
+    let params = new HttpParams();
+    params = params.append('latitude', latitude.toString());
+    params = params.append('longitude', longitude.toString());
+    params = params.append('hourly', 'temperature_2m');
+    params = params.append('hourly', 'relative_humidity_2m');
+    params = params.append('hourly', 'weather_code');
+    params = params.append('hourly', 'uv_index');
+    params = params.append('hourly', 'precipitation_probability');
+    params = params.append('hourly', 'rain');
+    params = params.append('hourly', 'is_day');
+    params = params.append('hourly', 'temperature');
+    params = params.append('start_date', formatDate(date, 'yyyy-MM-dd'));
+    params = params.append('end_date', formatDate(date, 'yyyy-MM-dd'));
+
     return this.http.get<ForecastWeatherResponse>(
-      `https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m,relative_humidity_2m,weather_code,uv_index,is_day&start_date=2024-02-02&end_date=2024-02-02`
+      `https://api.open-meteo.com/v1/forecast`,
+      { params }
     );
   }
 }

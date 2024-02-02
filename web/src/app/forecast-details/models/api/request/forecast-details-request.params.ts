@@ -13,7 +13,10 @@ export type ForecastDetailsRequestParams =
   | 'temperature_2m_max'
   | 'temperature_2m_min'
   | 'uv_index'
-  | 'relative_humidity_2m';
+  | 'relative_humidity_2m'
+  | 'rain'
+  | 'precipitation_probability'
+  | 'temperature_2m';
 
 export const currentWeatherModelKeyToDailyForecastParams: Record<
   CurrentWeatherModelKeys,
@@ -64,4 +67,7 @@ export const dailyForecastParamsToText: Record<
   temperature_2m_min: 'Minimum temperature',
   uv_index: 'UV index',
   relative_humidity_2m: 'Relative humidity',
+  rain: 'Rain',
+  precipitation_probability: 'Precipitation probability',
+  temperature_2m: 'Temperature',
 };

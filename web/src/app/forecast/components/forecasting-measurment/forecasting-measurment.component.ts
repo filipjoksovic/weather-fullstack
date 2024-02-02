@@ -23,11 +23,12 @@ import {
   ForecastDetailsRequestParams,
   dailyForecastParamsToText,
 } from 'app/forecast-details/models/api/request/forecast-details-request.params';
-import {
-  ForecastWeatherResponse,
-  ForecastWeatherResponseUnits,
-} from '@forecast/models/api/response/forecast-weather-response';
 import { DataState } from '@core/models/data.state.enum';
+import {
+  getDefaultChartOptions,
+  getGradient,
+} from '@core/models/chart.options';
+import { ChartData, ChartOptions } from 'chart.js';
 
 @Component({
   selector: 'app-forecasting-measurement',
@@ -53,7 +54,8 @@ export class ForecastingMeasurementComponent implements OnInit {
 
   constructor() {
     effect(() => {
-      if (this.hourlyForecast().state === 'LOADED') {
+      if (this.hourlyForecast().state === DataState.LOADED) {
+        console.log(Object.keys(this.hourlyForecast().data.hourly_units));
         this.data = Object.keys(this.hourlyForecast().data.hourly_units)
           .filter(
             key =>
@@ -81,61 +83,21 @@ export class ForecastingMeasurementComponent implements OnInit {
                     (this.hourlyForecast().data.hourly[
                       key as any as ForecastDetailsRequestParams
                     ] as number[]) ?? [],
-                  fill: false,
-                  borderColor: '#4bc0c0',
-                  tension: 0.1,
+
+                  backgroundColor: function (context: any) {
+                    const chart = context.chart;
+                    const { ctx, chartArea } = chart;
+
+                    if (!chartArea) {
+                      return;
+                    }
+
+                    return getGradient(ctx, chartArea);
+                  },
                 },
               ],
             };
           });
-
-        // {
-        //   labels: this.hourlyForecast().data.hourly.time.map(x =>
-        //     format(x.toString(), 'HH:mm')
-        //   ),
-        //   datasets: Object.keys(this.hourlyForecast().data.hourly_units).filter(
-        //       key =>
-        //         dailyForecastParamsToText[
-        //           key as any as ForecastDetailsRequestParams
-        //         ] !== undefined
-        //     ).map((key: any) => {
-        //       return {
-        //         label:
-        //           dailyForecastParamsToText[
-        //             key as any as ForecastDetailsRequestParams
-        //           ],
-        //         data:
-        //           this.hourlyForecast().data.hourly[
-        //             key as any as ForecastDetailsRequestParams
-        //           ] ?? [],
-        //         fill: false,
-        //         borderColor: '#4bc0c0',
-        //         tension: 0.1,
-        //       };
-        //     })
-        //     // .filter(
-        //     //   key =>
-        //     //     dailyForecastParamsToText[
-        //     //       key as any as ForecastDetailsRequestParams
-        //     //     ] !== undefined
-        //     // )
-        //     // .map((key: any) => {
-        //     //   console.log(key);
-        //     //   return {
-        //     //     label:
-        //     //       dailyForecastParamsToText[
-        //     //         key as any as ForecastDetailsRequestParams
-        //     //       ],
-        //     //     data:
-        //     //       this.hourlyForecast().data.hourly[
-        //     //         key as any as ForecastDetailsRequestParams
-        //     //       ] ?? [],
-        //     //     fill: false,
-        //     //     borderColor: '#4bc0c0',
-        //     //     tension: 0.1,
-        //     //   };
-        //     // }),
-        // };
       }
     });
   }
@@ -150,48 +112,7 @@ export class ForecastingMeasurementComponent implements OnInit {
   ngOnInit(): void {
     this.isToday = isToday(new Date(this.measurement.date));
 
-    const documentStyle = getComputedStyle(document.documentElement);
-    const textColor = documentStyle.getPropertyValue('--text-color');
-    const textColorSecondary = documentStyle.getPropertyValue(
-      '--text-color-secondary'
-    );
-    const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
-    this.options = {
-      maintainAspectRatio: false,
-      aspectRatio: 0.6,
-      plugins: {
-        legend: {
-          labels: {
-            color: textColor,
-          },
-        },
-      },
-      interaction: {
-        intersect: false,
-        mode: 'index',
-      },
-      scales: {
-        x: {
-          ticks: {
-            color: textColorSecondary,
-          },
-          grid: {
-            color: surfaceBorder,
-            drawBorder: false,
-          },
-        },
-        y: {
-          ticks: {
-            color: textColorSecondary,
-          },
-          grid: {
-            color: surfaceBorder,
-            drawBorder: false,
-          },
-        },
-      },
-    };
+    this.options = getDefaultChartOptions();
   }
 
   openOverlay(event: Event) {
@@ -199,33 +120,6 @@ export class ForecastingMeasurementComponent implements OnInit {
     this.forecastService.getHourlyForecasting(0, 0, new Date()).subscribe();
   }
 
-  options!: {
-    maintainAspectRatio: boolean;
-    aspectRatio: number;
-    plugins: { legend: { labels: { color: string } } };
-    scales: {
-      x: {
-        ticks: { color: string };
-        grid: { color: string; drawBorder: boolean };
-      };
-      y: {
-        ticks: { color: string };
-        grid: { color: string; drawBorder: boolean };
-      };
-    };
-    interaction: {
-      intersect: boolean;
-      mode: string;
-    };
-  };
-  data!: {
-    labels: string[];
-    datasets: {
-      label: string;
-      data: number[];
-      fill: boolean;
-      borderColor: string;
-      tension: number;
-    }[];
-  }[];
+  options!: ChartOptions;
+  data!: ChartData[];
 }
