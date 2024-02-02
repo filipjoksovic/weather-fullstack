@@ -11,7 +11,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { ForecastDetailsService } from '../../../forecast-details/services/data/forecast-details.service';
 import { WeatherMeasurementComponentDisplaySettings } from '@current-weather/models/weather-measurment.config';
-import { DraggableDirective } from '@current-weather/directives/draggable.directive';
+import { DraggableDirective } from '@core/directives/draggable.directive';
 import { KnobModule } from 'primeng/knob';
 import { FormsModule } from '@angular/forms';
 

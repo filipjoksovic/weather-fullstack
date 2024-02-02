@@ -22,7 +22,7 @@ import {
   componentsToIgnore,
   displaySettings,
 } from '@current-weather/models/weather-measurment.config';
-import { DraggableDirective } from '@current-weather/directives/draggable.directive';
+import { DraggableDirective } from '@core/directives/draggable.directive';
 
 @Component({
   selector: 'app-weather-measurements',

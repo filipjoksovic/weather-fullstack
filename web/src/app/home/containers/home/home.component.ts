@@ -23,6 +23,7 @@ import { ForecastMeasurementsComponent } from '@forecast/containers/forecast-mea
 import { ForecastParamDetailsComponent } from 'app/forecast-details/containers/forecast-param-details/forecast-param-details.component';
 import { WeatherMeasurementComponent } from '@current-weather/components/weather-measurment/weather-measurement.component';
 import { WeatherMeasurementsComponent } from '@current-weather/containers/weather-measurements/weather-measurements.component';
+import { UserStoreService } from 'app/user/services/user.store.service';
 
 @Component({
   selector: 'app-home',
@@ -57,6 +58,10 @@ export class HomeComponent implements OnInit {
   private readonly forecastWeatherDataService = inject(ForecastDataService);
   options!: unknown;
   data!: unknown;
+
+  private readonly userService = inject(UserStoreService);
+
+  public user = this.userService.user;
 
   ngOnInit() {}
 }
