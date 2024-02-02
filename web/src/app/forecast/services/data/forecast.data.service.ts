@@ -11,6 +11,10 @@ import {
 } from '@forecast/models/forecast-weather.model';
 import { CurrentWeather } from '@current-weather/models/current-weather.model';
 import { UserStoreService } from '../../../user/services/user.store.service';
+import {
+  ForecastWeatherMeasurementsResponse,
+  ForecastWeatherResponse,
+} from '@forecast/models/api/response/forecast-weather-response';
 
 @Injectable({
   providedIn: 'root',
@@ -36,6 +40,10 @@ export class ForecastDataService {
   public forecast = signal<SignalState<ForecastWeather>>({
     state: DataState.UNDEFINED,
   } as SignalState<ForecastWeather>);
+
+  public hourlyForecast = signal<SignalState<ForecastWeatherResponse>>({
+    state: DataState.UNDEFINED,
+  } as SignalState<ForecastWeatherResponse>);
 
   private location = computed(() => {
     const locationSignal = this.locationService.currentLocation();
@@ -80,6 +88,35 @@ export class ForecastDataService {
               state: DataState.ERROR,
               data: null,
             } as SignalState<ForecastWeather>),
+        })
+      );
+  }
+
+  getHourlyForecasting(longitude: number, latitude: number, date: Date) {
+    const userSpeedUnit = this.userService.user()!.unitSettings.speed;
+    const userTemperatureUnit =
+      this.userService.user()!.unitSettings.temperature;
+    const userHeightUnit = this.userService.user()!.unitSettings.height;
+
+    this.forecast.set({
+      state: DataState.LOADING,
+      data: null,
+    } as SignalState<ForecastWeather>);
+
+    return this.forecastApiService
+      .getHourlyForecasting(longitude, latitude, new Date())
+      .pipe(
+        tap({
+          next: (data: ForecastWeatherResponse) =>
+            this.hourlyForecast.set({
+              state: DataState.LOADED,
+              data,
+            } as SignalState<ForecastWeatherResponse>),
+          error: () =>
+            this.hourlyForecast.set({
+              state: DataState.ERROR,
+              data: null,
+            } as SignalState<ForecastWeatherResponse>),
         })
       );
   }

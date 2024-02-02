@@ -4,6 +4,7 @@ import { HeightUnit } from '../../../../core/models/api/response/height.unit';
 import { SpeedUnit } from '../../../../core/models/api/response/speed.unit';
 import { TemperatureUnit } from '../../../../core/models/api/response/temperature.unit';
 import { TimeUnit } from '../../../../core/models/api/response/time-format.unit';
+import { PercentageUnit } from '@core/models/api/response/percentage.unit';
 
 export type ForecastWeatherResponseUnits = {
   time?: TimeUnit;
@@ -19,6 +20,9 @@ export type ForecastWeatherResponseUnits = {
   wind_gusts_10m_max?: SpeedUnit;
   wind_direction_10m_dominant?: DirectionUnit;
   weather_code?: WeatherCode[];
+  relative_humidity_2m?: PercentageUnit;
+  uv_index?: number[];
+  is_day?: number[];
 };
 
 export type ForecastWeatherMeasurementsResponse = {
@@ -35,4 +39,6 @@ export type ForecastWeatherResponse = {
   elevation: number;
   daily_units: ForecastWeatherResponseUnits;
   daily: ForecastWeatherMeasurementsResponse;
+  hourly_units: ForecastWeatherResponseUnits;
+  hourly: ForecastWeatherMeasurementsResponse;
 };

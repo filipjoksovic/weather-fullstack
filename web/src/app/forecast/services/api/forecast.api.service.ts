@@ -53,4 +53,14 @@ export class ForecastApiService {
       { params }
     );
   }
+
+  public getHourlyForecasting(
+    longitude: number,
+    latitude: number,
+    date: Date
+  ): Observable<ForecastWeatherResponse> {
+    return this.http.get<ForecastWeatherResponse>(
+      `https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m,relative_humidity_2m,weather_code,uv_index,is_day&start_date=2024-02-02&end_date=2024-02-02`
+    );
+  }
 }

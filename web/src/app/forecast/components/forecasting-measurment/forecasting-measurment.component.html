@@ -1,6 +1,9 @@
 <div
-  class="forecast-measurement p-4 bg-gray-100 hover:bg-gray-200 transition-all"
-  [class]="{ 'bg-primary-reverse': isToday }">
+  class="forecast-measurement p-4 bg-gray-100 hover:bg-gray-200 transition-all cursor-pointer"
+  [class]="{ 'bg-primary-reverse': isToday }"
+  tabindex="0"
+  (click)="openOverlay($event)"
+  (keydown)="openOverlay($event)">
   <div [class]="{ 'font-bold': isToday }" class="grid align-items-center">
     <div class="lg:col-3 md:col-10">
       <app-weather-icon
@@ -26,3 +29,31 @@
     </div>
   </div>
 </div>
+
+<p-overlayPanel #op>
+  <ng-template pTemplate="content">
+    <h4>Hourly weather details</h4>
+
+    @if (hourlyForecast().state !== DataState.LOADING) {
+      @for (dataPiece of data; track $index) {
+        <div>
+          <p-chart
+            type="line"
+            [data]="dataPiece"
+            [options]="options"
+            width="100%"
+            height="100%"
+            [responsive]="true"></p-chart>
+        </div>
+      }
+    }
+
+    <!-- <div>
+      <p-chart
+        type="line"
+        width="100%"
+        height="100%"
+        [responsive]="true"></p-chart>
+    </div> -->
+  </ng-template>
+</p-overlayPanel>

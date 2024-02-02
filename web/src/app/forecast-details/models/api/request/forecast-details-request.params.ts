@@ -11,7 +11,9 @@ export type ForecastDetailsRequestParams =
   | 'apparent_temperature_max'
   | 'apparent_temperature_min'
   | 'temperature_2m_max'
-  | 'temperature_2m_min';
+  | 'temperature_2m_min'
+  | 'uv_index'
+  | 'relative_humidity_2m';
 
 export const currentWeatherModelKeyToDailyForecastParams: Record<
   CurrentWeatherModelKeys,
@@ -60,4 +62,6 @@ export const dailyForecastParamsToText: Record<
   apparent_temperature_min: 'Minimum apparent temperature',
   temperature_2m_max: 'Maximum temperature',
   temperature_2m_min: 'Minimum temperature',
+  uv_index: 'UV index',
+  relative_humidity_2m: 'Relative humidity',
 };

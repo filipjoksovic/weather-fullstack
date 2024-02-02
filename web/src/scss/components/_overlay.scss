@@ -1,0 +1,11 @@
+.p-overlaypanel-content {
+  min-width: 30rem;
+  min-height: 30rem;
+  padding: $spacer * 2;
+
+  & p-chart {
+    & canvas {
+      height: 250px;
+    }
+  }
+}
