@@ -20,46 +20,41 @@ import { ChartData, ChartOptions } from 'chart.js';
   templateUrl: './forecast-param-details.component.html',
 })
 export class ForecastParamDetailsComponent implements OnInit {
+  public forecastDetailsService = inject(ForecastDetailsService);
+
   constructor() {
     effect(() => {
+      const documentStyle = getComputedStyle(document.documentElement);
       this.showModalValue = this.showModal();
-      this.data.labels = this.measurementData().dates.map(date =>
-        format(date, 'EEEE')
-      );
-      this.data.datasets = this.measurementData().measurements.map(
-        (measurement: number[], index: number) => {
-          return {
-            label:
-              dailyForecastParamsToText[
-                currentWeatherModelKeyToDailyForecastParams[
-                  this.activeParameter()
-                ][index]
-              ],
-            data: measurement,
-            borderColor: currentWeatherModelKeyToDailyForecastParams[
-              this.activeParameter()
-            ][index].includes('max')
-              ? getComputedStyle(document.documentElement).getPropertyValue(
-                  '--red-500'
-                ) + '66'
-              : getComputedStyle(document.documentElement).getPropertyValue(
-                  '--blue-500'
-                ) + '66',
-            tension: 0.4,
-            backgroundColor: currentWeatherModelKeyToDailyForecastParams[
-              this.activeParameter()
-            ][index].includes('max')
-              ? getComputedStyle(document.documentElement).getPropertyValue(
-                  '--red-500'
-                ) + '66'
-              : getComputedStyle(document.documentElement).getPropertyValue(
-                  '--blue-500'
-                ) + '66',
-            fill: true,
-            fillOpacity: 0.5,
-          };
-        }
-      );
+      this.data = {
+        labels: this.measurementData().dates.map(date => format(date, 'EEEE')),
+        datasets: this.measurementData().measurements.map(
+          (measurement: number[], index: number) => {
+            return {
+              label:
+                dailyForecastParamsToText[
+                  currentWeatherModelKeyToDailyForecastParams[
+                    this.activeParameter()
+                  ][index]
+                ],
+              data: measurement,
+              borderColor: currentWeatherModelKeyToDailyForecastParams[
+                this.activeParameter()
+              ][index].includes('max')
+                ? documentStyle.getPropertyValue('--red-500') + '66'
+                : documentStyle.getPropertyValue('--blue-500') + '66',
+              tension: 0.4,
+              backgroundColor: currentWeatherModelKeyToDailyForecastParams[
+                this.activeParameter()
+              ][index].includes('max')
+                ? documentStyle.getPropertyValue('--red-500') + '66'
+                : documentStyle.getPropertyValue('--blue-500') + '66',
+              fill: true,
+              fillOpacity: 0.5,
+            };
+          }
+        ),
+      };
     });
   }
 
@@ -71,7 +66,7 @@ export class ForecastParamDetailsComponent implements OnInit {
 
   public data!: ChartData;
 
-  public forecastDetailsService = inject(ForecastDetailsService);
+  public showModalValue = false;
 
   public showModal = computed(() => this.forecastDetailsService.showDialog());
 
@@ -99,8 +94,6 @@ export class ForecastParamDetailsComponent implements OnInit {
     }
     return { measurements: [], dates: [] };
   });
-
-  public showModalValue = false;
 
   dialogClosed() {
     this.forecastDetailsService.showDialog.set(false);

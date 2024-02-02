@@ -32,12 +32,6 @@ app-home-routing {
     align-self: center;
     height: clamp(30vh, 100rem, 80vh);
     width: clamp(30vw, 100rem, 80vw);
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
   }
 
   @media only screen and (max-width: $sm) {
