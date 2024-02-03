@@ -28,15 +28,13 @@ export class GeoLocationService {
         map(data => data.data)
       )
       .subscribe(location => {
+        tap(() => {
+          this.locationDetails.set({
+            state: DataState.LOADING,
+          } as SignalState<LocationDetails>);
+        });
         this.locationService
           .getLocationDetails(location.longitude, location.latitude)
-          .pipe(
-            tap(() => {
-              this.locationDetails.set({
-                state: DataState.LOADING,
-              } as SignalState<LocationDetails>);
-            })
-          )
           .subscribe({
             next: locationDetails => {
               this.locationDetails.set({

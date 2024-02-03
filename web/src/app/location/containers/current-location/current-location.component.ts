@@ -20,6 +20,7 @@ import {
   WeatherMeasurementComponentDisplaySettings,
   displaySettings,
 } from '@current-weather/models/weather-measurment.config';
+import { SkeletonModule } from 'primeng/skeleton';
 
 @Component({
   selector: 'app-current-location',
@@ -32,6 +33,7 @@ import {
     UnitValueToStringPipe,
     ChipModule,
     WeatherMeasurementComponent,
+    SkeletonModule,
   ],
 })
 export class CurrentLocationComponent {
@@ -49,6 +51,7 @@ export class CurrentLocationComponent {
       this.currentWeatherService.currentWeather().state === DataState.LOADED
     ) {
       return {
+        state: DataState.LOADED,
         weatherCode: getMeasurement(
           this.currentWeatherService.currentWeather().data,
           CurrentWeatherModelKeys.weatherCode
@@ -63,7 +66,10 @@ export class CurrentLocationComponent {
           CurrentWeatherModelKeys.apparentTemperature
         ),
       };
+    } else {
+      return {
+        state: this.currentWeatherService.currentWeather().state,
+      };
     }
-    return null;
   });
 }

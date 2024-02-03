@@ -12,13 +12,16 @@
         </h2>
       </div>
     } @else if (location().state === DataState.LOADING) {
-      Loading
+      <p-skeleton borderRadius="16px"></p-skeleton>
     } @else if (location().state === DataState.UNDEFINED) {
-      Undefined
+      <div>
+        <h1>No city data</h1>
+        <h2>No country data</h2>
+      </div>
     }
   </div>
 
-  @if (weather()) {
+  @if (weather().state === DataState.LOADED) {
     <div
       class="p-3 bg-primary border-round-2xl flex align-items-center gap-2 flex-column justify-content-between current-location-weather__current-temperature">
       <div class="align-items-center gap-2 w-full">
@@ -26,8 +29,8 @@
         <span>Current temperature</span>
       </div>
       <span class="text-3xl">
-        {{ weather()?.temperature?.value }}
-        {{ weather()?.temperature?.unit }}
+        {{ weather().temperature?.value }}
+        {{ weather().temperature?.unit }}
       </span>
     </div>
 
@@ -38,15 +41,59 @@
         <span>Feels like</span>
       </div>
       <span class="text-3xl">
-        {{ weather()?.apparentTemperature?.value }}
-        {{ weather()?.apparentTemperature?.unit }}
+        {{ weather().apparentTemperature?.value }}
+        {{ weather().apparentTemperature?.unit }}
       </span>
     </div>
     <div
       class="p-3 bg-primary border-round-2xl current-location-weather__weather-icon">
       <app-weather-icon
-        [weatherCode]="toNumber(weather()?.weatherCode?.value)"
+        [weatherCode]="toNumber(weather().weatherCode?.value)"
         [displayTooltip]="false"></app-weather-icon>
+    </div>
+  } @else if (weather().state === DataState.LOADING) {
+    <p-skeleton
+      class="current-location-weather__current-temperature"
+      borderRadius="16px"
+      width="100%"
+      height="100%"></p-skeleton>
+
+    <p-skeleton
+      class="current-location-weather__apparent-temperature"
+      borderRadius="16px"
+      width="100%"
+      height="100%"></p-skeleton>
+
+    <p-skeleton
+      class="current-location-weather__weather-icon"
+      borderRadius="16px"
+      width="100%"
+      height="100%"></p-skeleton>
+  } @else if (weather().state === DataState.UNDEFINED) {
+    <div
+      class="p-3 bg-primary border-round-2xl current-location-weather__current-temperature">
+      <div class="align-items-center gap-2 w-full">
+        <i class="fa fa-temperature-low fa-xl"></i>
+        <span>Current temperature</span>
+      </div>
+      <p class="text-3xl text-center">0</p>
+    </div>
+    <div
+      class="p-3 bg-primary border-round-2xl current-location-weather__apparent-temperature">
+      <div class="flex align-items-center gap-2 w-full">
+        <i class="fa fa-temperature-low fa-xl"></i>
+        <span>Feels like</span>
+      </div>
+      <p class="text-3xl text-center">0</p>
+    </div>
+    <div
+      class="p-3 bg-primary border-round-2xl current-location-weather__weather-icon align-items-center justify-content-between flex">
+      <div
+        class="p-3 bg-primary border-round-2xl current-location-weather__weather-icon flex align-items-center justify-content-between">
+        <app-weather-icon
+          [weatherCode]="toNumber(weather().weatherCode?.value)"
+          [displayTooltip]="false"></app-weather-icon>
+      </div>
     </div>
   }
 </div>

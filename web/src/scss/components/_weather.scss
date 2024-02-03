@@ -4,6 +4,7 @@
   grid-template-rows: repeat(12, minmax(0, 1fr));
   grid-auto-flow: dense;
   gap: $spacer;
+  overflow-y: scroll;
   & > div {
     height: 100%;
     & app-weather-measurement {
