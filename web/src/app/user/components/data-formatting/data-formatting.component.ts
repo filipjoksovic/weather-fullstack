@@ -3,14 +3,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { formatDate } from 'date-fns';
 import { getTimeFormats, TimeFormatConfig } from '@core/models/time-format';
 import { DateFormatConfig, getDateFormats } from '@core/models/date-format';
-import {
-  FormBuilder,
-  FormControl,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { UserStoreService } from '../../services/user.store.service';
-import { UserData } from '../../models/user-data.model';
 
 @Component({
   selector: 'app-data-formatting',

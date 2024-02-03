@@ -3,13 +3,15 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
-    "types": [
-      "jest",
-      "node"
-    ]
+    "types": ["jest", "node"],
+    "paths": {
+      "@core/*": ["app/core/*"],
+      "@forecast/*": ["app/forecast/*"],
+      "@current-weather/*": ["app/current-weather/*"],
+      "@shared/*": ["app/shared/*"],
+      "@home/*": ["app/home/*"],
+      "@auth/*": ["app/auth/*"]
+    }
   },
-  "include": [
-    "src/**/*.spec.ts",
-    "src/**/*.d.ts"
-  ]
+  "include": ["src/**/*.spec.ts", "src/**/*.d.ts"]
 }
