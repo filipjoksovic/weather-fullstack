@@ -1,8 +1,11 @@
 <div
-  class="weather-icon flex h-full w-full align-items-center justify-content-center bg-primary w-3rem h-3rem text-lg border-round-2xl"
+  class="weather-icon flex flex-column align-items-center justify-content-center h-full w-full align-items-center justify-content-center bg-primary w-full h-full text-lg border-round-2xl gap-3"
   pInputText
-  [pTooltip]="weatherIconConfig.name"
+  [pTooltip]="displayTooltip ? weatherIconConfig.name : ''"
   tooltipPosition="bottom">
   {{ weatherIconConfig.description }}
   <i [class]="weatherIconConfig.icon"></i>
+  @if (!displayTooltip) {
+    <p class="w-full text-center">{{ weatherIconConfig.name }}</p>
+  }
 </div>

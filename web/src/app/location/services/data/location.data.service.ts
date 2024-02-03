@@ -7,16 +7,15 @@ import {
   LocationSearchResponse,
   LocationSearchResult,
 } from '../../models/api/response/location-search.response';
+import { GeoLocationService } from '@core/services/geolocation.service';
+import { DataState } from '@core/models/data.state.enum';
+import { locationDetailsResponseToLocationDetails } from 'app/location/models/location-details.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LocationDataService {
-  constructor(
-    private readonly locationApiService: LocationApiService,
-    private readonly currentWeatherService: CurrentWeatherDataService,
-    private readonly forecastDataService: ForecastDataService
-  ) {
+  constructor(private readonly locationApiService: LocationApiService) {
     this.searchQuery
       .asObservable()
       .pipe(
@@ -41,16 +40,9 @@ export class LocationDataService {
     this.searchQuery.next(search);
   }
 
-  locationSelected(item: {
-    longitude: number;
-    latitude: number;
-    [key: string]: any;
-  }) {
-    this.currentWeatherService
-      .getCurrentWeather(item.longitude, item.latitude)
-      .subscribe();
-    this.forecastDataService
-      .getBasicForecast(item.longitude, item.latitude)
-      .subscribe();
+  public getLocationDetails(longitude: number, latitude: number) {
+    return this.locationApiService
+      .getLocationDetails(longitude, latitude)
+      .pipe(map(locationDetailsResponseToLocationDetails));
   }
 }

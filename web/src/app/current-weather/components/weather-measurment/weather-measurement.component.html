@@ -5,7 +5,8 @@
   class="h-full">
   @if (!measurement.componentType || measurement.componentType === 'text') {
     <div
-      class="bg-primary border-round-2xl p-2 shadow-1s hover:bg-primary-reverse cursor-pointer border-primary border-solid transition-colors transition-duration-300 flex-grow-1 h-full flex flex-column">
+      class="bg-primary border-round-2xl p-2 shadow-1s hover:bg-primary-reverse cursor-pointer border-primary border-solid transition-colors transition-duration-300 flex-grow-1 h-full flex flex-column"
+      [class]="containerClass">
       <div class="flex gap-2 p-2">
         @if (measurement.icon) {
           <i [class]="measurement.icon"></i>
@@ -37,7 +38,7 @@
     </div>
   } @else if (measurement.componentType === 'compass') {
     <div
-      class="bg-primary p-2 border-round-2xl h-full flex justify-content-center flex-column align-items-center">
+      class="bg-primary p-2 border-round-2xl h-full flex justify-content-center flex-column align-items-center cursor-pointer">
       <div class="flex gap-2 p-2">
         @if (measurement.icon) {
           <i [class]="measurement.icon"></i>
@@ -49,6 +50,14 @@
       <p class="text-center font-bold text-xl w-full">
         {{ measurement.value }}{{ measurement.unit }}
       </p>
+    </div>
+  } @else if (measurement.componentType === 'weatherIcon') {
+    <div
+      class="bg-primary p-2 border-round-2xl h-full flex justify-content-center flex-column align-items-center"
+      [class]="containerClass">
+      <app-weather-icon
+        class="block w-full h-full"
+        [weatherCode]="toNumber(measurement.value ?? 0)"></app-weather-icon>
     </div>
   }
 </div>

@@ -50,7 +50,7 @@ export class LocationSearchComponent {
   }
 
   countrySelected(event: AutoCompleteSelectEvent) {
-    this.locationService.locationSelected(event.value);
+    this.geoLocationService.locationSelected(event.value);
   }
 
   getFlagIcon(countryCode: string) {

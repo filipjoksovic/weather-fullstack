@@ -13,6 +13,7 @@ export enum CurrentWeatherModelKeysToRequestKeys {
   'windDirection' = 'wind_direction_10m',
   'windGusts' = 'wind_gusts_10m',
   'time' = 'time',
+  'weatherCode' = 'weather_code',
 }
 
 export enum CurrentWeatherModelKeys {
@@ -30,6 +31,7 @@ export enum CurrentWeatherModelKeys {
   'windDirection' = 'windDirection',
   'windGusts' = 'windGusts',
   'time' = 'time',
+  'weatherCode' = 'weatherCode',
 }
 
 export enum CurrentWeatherResponseKeysToModelKeys {

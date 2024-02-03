@@ -24,26 +24,8 @@ import { UserStoreService } from '../../../user/services/user.store.service';
 export class CurrentWeatherDataService {
   constructor(
     private currentWeatherApiService: CurrentWeatherApiService,
-    private readonly geoLocationService: GeoLocationService,
     private readonly userService: UserStoreService
-  ) {
-    toObservable(this.location).subscribe(location => {
-      if (location) {
-        this.getCurrentWeather(
-          location.longitude,
-          location.latitude
-        ).subscribe();
-      }
-    });
-  }
-
-  private location = computed(() => {
-    const locationSignal = this.geoLocationService.currentLocation();
-    if (locationSignal.loadingState === DataState.LOADED) {
-      return locationSignal.coords;
-    }
-    return null;
-  });
+  ) {}
 
   public currentWeather = signal<SignalState<CurrentWeather>>({
     state: DataState.UNDEFINED,

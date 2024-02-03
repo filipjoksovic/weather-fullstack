@@ -57,8 +57,8 @@ export class ForecastDetailsService {
     return this.forecastDetailsApiService
       .getDetailsForParam(
         measurement,
-        this.location().coords?.longitude,
-        this.location().coords?.latitude,
+        this.location().data?.latitude,
+        this.location().data?.longitude,
         this.user()?.unitSettings?.speed,
         this.user()?.unitSettings?.temperature,
         this.user()?.unitSettings.height

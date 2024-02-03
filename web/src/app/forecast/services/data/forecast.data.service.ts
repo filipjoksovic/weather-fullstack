@@ -22,20 +22,8 @@ import {
 export class ForecastDataService {
   constructor(
     private readonly forecastApiService: ForecastApiService,
-    private readonly locationService: GeoLocationService,
     private readonly userService: UserStoreService
-  ) {
-    toObservable(this.location)
-      .pipe(filter(location => location !== null))
-      .subscribe(location => {
-        if (location) {
-          this.getBasicForecast(
-            location.longitude,
-            location.latitude
-          ).subscribe();
-        }
-      });
-  }
+  ) {}
 
   public forecast = signal<SignalState<ForecastWeather>>({
     state: DataState.UNDEFINED,
@@ -44,14 +32,6 @@ export class ForecastDataService {
   public hourlyForecast = signal<SignalState<ForecastWeatherResponse>>({
     state: DataState.UNDEFINED,
   } as SignalState<ForecastWeatherResponse>);
-
-  private location = computed(() => {
-    const locationSignal = this.locationService.currentLocation();
-    if (locationSignal.loadingState === DataState.LOADED) {
-      return locationSignal.coords;
-    }
-    return null;
-  });
 
   public getBasicForecast(
     longitude: number,

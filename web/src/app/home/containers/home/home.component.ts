@@ -24,6 +24,7 @@ import { ForecastParamDetailsComponent } from 'app/forecast-details/containers/f
 import { WeatherMeasurementComponent } from '@current-weather/components/weather-measurment/weather-measurement.component';
 import { WeatherMeasurementsComponent } from '@current-weather/containers/weather-measurements/weather-measurements.component';
 import { UserStoreService } from 'app/user/services/user.store.service';
+import { CurrentLocationComponent } from '../../../location/containers/current-location/current-location.component';
 
 @Component({
   selector: 'app-home',
@@ -52,6 +53,7 @@ import { UserStoreService } from 'app/user/services/user.store.service';
     ForecastMeasurementsComponent,
     ForecastParamDetailsComponent,
     ChartModule,
+    CurrentLocationComponent,
   ],
 })
 export class HomeComponent implements OnInit {

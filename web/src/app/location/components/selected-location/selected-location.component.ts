@@ -21,9 +21,9 @@ export class SelectedLocationComponent {
   private readonly locationService = inject(GeoLocationService);
   private currentLocation = this.locationService.currentLocation;
 
-  currentCoords = computed(() => this.currentLocation().coords);
+  currentCoords = computed(() => this.currentLocation().data);
   locationDataState = debouncedSignal(
-    computed(() => this.currentLocation().loadingState),
+    computed(() => this.currentLocation().state),
     250
   );
 

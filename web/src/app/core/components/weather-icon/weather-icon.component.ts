@@ -23,6 +23,9 @@ export class WeatherIconComponent implements OnInit {
   @Input({ required: true })
   public weatherCode!: WeatherCode;
 
+  @Input({ required: false })
+  public displayTooltip: boolean = false;
+
   public weatherIconConfig!: WeatherConfig;
 
   public ngOnInit(): void {

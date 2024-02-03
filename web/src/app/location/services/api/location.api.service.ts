@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LocationSearchResponse } from '../../models/api/response/location-search.response';
+import { LocationDetailsResponse } from 'app/location/models/api/response/location-details.response';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +18,19 @@ export class LocationApiService {
 
     return this.http.get<LocationSearchResponse>(
       `https://geocoding-api.open-meteo.com/v1/search`,
+      {
+        params,
+      }
+    );
+  }
+
+  getLocationDetails(longitude: number, latitude: number) {
+    let params = new HttpParams();
+    params = params.append('lat', latitude.toString());
+    params = params.append('lon', longitude.toString());
+    params = params.append('format', 'jsonv2');
+    return this.http.get<LocationDetailsResponse>(
+      `https://nominatim.openstreetmap.org/reverse.php`,
       {
         params,
       }

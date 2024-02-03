@@ -7,7 +7,8 @@
   <div [class]="{ 'font-bold': isToday }" class="grid align-items-center">
     <div class="lg:col-3 md:col-10">
       <app-weather-icon
-        class=""
+        class="w-3rem h-3rem block"
+        [displayTooltip]="true"
         [weatherCode]="measurement.weatherCode"></app-weather-icon>
     </div>
 

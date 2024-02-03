@@ -16,7 +16,8 @@ export type ForecastDetailsRequestParams =
   | 'relative_humidity_2m'
   | 'rain'
   | 'precipitation_probability'
-  | 'temperature_2m';
+  | 'temperature_2m'
+  | 'weather_code';
 
 export const currentWeatherModelKeyToDailyForecastParams: Record<
   CurrentWeatherModelKeys,
@@ -42,6 +43,7 @@ export const currentWeatherModelKeyToDailyForecastParams: Record<
   [CurrentWeatherModelKeys.windDirection]: ['wind_direction_10m_dominant'],
   [CurrentWeatherModelKeys.windGusts]: ['wind_gusts_10m_max'],
   [CurrentWeatherModelKeys.windSpeed]: ['wind_speed_10m_max'],
+  [CurrentWeatherModelKeys.weatherCode]: ['weather_code'],
 };
 
 export const isParameterSupported = (
@@ -70,4 +72,5 @@ export const dailyForecastParamsToText: Record<
   rain: 'Rain',
   precipitation_probability: 'Precipitation probability',
   temperature_2m: 'Temperature',
+  weather_code: 'Weather code',
 };

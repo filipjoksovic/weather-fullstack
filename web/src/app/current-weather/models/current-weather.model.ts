@@ -54,3 +54,8 @@ export const currentWeatherHeadlessResponseToCurrentWeather = (
 
   return partialWeather as CurrentWeather;
 };
+
+export const getMeasurement = (
+  currentWeather: CurrentWeather,
+  key: CurrentWeatherModelKeys
+) => currentWeather.measurements.find(measurement => measurement.key === key);

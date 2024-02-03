@@ -1,10 +1,10 @@
 <div class="location-search">
-  @if (location().loadingState === DataState.LOADED) {
+  @if (location().state === DataState.LOADED) {
     <div class="bg-green-300 p-3 border-round-3xl">
-      {{ location().coords?.latitude | number: '1.0-2' }}
+      {{ location().data.latitude | number: '1.0-2' }}
     </div>
     <div class="bg-green-300 p-3 border-round-3xl">
-      {{ location().coords?.longitude | number: '1.0-2' }}
+      {{ location().data.longitude | number: '1.0-2' }}
     </div>
   }
 

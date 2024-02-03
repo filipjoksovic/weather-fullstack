@@ -9,12 +9,15 @@ export type WeatherMeasurementComponentDisplaySettings = {
   unit?: BaseUnit;
   rowSpan?: number;
   colSpan?: number;
-  componentType?: 'text' | 'gauge' | 'compass';
+  componentType?: 'text' | 'gauge' | 'compass' | 'weatherIcon';
   order: number;
 };
 
 export const componentsToIgnore: CurrentWeatherModelKeys[] = [
   CurrentWeatherModelKeys.time,
+  CurrentWeatherModelKeys.weatherCode,
+  CurrentWeatherModelKeys.temperature,
+  CurrentWeatherModelKeys.windSpeed,
 ];
 
 export const displaySettings: {
@@ -134,5 +137,14 @@ export const displaySettings: {
     rowSpan: 2,
     colSpan: 2,
     order: 15,
+  },
+  [CurrentWeatherModelKeys.weatherCode]: {
+    key: CurrentWeatherModelKeys.weatherCode,
+    icon: 'fa fa-cloud-sun',
+    title: 'Weather code',
+    rowSpan: 2,
+    colSpan: 2,
+    order: 16,
+    componentType: 'weatherIcon',
   },
 };

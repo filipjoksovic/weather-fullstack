@@ -14,10 +14,15 @@ import { WeatherMeasurementComponentDisplaySettings } from '@current-weather/mod
 import { DraggableDirective } from '@core/directives/draggable.directive';
 import { KnobModule } from 'primeng/knob';
 import { FormsModule } from '@angular/forms';
+import { WeatherIconComponent } from '../../../core/components/weather-icon/weather-icon.component';
+import { WeatherCode } from '@core/models/api/response/weather-code.enum';
 
 @Component({
   selector: 'app-weather-measurement',
   standalone: true,
+  templateUrl: `./weather-measurement.component.html`,
+  styleUrl: './weather-measurement.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     CommonModule,
     PanelModule,
@@ -26,13 +31,12 @@ import { FormsModule } from '@angular/forms';
     DraggableDirective,
     KnobModule,
     FormsModule,
+    WeatherIconComponent,
   ],
-  templateUrl: `./weather-measurement.component.html`,
-  styleUrl: './weather-measurement.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WeatherMeasurementComponent implements OnInit {
   private readonly forecastDetailsService = inject(ForecastDetailsService);
+  WeatherCode = WeatherCode;
 
   measurementClicked() {
     this.forecastDetailsService.showParams(this.measurement.key);
@@ -41,6 +45,12 @@ export class WeatherMeasurementComponent implements OnInit {
   @Input({ required: true })
   measurement!: WeatherMeasurementComponentDisplaySettings;
   public isCollapsed: boolean = false;
+  @Input({ required: false })
+  public containerClass: string = '';
 
   ngOnInit(): void {}
+
+  toNumber(value: string | number): WeatherCode {
+    return Number(value) as WeatherCode;
+  }
 }

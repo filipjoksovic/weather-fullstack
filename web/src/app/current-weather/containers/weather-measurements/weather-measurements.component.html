@@ -1,6 +1,6 @@
 @if (weather().state === DataState.LOADED) {
   <div class="p-2 surface-ground border-round-2xl p-3 mb-3 sticky top-0">
-    <h2>Current weather data</h2>
+    <h2>Additional data</h2>
   </div>
   <div class="weather-data" appDraggable>
     @for (measurement of weatherDisplaySettings(); track $index) {
