@@ -2,3 +2,29 @@
   padding: $spacer * 2 0;
   border-radius: $spacer;
 }
+
+.current-location-weather {
+  display: grid;
+  gap: $spacer * 2;
+
+  grid-template-areas:
+    'cityData currentTemperature weatherIcon'
+    'cityData apparentTemperature weatherIcon';
+
+  grid-template-columns: 3fr 2fr 1fr;
+  grid-template-rows: 1fr 1fr;
+
+  &__city-data {
+    grid-area: cityData;
+  }
+
+  &__current-temperature {
+    grid-area: currentTemperature;
+  }
+  &__apparent-temperature {
+    grid-area: apparentTemperature;
+  }
+  &__weather-icon {
+    grid-area: weatherIcon;
+  }
+}

@@ -1,6 +1,6 @@
-<div class="flex justify-content-between">
+<div class="current-location-weather mb-2">
   <div
-    class="p-2 surface-ground border-round-2xl p-3 mb-2 sticky top-0 flex align-items-center flex-1">
+    class="p-2 surface-ground border-round-2xl p-3 sticky top-0 flex align-items-center flex-1 current-location-weather__city-data">
     @if (location().state === DataState.LOADED) {
       <div>
         <h1>{{ location().data.address.city }}</h1>
@@ -20,37 +20,33 @@
 
   @if (weather()) {
     <div
-      class="flex gap-4 align-items-center justify-content-center flex-wrap p-2">
-      <div class="flex flex-column gap-3">
-        <div
-          class="p-3 bg-primary w-18rem h-6rem border-round-2xl flex align-items-center flex-column justify-content-between">
-          <div class="flex align-items-center gap-2 w-full">
-            <i class="fa fa-temperature-low fa-xl"></i>
-            <span>Current temperature</span>
-          </div>
-          <span class="text-3xl">
-            {{ weather()?.temperature?.value }}
-            {{ weather()?.temperature?.unit }}
-          </span>
-        </div>
+      class="p-3 bg-primary border-round-2xl flex align-items-center gap-2 flex-column justify-content-between current-location-weather__current-temperature">
+      <div class="align-items-center gap-2 w-full">
+        <i class="fa fa-temperature-low fa-xl"></i>
+        <span>Current temperature</span>
+      </div>
+      <span class="text-3xl">
+        {{ weather()?.temperature?.value }}
+        {{ weather()?.temperature?.unit }}
+      </span>
+    </div>
 
-        <div
-          class="p-3 bg-primary w-18rem h-6rem border-round-2xl flex align-items-center flex-column justify-content-between">
-          <div class="flex align-items-center gap-2 w-full">
-            <i class="fa fa-temperature-low fa-xl"></i>
-            <span>Feels like</span>
-          </div>
-          <span class="text-3xl">
-            {{ weather()?.apparentTemperature?.value }}
-            {{ weather()?.apparentTemperature?.unit }}
-          </span>
-        </div>
+    <div
+      class="p-3 bg-primary border-round-2xl align-items-center gap-2 flex flex-column justify-content-between current-location-weather__apparent-temperature">
+      <div class="flex align-items-center gap-2 w-full">
+        <i class="fa fa-temperature-low fa-xl"></i>
+        <span>Feels like</span>
       </div>
-      <div class="p-3 bg-primary w-10rem h-13rem border-round-2xl">
-        <app-weather-icon
-          [weatherCode]="toNumber(weather()?.weatherCode?.value)"
-          [displayTooltip]="false"></app-weather-icon>
-      </div>
+      <span class="text-3xl">
+        {{ weather()?.apparentTemperature?.value }}
+        {{ weather()?.apparentTemperature?.unit }}
+      </span>
+    </div>
+    <div
+      class="p-3 bg-primary border-round-2xl current-location-weather__weather-icon">
+      <app-weather-icon
+        [weatherCode]="toNumber(weather()?.weatherCode?.value)"
+        [displayTooltip]="false"></app-weather-icon>
     </div>
   }
 </div>

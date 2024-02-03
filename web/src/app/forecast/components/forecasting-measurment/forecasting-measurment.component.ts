@@ -122,7 +122,7 @@ export class ForecastingMeasurementComponent implements OnInit {
       .getHourlyForecasting(
         this.geoLocationService.currentLocation().data.longitude,
         this.geoLocationService.currentLocation().data.latitude,
-        new Date()
+        new Date(this.measurement.date)
       )
       .subscribe();
   }

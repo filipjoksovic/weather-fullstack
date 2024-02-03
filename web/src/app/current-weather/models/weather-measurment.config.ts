@@ -71,7 +71,7 @@ export const displaySettings: {
     icon: 'fa fa-umbrella',
     title: 'Precipitation',
     rowSpan: 2,
-    colSpan: 2,
+    colSpan: 4,
     order: 7,
   },
   [CurrentWeatherModelKeys.pressure]: {
@@ -87,7 +87,7 @@ export const displaySettings: {
     icon: 'fa fa-cloud-rain',
     title: 'Rain',
     rowSpan: 2,
-    colSpan: 2,
+    colSpan: 4,
     order: 9,
   },
   [CurrentWeatherModelKeys.showers]: {

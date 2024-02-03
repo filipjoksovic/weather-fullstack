@@ -58,16 +58,29 @@ export class ForecastApiService {
   public getHourlyForecasting(
     longitude: number,
     latitude: number,
-    date: Date
+    date: Date,
+    speedUnit: SpeedUnit,
+    temperatureUnit: TemperatureUnit,
+    heightUnit: HeightUnit
   ): Observable<ForecastWeatherResponse> {
     let params = new HttpParams();
     params = params.append('latitude', latitude.toString());
     params = params.append('longitude', longitude.toString());
+    params = params.append(
+      'temperature_unit',
+      temperatureUnitToTemperatureUnitParamMapper(temperatureUnit)
+    );
+    params = params.append(
+      'wind_speed_unit',
+      speedUnitToSpeedUnitParamMapper(speedUnit)
+    );
+    params = params.append(
+      'precipitation_unit',
+      heightUnitToHeightUnitParamMapper(heightUnit)
+    );
     params = params.append('hourly', 'temperature_2m');
     params = params.append('hourly', 'relative_humidity_2m');
-    params = params.append('hourly', 'weather_code');
     params = params.append('hourly', 'uv_index');
-    params = params.append('hourly', 'precipitation_probability');
     params = params.append('hourly', 'rain');
     params = params.append('hourly', 'is_day');
     params = params.append('hourly', 'temperature');

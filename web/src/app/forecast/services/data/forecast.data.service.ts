@@ -84,7 +84,14 @@ export class ForecastDataService {
     } as SignalState<ForecastWeather>);
 
     return this.forecastApiService
-      .getHourlyForecasting(longitude, latitude, new Date())
+      .getHourlyForecasting(
+        longitude,
+        latitude,
+        date,
+        userSpeedUnit,
+        userTemperatureUnit,
+        userHeightUnit
+      )
       .pipe(
         tap({
           next: (data: ForecastWeatherResponse) =>
