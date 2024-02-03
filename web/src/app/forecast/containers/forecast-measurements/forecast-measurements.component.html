@@ -5,16 +5,18 @@
   <div class="card weather-forecast">
     <p-dataView #dv [value]="forecast().data.measurements">
       <ng-template pTemplate="list">
-        @for (measurement of forecast().data.measurements; track $index) {
-          <app-forecasting-measurement
-            class="scalein"
-            [class]="{
-              'border-primary border-solid border-bottom-1 ':
-                $index !== forecast().data.measurements.length - 1
-            }"
-            [style]="{ 'animation-duration': 0.5 + $index * 0.1 + 's' }"
-            [measurement]="measurement"></app-forecasting-measurement>
-        }
+        <div class="forecast-measurements">
+          @for (measurement of forecast().data.measurements; track $index) {
+            <app-forecasting-measurement
+              class="scalein"
+              [class]="{
+                'border-primary border-solid border-bottom-1 ':
+                  $index !== forecast().data.measurements.length - 1
+              }"
+              [style]="{ 'animation-duration': 0.5 + $index * 0.1 + 's' }"
+              [measurement]="measurement"></app-forecasting-measurement>
+          }
+        </div>
       </ng-template>
     </p-dataView>
   </div>

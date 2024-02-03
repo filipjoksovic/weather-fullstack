@@ -20,17 +20,30 @@
   }
 }
 
+.forecast-measurements {
+  container: frc / inline-size;
+}
+
 app-forecast-measurements {
   display: flex;
   flex-direction: column;
   gap: $spacer * 2;
-  container: frc / inline-size;
 }
 
-@container frc (max-width: 1200px) {
-  app-forecast-measurements {
-    flex-direction: row;
-    gap: $spacer * 2;
-    container: frc / inline-size;
+@container frc (max-width: 250px) {
+  .forecast-measurement {
+    & > div {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: $spacer !important;
+
+      & .forecast-measurement__temperature-interval {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: center;
+        width: 100%;
+      }
+    }
   }
 }

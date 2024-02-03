@@ -21,5 +21,6 @@ app-user-layout {
     background: $surface-ground;
     margin-block: $spacer * 4;
     box-shadow: $shadow-standard;
+    overflow-y: scroll;
   }
 }
