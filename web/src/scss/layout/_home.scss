@@ -22,7 +22,6 @@ app-home-routing {
     backdrop-filter: blur(5px);
     padding: $spacer * 2;
     border-radius: $spacer;
-    overflow-y: scroll;
     box-shadow: $shadow-standard;
     grid-area: content;
     width: clamp(0rem, 100%, 100rem);
@@ -30,7 +29,7 @@ app-home-routing {
     margin-inline: auto;
     margin-block: $spacer * 4;
     align-self: center;
-    height: clamp(30vh, 100rem, 80vh);
+    height: 80vh;
     width: clamp(30vw, 100rem, 80vw);
   }
 
@@ -45,20 +44,17 @@ app-home-routing {
   @media only screen and (max-width: $md) {
     app-home-routing {
       .content {
-        height: clamp(30vh, 100rem, 80vh);
         width: clamp(30vw, 100rem, 80vw);
       }
     }
   }
   @media only screen and (max-width: $lg) {
     .content {
-      height: clamp(30vh, 100rem, 80vh);
       width: clamp(30vw, 100rem, 80vw);
     }
   }
   @media only screen and (max-width: $xl) {
     .content {
-      height: clamp(30vh, 100rem, 80vh);
       width: clamp(30vw, 100rem, 80vw);
     }
   }

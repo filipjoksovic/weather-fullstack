@@ -18,6 +18,7 @@ export const componentsToIgnore: CurrentWeatherModelKeys[] = [
   CurrentWeatherModelKeys.weatherCode,
   CurrentWeatherModelKeys.temperature,
   CurrentWeatherModelKeys.windSpeed,
+  CurrentWeatherModelKeys.apparentTemperature,
 ];
 
 export const displaySettings: {

@@ -1,14 +1,15 @@
-<div>
-  <div class="p-2 surface-ground border-round-2xl p-3 mb-3 sticky top-0">
-    <h2>Current weather data</h2>
+<div class="flex justify-content-between">
+  <div
+    class="p-2 surface-ground border-round-2xl p-3 mb-2 sticky top-0 flex align-items-center flex-1">
     @if (location().state === DataState.LOADED) {
       <div>
-        <h3>
-          {{ location().data.address.city }},
-          {{ location().data.address.postcode }},
+        <h1>{{ location().data.address.city }}</h1>
+        <h2>
           {{ location().data.address.country }}
-          {{ getCountryIcon(location().data.address.countryCode) }}
-        </h3>
+          <span class="text-3xl">{{
+            getCountryIcon(location().data.address.countryCode)
+          }}</span>
+        </h2>
       </div>
     } @else if (location().state === DataState.LOADING) {
       Loading
@@ -19,15 +20,37 @@
 
   @if (weather()) {
     <div
-      class="flex flex-wrap w-full gap-4 justify-content-center align-items-center my-3">
-      @for (measurement of weather(); track $index) {
-        <app-weather-measurement
-          class="w-3 h-8rem block"
-          containerClass="bg-primary-reverse"
-          [measurement]="measurement"></app-weather-measurement>
-      }
+      class="flex gap-4 align-items-center justify-content-center flex-wrap p-2">
+      <div class="flex flex-column gap-3">
+        <div
+          class="p-3 bg-primary w-18rem h-6rem border-round-2xl flex align-items-center flex-column justify-content-between">
+          <div class="flex align-items-center gap-2 w-full">
+            <i class="fa fa-temperature-low fa-xl"></i>
+            <span>Current temperature</span>
+          </div>
+          <span class="text-3xl">
+            {{ weather()?.temperature?.value }}
+            {{ weather()?.temperature?.unit }}
+          </span>
+        </div>
+
+        <div
+          class="p-3 bg-primary w-18rem h-6rem border-round-2xl flex align-items-center flex-column justify-content-between">
+          <div class="flex align-items-center gap-2 w-full">
+            <i class="fa fa-temperature-low fa-xl"></i>
+            <span>Feels like</span>
+          </div>
+          <span class="text-3xl">
+            {{ weather()?.apparentTemperature?.value }}
+            {{ weather()?.apparentTemperature?.unit }}
+          </span>
+        </div>
+      </div>
+      <div class="p-3 bg-primary w-10rem h-13rem border-round-2xl">
+        <app-weather-icon
+          [weatherCode]="toNumber(weather()?.weatherCode?.value)"
+          [displayTooltip]="false"></app-weather-icon>
+      </div>
     </div>
-  } @else {
-    <p>No weather data available</p>
   }
 </div>

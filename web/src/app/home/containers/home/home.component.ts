@@ -25,6 +25,7 @@ import { WeatherMeasurementComponent } from '@current-weather/components/weather
 import { WeatherMeasurementsComponent } from '@current-weather/containers/weather-measurements/weather-measurements.component';
 import { UserStoreService } from 'app/user/services/user.store.service';
 import { CurrentLocationComponent } from '../../../location/containers/current-location/current-location.component';
+import { GeoLocationService } from '@core/services/geolocation.service';
 
 @Component({
   selector: 'app-home',
@@ -58,6 +59,7 @@ import { CurrentLocationComponent } from '../../../location/containers/current-l
 })
 export class HomeComponent implements OnInit {
   private readonly forecastWeatherDataService = inject(ForecastDataService);
+  private readonly geoLocationService = inject(GeoLocationService);
   options!: unknown;
   data!: unknown;
 
@@ -65,5 +67,7 @@ export class HomeComponent implements OnInit {
 
   public user = this.userService.user;
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.geoLocationService.getLocation();
+  }
 }

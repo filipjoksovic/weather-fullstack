@@ -11,7 +11,11 @@
 
 .p-dialog-content {
   padding: $spacer * 2;
+  background: #ffffffa4;
+  backdrop-filter: blur(20px);
 }
 .p-dialog-footer {
   padding: $spacer * 2;
+  background: #ffffffa4;
+  backdrop-filter: blur(20px);
 }

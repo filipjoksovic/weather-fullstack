@@ -68,6 +68,5 @@ export class AppComponent implements OnInit {
       this.storageService.setObject(StorageKeys.USER, defaultUser);
       this.userStoreService.user.set(defaultUser);
     }
-    this.geoLocationService.getLocation();
   }
 }

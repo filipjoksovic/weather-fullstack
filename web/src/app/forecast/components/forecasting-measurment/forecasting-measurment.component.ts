@@ -29,6 +29,7 @@ import {
   getGradient,
 } from '@core/models/chart.options';
 import { ChartData, ChartOptions } from 'chart.js';
+import { GeoLocationService } from '@core/services/geolocation.service';
 
 @Component({
   selector: 'app-forecasting-measurement',
@@ -50,6 +51,7 @@ import { ChartData, ChartOptions } from 'chart.js';
 export class ForecastingMeasurementComponent implements OnInit {
   private readonly forecastService: ForecastDataService =
     inject(ForecastDataService);
+  private readonly geoLocationService = inject(GeoLocationService);
   DataState = DataState;
 
   constructor() {
@@ -116,7 +118,13 @@ export class ForecastingMeasurementComponent implements OnInit {
 
   openOverlay(event: Event) {
     this.op.toggle(event);
-    this.forecastService.getHourlyForecasting(0, 0, new Date()).subscribe();
+    this.forecastService
+      .getHourlyForecasting(
+        this.geoLocationService.currentLocation().data.longitude,
+        this.geoLocationService.currentLocation().data.latitude,
+        new Date()
+      )
+      .subscribe();
   }
 
   options!: ChartOptions;

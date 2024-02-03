@@ -48,34 +48,21 @@ export class CurrentLocationComponent {
     if (
       this.currentWeatherService.currentWeather().state === DataState.LOADED
     ) {
-      return [
-        getMeasurement(
+      return {
+        weatherCode: getMeasurement(
           this.currentWeatherService.currentWeather().data,
           CurrentWeatherModelKeys.weatherCode
         ),
-        getMeasurement(
+        temperature: getMeasurement(
           this.currentWeatherService.currentWeather().data,
           CurrentWeatherModelKeys.temperature
         ),
 
-        getMeasurement(
+        apparentTemperature: getMeasurement(
           this.currentWeatherService.currentWeather().data,
           CurrentWeatherModelKeys.apparentTemperature
         ),
-      ].map(measurement => {
-        console.log({
-          ...displaySettings[measurement!.key],
-          key: measurement!.key,
-          value: measurement!.value,
-          unit: measurement!.unit,
-        } as WeatherMeasurementComponentDisplaySettings);
-        return {
-          ...displaySettings[measurement!.key],
-          key: measurement!.key,
-          value: measurement!.value,
-          unit: measurement!.unit,
-        } as WeatherMeasurementComponentDisplaySettings;
-      });
+      };
     }
     return null;
   });
