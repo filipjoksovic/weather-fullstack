@@ -4,16 +4,17 @@ import { UserUnitSettings } from './user-unit.settings';
 export type UserDataHeadless = {
   firstName: string;
   lastName: string;
-  email: never;
   userSettings: UserSettings;
   unitSettings: UserUnitSettings;
 };
 
+/**
+ * @deprecated - Unused, was meant for backend integration
+ */
 export type StoredUserData = {
   id: string;
   firstName: string;
   lastName: string;
-  email: string;
   userSettings: UserSettings;
   unitSettings: UserUnitSettings;
   token?: string;

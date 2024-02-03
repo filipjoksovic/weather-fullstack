@@ -12,7 +12,7 @@ import { UnitSettingsComponent } from '../unit-settings/unit-settings.component'
 import { UserData } from 'app/user/models/user-data.model';
 
 export type PersonalDetailsFormKeys = Record<
-  keyof Pick<UserData, 'firstName' | 'lastName' | 'email'>,
+  keyof Pick<UserData, 'firstName' | 'lastName'>,
   FormControl<string | null>
 >;
 

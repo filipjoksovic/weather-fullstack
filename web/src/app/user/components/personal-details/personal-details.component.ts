@@ -71,9 +71,5 @@ export class PersonalDetailsComponent {
         updateOn: 'blur',
         validators: [Validators.required],
       }),
-      email: new FormControl(this.user()?.email ?? '', {
-        updateOn: 'blur',
-        validators: [Validators.required],
-      }),
     });
 }
