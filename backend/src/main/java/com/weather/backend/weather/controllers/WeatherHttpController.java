@@ -1,5 +1,6 @@
 package com.weather.backend.weather.controllers;
 
+import com.weather.backend.config.ExternalApiProperties;
 import com.weather.backend.weather.dto.CurrentWeatherDto;
 import com.weather.backend.weather.service.CurrentWeatherService;
 import org.springframework.http.ResponseEntity;
@@ -21,10 +22,12 @@ public class WeatherHttpController {
 
 
     CurrentWeatherService currentWeatherService;
+    ExternalApiProperties externalApiProperties;
 
-    public WeatherHttpController() {
+    public WeatherHttpController(ExternalApiProperties externalApiProperties) {
+        this.externalApiProperties = externalApiProperties;
         this.currentWeatherService = new Retrofit.Builder()
-                .baseUrl("https://api.open-meteo.com")
+                .baseUrl(externalApiProperties.getOpenMeteoCurrentBaseUrl())
                 .addConverterFactory(JacksonConverterFactory.create())
                 .build()
                 .create(CurrentWeatherService.class);

@@ -1,0 +1,24 @@
+{
+  "properties": [
+    {
+      "name": "app.external-api.openMeteoCurrentBaseUrl",
+      "type": "java.lang.String",
+      "description": "Base URL for OpenMeteo Current Weather API."
+    },
+    {
+      "name": "app.external-api.openMeteoForecastBaseUrl",
+      "type": "java.lang.String",
+      "description": "Base URL for OpenMeteo Forecast Weather API."
+    },
+    {
+      "name": "app.external-api.openMeteoLocationBaseUrl",
+      "type": "java.lang.String",
+      "description": "Base URL for OpenMeteo Location Search API."
+    },
+    {
+      "name": "app.external-api.nominatimLocationBaseUrl",
+      "type": "java.lang.String",
+      "description": "Base URL for Nominatim Reverse Geocoding API."
+    }
+  ]
+}

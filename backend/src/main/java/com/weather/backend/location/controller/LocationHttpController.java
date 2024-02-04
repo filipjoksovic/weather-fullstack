@@ -1,5 +1,6 @@
 package com.weather.backend.location.controller;
 
+import com.weather.backend.config.ExternalApiProperties;
 import com.weather.backend.location.dto.NominatimLocationDto;
 import com.weather.backend.location.dto.OpenMeteoLocationDto;
 import com.weather.backend.location.service.NominatimLocationService;
@@ -25,14 +26,14 @@ public class LocationHttpController {
     OpenMeteoLocationService openMeteoLocationService;
     NominatimLocationService nominatimLocationService;
 
-    public LocationHttpController() {
+    public LocationHttpController(ExternalApiProperties externalApiProperties) {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient httpClient = new OkHttpClient();
 
         this.openMeteoLocationService = new Retrofit.Builder()
-                .baseUrl("https://geocoding-api.open-meteo.com").addConverterFactory(JacksonConverterFactory.create()).client(httpClient).build().create(OpenMeteoLocationService.class);
-        this.nominatimLocationService = new Retrofit.Builder().baseUrl("https://nominatim.openstreetmap.org").addConverterFactory(JacksonConverterFactory.create()).client(httpClient).build().create(NominatimLocationService.class);
+                .baseUrl(externalApiProperties.getOpenMeteoForecastBaseUrl()).addConverterFactory(JacksonConverterFactory.create()).client(httpClient).build().create(OpenMeteoLocationService.class);
+        this.nominatimLocationService = new Retrofit.Builder().baseUrl(externalApiProperties.getNominatimLocationBaseUrl()).addConverterFactory(JacksonConverterFactory.create()).client(httpClient).build().create(NominatimLocationService.class);
     }
 
     @GetMapping("/search")
