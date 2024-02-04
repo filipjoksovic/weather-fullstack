@@ -10,6 +10,8 @@ export const routes: Routes = [
         module => module.HomeRoutingComponent
       ),
     children: [{ path: '', component: HomeComponent }],
+    canActivate: [authGuard],
+    canActivateChild: [authGuard],
   },
   {
     path: 'profile',

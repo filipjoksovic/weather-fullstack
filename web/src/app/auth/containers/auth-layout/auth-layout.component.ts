@@ -16,6 +16,6 @@ export class AuthLayoutComponent {
   constructor(private readonly environmentService: EnvironmentService) {}
 
   headlessModeClicked() {
-    this.environmentService.activateHeadless();
+    this.environmentService.switchToHeadless();
   }
 }

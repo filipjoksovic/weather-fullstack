@@ -60,6 +60,28 @@
                   "with": "src/environments/environment.development.ts"
                 }
               ]
+            },
+            "headless": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.headless.ts"
+                }
+              ]
+            },
+            "full": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.full.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -72,6 +94,12 @@
             },
             "development": {
               "buildTarget": "web:build:development"
+            },
+            "full": {
+              "buildTarget": "web:build:full"
+            },
+            "headless": {
+              "buildTarget": "web:build:headless"
             }
           },
           "defaultConfiguration": "development"

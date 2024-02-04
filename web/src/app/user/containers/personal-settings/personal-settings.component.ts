@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, WritableSignal, inject } from '@angular/core';
 import { InputTextModule } from 'primeng/inputtext';
 import { DividerModule } from 'primeng/divider';
 import { DropdownModule } from 'primeng/dropdown';
@@ -10,6 +10,9 @@ import { PersonalDetailsComponent } from '../../components/personal-details/pers
 import { DataFormattingComponent } from '../../components/data-formatting/data-formatting.component';
 import { UnitSettingsComponent } from '../unit-settings/unit-settings.component';
 import { UserData } from 'app/user/models/user-data.model';
+import { EnvironmentService } from '@core/services/environment.service';
+import { EnvironmentBase } from 'environments/environment.base';
+import { ButtonModule } from 'primeng/button';
 
 export type PersonalDetailsFormKeys = Record<
   keyof Pick<UserData, 'firstName' | 'lastName'>,
@@ -37,6 +40,17 @@ export type PersonalDetailsFormKeys = Record<
 export class PersonalSettingsComponent {
   private readonly authService = inject(AuthStoreService);
   private readonly userStoreService = inject(UserStoreService);
+  private readonly environmentService = inject(EnvironmentService);
 
-  constructor() {}
+  public environment: WritableSignal<EnvironmentBase>;
+  constructor() {
+    this.environment = this.environmentService.environment;
+  }
+
+  switchToHosted() {
+    this.environmentService.switchToHosted();
+  }
+  switchToHeadless() {
+    this.environmentService.switchToHeadless();
+  }
 }

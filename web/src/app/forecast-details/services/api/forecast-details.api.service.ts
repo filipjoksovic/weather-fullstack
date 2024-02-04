@@ -19,6 +19,7 @@ import {
   heightUnitToHeightUnitParamMapper,
 } from '@core/models/api/response/height.unit';
 import { MessageService } from 'primeng/api';
+import { EnvironmentService } from '@core/services/environment.service';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +27,8 @@ import { MessageService } from 'primeng/api';
 export class ForecastDetailsApiService {
   constructor(
     private readonly http: HttpClient,
-    private readonly messageService: MessageService
+    private readonly messageService: MessageService,
+    private readonly environmentService: EnvironmentService
   ) {}
 
   public getDetailsForParam(
@@ -66,7 +68,7 @@ export class ForecastDetailsApiService {
       past_days: 5,
     });
     return this.http.get<ForecastWeatherResponse>(
-      `http://localhost:8080/api/weather/daily`,
+      this.environmentService.environment().dailyWeatherUrl,
       { params }
     );
   }

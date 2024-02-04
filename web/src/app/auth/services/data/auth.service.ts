@@ -20,7 +20,7 @@ export class AuthService {
   ) {}
 
   public isLoggedIn() {
-    return !!this.storageService.get(StorageKeys.USER);
+    return !!this.storageService.get(StorageKeys.TOKEN);
   }
 
   signup(value: Partial<{ email: string | null; password: string | null }>) {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterOutlet } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
@@ -6,7 +6,6 @@ import { SidebarModule } from 'primeng/sidebar';
 import { PrimeNGConfig } from 'primeng/api';
 import { AvatarModule } from 'primeng/avatar';
 import { ToastModule } from 'primeng/toast';
-import { AuthStoreService } from '@auth/services/auth.store.service';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { StorageService } from '@core/services/storage.service';
 import { UserStoreService } from './user/services/user.store.service';
@@ -14,7 +13,8 @@ import { StorageKeys } from '@core/models/config/storage-keys.enum';
 import { UserData } from './user/models/user-data.model';
 import { DateFormatEnum } from '@core/models/date-format';
 import { TimeFormatEnum } from '@core/models/time-format';
-import { GeoLocationService } from '@core/services/geolocation.service';
+import { EnvironmentService } from '@core/services/environment.service';
+import { EnvironmentBase } from 'environments/environment.base';
 
 @UntilDestroy()
 @Component({
@@ -32,14 +32,17 @@ import { GeoLocationService } from '@core/services/geolocation.service';
 })
 export class AppComponent implements OnInit {
   title = 'web';
+
+  public environment: WritableSignal<EnvironmentBase>;
+
   constructor(
     private primengConfig: PrimeNGConfig,
-    private readonly authStore: AuthStoreService,
-    private readonly router: Router,
     private readonly storageService: StorageService,
     private readonly userStoreService: UserStoreService,
-    private readonly geoLocationService: GeoLocationService
-  ) {}
+    private readonly environmentService: EnvironmentService
+  ) {
+    this.environment = this.environmentService.environment;
+  }
 
   ngOnInit() {
     this.primengConfig.ripple = true;

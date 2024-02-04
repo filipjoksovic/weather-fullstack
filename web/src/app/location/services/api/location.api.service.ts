@@ -2,12 +2,16 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LocationSearchResponse } from '../../models/api/response/location-search.response';
 import { LocationDetailsResponse } from 'app/location/models/api/response/location-details.response';
+import { EnvironmentService } from '@core/services/environment.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LocationApiService {
-  constructor(private readonly http: HttpClient) {}
+  constructor(
+    private readonly http: HttpClient,
+    private readonly environmentService: EnvironmentService
+  ) {}
 
   public searchForLocation(search: string) {
     let params = new HttpParams();
@@ -17,7 +21,7 @@ export class LocationApiService {
     params = params.append('format', 'json');
 
     return this.http.get<LocationSearchResponse>(
-      `http://localhost:8080/api/location/search`,
+      this.environmentService.environment().geocodingUrl,
       {
         params,
       }
@@ -30,7 +34,7 @@ export class LocationApiService {
     params = params.append('lon', longitude.toString());
     params = params.append('format', 'jsonv2');
     return this.http.get<LocationDetailsResponse>(
-      `http://localhost:8080/api/location/reverse`,
+      this.environmentService.environment().reverseGeoCodingUrl,
       {
         params,
       }

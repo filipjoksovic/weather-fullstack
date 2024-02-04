@@ -13,12 +13,16 @@ import {
   TemperatureUnit,
   temperatureUnitToTemperatureUnitParamMapper,
 } from '@core/models/api/response/temperature.unit';
+import { EnvironmentService } from '@core/services/environment.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CurrentWeatherApiService {
-  constructor(private readonly http: HttpClient) {}
+  constructor(
+    private readonly http: HttpClient,
+    private readonly environmentService: EnvironmentService
+  ) {}
 
   public getCurrentWeather(
     longitude: number,
@@ -49,7 +53,7 @@ export class CurrentWeatherApiService {
     params = params.append('timeformat', 'iso8601');
 
     return this.http.get<CurrentWeatherResponse>(
-      `http://localhost:8080/api/weather/current`,
+      this.environmentService.environment().currentWeatherUrl,
       { params }
     );
   }

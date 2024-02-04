@@ -15,12 +15,17 @@ import {
   heightUnitToHeightUnitParamMapper,
 } from '@core/models/api/response/height.unit';
 import { formatDate } from 'date-fns';
+import { Environment } from 'environments/environment.base';
+import { EnvironmentService } from '@core/services/environment.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ForecastApiService {
-  constructor(private readonly http: HttpClient) {}
+  constructor(
+    private readonly http: HttpClient,
+    private readonly environmentService: EnvironmentService
+  ) {}
 
   public getBasicForecasting(
     longitude: number,
@@ -50,7 +55,7 @@ export class ForecastApiService {
     params = params.append('past_days', '5');
 
     return this.http.get<ForecastWeatherResponse>(
-      `http://localhost:8080/api/weather/daily`,
+      this.environmentService.environment().dailyWeatherUrl,
       { params }
     );
   }
@@ -88,7 +93,7 @@ export class ForecastApiService {
     params = params.append('end_date', formatDate(date, 'yyyy-MM-dd'));
 
     return this.http.get<ForecastWeatherResponse>(
-      `http://localhost:8080/api/weather/hourly`,
+      this.environmentService.environment().hourlyWeatherUrl,
       { params }
     );
   }

@@ -1,4 +1,48 @@
 <div class="mb-4">
+  @if (environment().isHeadless) {
+    <div
+      class="bg-orange-200 p-3 w-full text-center border-round-2xl shadow-1 mb-3 border-1 border-orange-400">
+      <p>
+        You're running this application in
+        <span class="font-bold">headless</span> mode. This means that all of
+        your preference data, such as units, data formats, account info, etc...
+        will be deleted after your local storage gets deleted.
+      </p>
+      <p>
+        If you want your data to stay persistent, switch to the
+        <span
+          tabindex="0"
+          (click)="switchToHosted()"
+          (keyup)="switchToHosted()"
+          class="font-medium text-orange-700 underline cursor-pointer"
+          >server-supported mode.</span
+        >
+        After switching, you will be prompted to log in or create an account to
+        continue using the application.
+      </p>
+    </div>
+  } @else {
+    <div
+      class="bg-green-200 p-3 w-full text-center flex align-items-center justify-content-center gap-3 flex-column border-round-2xl shadow-1 mb-3 border-1 border-green-400">
+      <p>
+        You're running this application in
+        <span class="font-bold">server-supported</span> mode. This means that
+        all of your preference data, such as units, data formats, account info,
+        etc... will be stored on the server and will be persistent.
+      </p>
+      <p>
+        If you want your data to be deleted after your local storage gets
+        deleted, switch to the
+        <span
+          tabindex="0"
+          (click)="switchToHeadless()"
+          (keyup)="switchToHeadless()"
+          class="font-medium text-green-700 underline cursor-pointer"
+          >headless mode.</span
+        >
+      </p>
+    </div>
+  }
   <h1>Settings</h1>
   <p class="text-gray-400 text-sm">
     Edit your personal information, data formatting preferences, units used for
