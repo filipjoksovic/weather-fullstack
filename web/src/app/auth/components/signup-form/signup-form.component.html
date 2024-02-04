@@ -1,29 +1,60 @@
 <div class="p-5 surface-ground border-round h-full shadow-1">
-  <div class="flex flex-column justify-content-between h-full">
+  <div class="flex flex-column justify-content-around h-full">
     <form
       class="flex flex-column gap-2 align-items-center"
       [formGroup]="signupForm">
-      <h1 class="text-center mb-2">Register</h1>
-      <div class="flex flex-column gap-2 w-full">
-        <label for="firstname">Email</label>
-        <input
-          pInputText
-          id="firstname"
-          aria-describedby="username-help"
-          formControlName="email" />
+      <h1 class="text-center mb-4">Register</h1>
+      <div class="grid">
+        <div class="flex flex-column gap-2 col-6">
+          <label for="firstname">First name</label>
+          <input
+            pInputText
+            id="firstname"
+            aria-describedby="username-help"
+            formControlName="firstName" />
+        </div>
+        <div class="flex flex-column gap-2 col-6">
+          <label for="firstname">Last name</label>
+          <input
+            pInputText
+            id="lastname"
+            aria-describedby="username-help"
+            formControlName="lastName" />
+        </div>
       </div>
-      <div class="flex flex-column gap-2 w-full">
-        <label for="firstname">Password</label>
-        <p-password
-          [toggleMask]="true"
-          formControlName="password"
-          [feedback]="false"
-          styleClass=""></p-password>
+      <div class="grid">
+        <div class="flex flex-column gap-2 col-12">
+          <label for="email">Email</label>
+          <input
+            pInputText
+            id="email"
+            aria-describedby="username-help"
+            formControlName="email" />
+        </div>
+        <div class="flex flex-column gap-2 col-12">
+          <label for="password">Password</label>
+          <p-password
+            id="password"
+            [toggleMask]="true"
+            formControlName="password"
+            [feedback]="false"
+            styleClass="w-full"></p-password>
+        </div>
       </div>
     </form>
-    <p-button
-      label="Continue"
-      styleClass="mx-auto block"
-      (onClick)="onSubmit()"></p-button>
+    <div class="flex flex-column gap-3">
+      <p-button
+        label="Continue"
+        styleClass="mx-auto block"
+        (onClick)="onSubmit()"></p-button>
+      <p class="text-center">
+        Already have an account? Log in
+        <a
+          class="text-primary no-underline font-bold hover:underline"
+          [routerLink]="'/login'"
+          >here</a
+        >
+      </p>
+    </div>
   </div>
 </div>

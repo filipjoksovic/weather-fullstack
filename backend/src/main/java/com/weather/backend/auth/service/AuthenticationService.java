@@ -30,6 +30,10 @@ public class AuthenticationService {
         User user = new User();
         user.setEmail(request.email());
         user.setPassword(passwordEncoder.encode(request.password()));
+        user.setFirstName(request.firstName());
+        user.setLastName(request.lastName());
+        user.setUserUnitSettings(UserDto.defaultUnitSettings());
+        user.setUserSettings(UserDto.defaultSettings());
         user = userRepository.save(user);
         String token = jwtService.generateToken(user);
         LOG.info("Usr rgstrd {} {}", user.getId(), token);
@@ -40,7 +44,7 @@ public class AuthenticationService {
         LOG.info("Lgn attmpt for {} {}", request.email(), request.password());
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.email(), request.password()));
         User user = userRepository.findByEmail(request.email())
-                                  .orElseThrow(UserNotFoundException::new);
+                .orElseThrow(UserNotFoundException::new);
         String token = jwtService.generateToken(user);
         return UserDto.to(user, token);
     }

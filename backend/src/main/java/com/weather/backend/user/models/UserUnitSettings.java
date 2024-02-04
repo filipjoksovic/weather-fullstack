@@ -1,5 +1,6 @@
 package com.weather.backend.user.models;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -7,6 +8,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 public class UserUnitSettings {
     private String speed;
     private String temperature;

@@ -5,7 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { UserApiService } from './api/user.api.service';
 import { StorageService } from '@core/services/storage.service';
 import { MessageService } from 'primeng/api';
-import { StoredUserData } from '../models/user-data.model';
+import { UserData } from '../models/user-data.model';
 
 describe('UserStoreService', () => {
   let spectator: SpectatorService<UserStoreService>;
@@ -31,7 +31,7 @@ describe('UserStoreService', () => {
     );
     const messageServiceAddSpy = spyOn(messageService, 'add');
 
-    spectator.service.updateUserDetails(formKey as keyof StoredUserData, value);
+    spectator.service.updateUserDetails(formKey as keyof UserData, value);
 
     expect(updateUserSpy).toHaveBeenCalledWith('', { [formKey]: value });
     expect(messageServiceAddSpy).toHaveBeenCalledWith({

@@ -28,9 +28,11 @@ export class StorageService {
     this.addedToStorage.set(key);
   }
 
-  public setObject(key: string, value: object) {
+  public setObject(key: string, value: object, emit = true) {
     this.storage.setItem(key, JSON.stringify(value));
-    this.addedToStorage.set(key);
+    if (emit) {
+      this.addedToStorage.set(key);
+    }
   }
 
   public remove(key: string) {

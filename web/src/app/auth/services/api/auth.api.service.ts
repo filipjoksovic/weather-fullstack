@@ -1,20 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { StoredUserData, UserData } from 'app/user/models/user-data.model';
+import { UserData, UserDataHeadless } from 'app/user/models/user-data.model';
 import { Observable } from 'rxjs';
+import { EnvironmentService } from '@core/services/environment.service';
 
-/**
- * @deprecated - The application will not be using backend to store data
- */
 @Injectable({
   providedIn: 'root',
 })
 export class AuthApiService {
-  constructor(private readonly http: HttpClient) {}
+  constructor(
+    private readonly http: HttpClient,
+    private readonly environmentService: EnvironmentService
+  ) {}
 
-  public login(email: string, password: string): Observable<StoredUserData> {
-    return this.http.post<StoredUserData>(
-      'http://localhost:8080/api/auth/login',
+  public login(email: string, password: string): Observable<UserData> {
+    return this.http.post<UserData>(
+      `${this.environmentService.environment().backendUrl}/api/auth/login`,
       {
         email,
         password,
@@ -22,12 +23,19 @@ export class AuthApiService {
     );
   }
 
-  public signup(email: string, password: string): Observable<StoredUserData> {
-    return this.http.post<StoredUserData>(
-      'http://localhost:8080/api/auth/signup',
+  public signup(
+    email: string,
+    password: string,
+    firstName: string,
+    lastName: string
+  ): Observable<UserData> {
+    return this.http.post<UserData>(
+      `${this.environmentService.environment().backendUrl}/api/auth/signup`,
       {
         email,
         password,
+        firstName,
+        lastName,
       }
     );
   }

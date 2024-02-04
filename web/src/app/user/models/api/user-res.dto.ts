@@ -11,17 +11,12 @@ export type UserResDto = {
   unitSettings: UserUnitSettingsResDto;
 };
 
-/**
- * @deprecated - The application will not be using backend to store data
- * @param userRes
- * @returns
- */
 export const userRestDtoToUserData = (userRes: UserResDto): UserData => {
   return {
-    // id: userRes.id,
+    id: userRes.id,
     firstName: userRes.firstName,
     lastName: userRes.lastName,
-    // email: userRes.email,
+    email: userRes.email,
     userSettings: userRes.userSettings,
     unitSettings: userRes.unitSettings,
   } as UserData;

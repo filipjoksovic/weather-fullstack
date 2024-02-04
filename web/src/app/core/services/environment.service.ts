@@ -5,6 +5,9 @@ import { environmentFullData } from 'environments/environment.full';
 import { headlessEnvironmentData } from 'environments/environment.headless';
 import { StorageService } from './storage.service';
 import { Route, Router } from '@angular/router';
+import { AuthService } from '@auth/services/data/auth.service';
+import { StorageKeys } from '@core/models/config/storage-keys.enum';
+import { getDefaultUserObject } from '../../user/models/user-data.model';
 @Injectable({
   providedIn: 'root',
 })
@@ -35,6 +38,7 @@ export class EnvironmentService {
   switchToHosted() {
     this.storageService.set('isHeadless', 'false');
     this.environment.set(environmentFullData);
+    this.storageService.remove(StorageKeys.USER);
     this.router.navigate(['/login']);
   }
 }
