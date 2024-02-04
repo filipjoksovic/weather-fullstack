@@ -17,7 +17,7 @@ export class LocationApiService {
     params = params.append('format', 'json');
 
     return this.http.get<LocationSearchResponse>(
-      `https://geocoding-api.open-meteo.com/v1/search`,
+      `http://localhost:8080/api/location/search`,
       {
         params,
       }
@@ -30,7 +30,7 @@ export class LocationApiService {
     params = params.append('lon', longitude.toString());
     params = params.append('format', 'jsonv2');
     return this.http.get<LocationDetailsResponse>(
-      `https://nominatim.openstreetmap.org/reverse.php`,
+      `http://localhost:8080/api/location/reverse`,
       {
         params,
       }
