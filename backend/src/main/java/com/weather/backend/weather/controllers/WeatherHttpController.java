@@ -2,8 +2,6 @@ package com.weather.backend.weather.controllers;
 
 import com.weather.backend.weather.dto.CurrentWeatherDto;
 import com.weather.backend.weather.service.CurrentWeatherService;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,6 +20,16 @@ import java.io.IOException;
 public class WeatherHttpController {
 
 
+    CurrentWeatherService currentWeatherService;
+
+    public WeatherHttpController() {
+        this.currentWeatherService = new Retrofit.Builder()
+                .baseUrl("https://api.open-meteo.com")
+                .addConverterFactory(JacksonConverterFactory.create())
+                .build()
+                .create(CurrentWeatherService.class);
+    }
+
     @GetMapping("/current")
     public ResponseEntity<CurrentWeatherDto> getCurrentWeather(@RequestParam("longitude") String longitude,
                                                                @RequestParam("latitude") String latitude,
@@ -30,18 +38,7 @@ public class WeatherHttpController {
                                                                @RequestParam("wind_speed_unit") String windSpeedUnit,
                                                                @RequestParam("precipitation_unit") String precipitationUnit) throws IOException {
 
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.open-meteo.com")
-                .client(client)
-                .addConverterFactory(JacksonConverterFactory.create())
-                .build();
-
-        CurrentWeatherService service = retrofit.create(CurrentWeatherService.class);
-        Call<CurrentWeatherDto> callSync = service.currentWeather(longitude, latitude, current, temperatureUnit, windSpeedUnit, precipitationUnit);
+        Call<CurrentWeatherDto> callSync = currentWeatherService.currentWeather(longitude, latitude, current, temperatureUnit, windSpeedUnit, precipitationUnit);
         return ResponseEntity.ok(callSync.execute().body());
     }
 
@@ -54,18 +51,7 @@ public class WeatherHttpController {
                                                              @RequestParam("wind_speed_unit") String windSpeedUnit,
                                                              @RequestParam("precipitation_unit") String precipitationUnit) throws IOException {
 
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.open-meteo.com")
-                .client(client)
-                .addConverterFactory(JacksonConverterFactory.create())
-                .build();
-
-        CurrentWeatherService service = retrofit.create(CurrentWeatherService.class);
-        Call<CurrentWeatherDto> callSync = service.dailyWeather(longitude, latitude, daily, pastDays, temperatureUnit, windSpeedUnit, precipitationUnit);
+        Call<CurrentWeatherDto> callSync = currentWeatherService.dailyWeather(longitude, latitude, daily, pastDays, temperatureUnit, windSpeedUnit, precipitationUnit);
         return ResponseEntity.ok(callSync.execute().body());
     }
 
@@ -79,18 +65,8 @@ public class WeatherHttpController {
                                                               @RequestParam("wind_speed_unit") String windSpeedUnit,
                                                               @RequestParam("precipitation_unit") String precipitationUnit) throws IOException {
 
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.open-meteo.com")
-                .client(client)
-                .addConverterFactory(JacksonConverterFactory.create())
-                .build();
-
-        CurrentWeatherService service = retrofit.create(CurrentWeatherService.class);
-        Call<CurrentWeatherDto> callSync = service.hourlyWeather(longitude, latitude, hourly, temperatureUnit, windSpeedUnit, precipitationUnit, startDate, endDate);
+        Call<CurrentWeatherDto> callSync = currentWeatherService.hourlyWeather(longitude, latitude, hourly, temperatureUnit, windSpeedUnit, precipitationUnit, startDate, endDate);
         return ResponseEntity.ok(callSync.execute().body());
     }
 
