@@ -66,7 +66,7 @@ export class ForecastDetailsApiService {
       past_days: 5,
     });
     return this.http.get<ForecastWeatherResponse>(
-      `https://api.open-meteo.com/v1/forecast`,
+      `http://localhost:8080/api/weather/daily`,
       { params }
     );
   }

@@ -50,7 +50,7 @@ export class ForecastApiService {
     params = params.append('past_days', '5');
 
     return this.http.get<ForecastWeatherResponse>(
-      `https://api.open-meteo.com/v1/forecast`,
+      `http://localhost:8080/api/weather/daily`,
       { params }
     );
   }
@@ -88,7 +88,7 @@ export class ForecastApiService {
     params = params.append('end_date', formatDate(date, 'yyyy-MM-dd'));
 
     return this.http.get<ForecastWeatherResponse>(
-      `https://api.open-meteo.com/v1/forecast`,
+      `http://localhost:8080/api/weather/hourly`,
       { params }
     );
   }

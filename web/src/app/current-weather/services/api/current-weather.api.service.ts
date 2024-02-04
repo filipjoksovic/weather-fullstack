@@ -49,7 +49,7 @@ export class CurrentWeatherApiService {
     params = params.append('timeformat', 'iso8601');
 
     return this.http.get<CurrentWeatherResponse>(
-      `https://api.open-meteo.com/v1/forecast`,
+      `http://localhost:8080/api/weather/current`,
       { params }
     );
   }
