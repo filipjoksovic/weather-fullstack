@@ -32,7 +32,7 @@ public class LocationHttpController {
         OkHttpClient httpClient = new OkHttpClient();
 
         this.openMeteoLocationService = new Retrofit.Builder()
-                .baseUrl(externalApiProperties.getOpenMeteoForecastBaseUrl()).addConverterFactory(JacksonConverterFactory.create()).client(httpClient).build().create(OpenMeteoLocationService.class);
+                .baseUrl(externalApiProperties.getOpenMeteoLocationBaseUrl()).addConverterFactory(JacksonConverterFactory.create()).client(httpClient).build().create(OpenMeteoLocationService.class);
         this.nominatimLocationService = new Retrofit.Builder().baseUrl(externalApiProperties.getNominatimLocationBaseUrl()).addConverterFactory(JacksonConverterFactory.create()).client(httpClient).build().create(NominatimLocationService.class);
     }
 
