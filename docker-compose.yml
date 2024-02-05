@@ -1,0 +1,47 @@
+version: '3.7'
+services:
+  #************Mongo DB***************
+  mongodb:
+    container_name: mongo_container
+    image: mongo:latest
+    hostname: db
+    environment:
+      - MONGO_INITDB_ROOT_DATABASE=weather
+    volumes:
+      - ./mongodb_data_container:/data/db
+      #means you want to set data on container persist on your local folder named mongo-volume . /data/db/ is a folder that already created inside the mongo container.
+    ports:
+      - 27017:27017
+    networks:
+      - weather_net
+  #************Backend***************
+  backend_spring:
+    container_name: spring_container
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - mongodb
+    networks:
+      - weather_net
+    links:
+      - mongodb
+    environment:
+      # this overrides url in application properties
+      - SPRING_DATA_MONGODB_URI=mongodb://mongodb/{dbName}
+  #************Frontend***************
+  frontend_angular:
+    container_name: angular_container
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    ports:
+      - 4200:4200
+    networks:
+      - weather_net
+
+networks:
+  weather_net:
+    driver: bridge
